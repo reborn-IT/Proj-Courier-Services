@@ -1,0 +1,22 @@
+@import '../../Utils/Styles/variables.scss';
+
+.filter-container {
+    padding: 1.4rem 2rem;
+    border-radius: 2rem;
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $white;
+    z-index: 5;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+
+    .text-bold {
+      font-weight: 900;
+      color: $greyColor;
+    }
+}
