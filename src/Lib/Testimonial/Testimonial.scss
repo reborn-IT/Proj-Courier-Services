@@ -1,0 +1,38 @@
+@import '../../Utils/Styles/variables.scss';
+
+.testimonial-card{
+    position: absolute;
+}
+
+.testimonial-card-xl{
+    width: 14rem;
+    height: 20rem;
+    border-radius: 2.5rem;
+    background-image: url('../../Assets/Images/featuredOne.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0 .8rem .8rem .8rem;
+    display: flex;
+    align-items: flex-end;
+    
+    .review-testimonial {
+        background-color: $white;
+        border-radius: 1.5rem;
+        height: auto;
+        padding: 1rem .8rem;
+        font-size: .8rem;
+        text-align: center;
+        font-weight: 900;
+
+        p {
+            margin-bottom: .7rem;
+            color: $greyColor;
+
+            &:first-child {
+                color: $gold;
+                font-size: 1rem;
+            }
+        }
+    }
+}
