@@ -5,7 +5,8 @@ import language from '../../Assets/Icons/language.svg';
 import userprofile from '../../Assets/Icons/userprofile.svg';
 import RoundedButton from '../../Components/CommonRoundedButton';
 import MainFilterComponent from '../../Components/HomeFIlterComponent';
-import HomeFeatured from '../../Components/HomeFeatured';
+import HomeFeatured from '../../Lib/HomeFeatured';
+import Testimonial from '../../Lib/Testimonial';
 
 function Home() {
   return (
@@ -25,6 +26,10 @@ function Home() {
 
       <section className="container">
         <HomeFeatured />
+      </section>
+
+      <section className="testimonial-wrapper">
+        <Testimonial />
       </section>
     </main>
   );

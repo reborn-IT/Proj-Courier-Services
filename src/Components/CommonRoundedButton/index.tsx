@@ -5,7 +5,7 @@ export interface CommonRoundedButtonProps {
   label: string
 }
 
-function CommonRoundedButton({ label }) {
+function CommonRoundedButton({ label }: CommonRoundedButtonProps) {
   return (
     <button type="button" className="become-provider">{label}</button>
   );
