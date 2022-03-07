@@ -7,6 +7,7 @@ import RoundedButton from '../../Components/CommonRoundedButton';
 import MainFilterComponent from '../../Components/HomeFIlterComponent';
 import HomeFeatured from '../../Lib/HomeFeatured';
 import Testimonial from '../../Lib/Testimonial';
+import FAQ from '../../Lib/FAQ';
 
 function Home() {
   return (
@@ -28,8 +29,12 @@ function Home() {
         <HomeFeatured />
       </section>
 
-      <section className="testimonial-wrapper">
+      <section className="wrapper testimonial-wrapper">
         <Testimonial />
+      </section>
+
+      <section className="wrapper faq-wrapper">
+        <FAQ />
       </section>
     </main>
   );

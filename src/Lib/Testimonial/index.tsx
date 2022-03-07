@@ -32,7 +32,9 @@ function Testimonial() {
         rightBiased={false}
       />
       <div className="testimonial-card testimonial-card-m" />
-      <div className="testimonial-card testimonial-card-sm" />
+      <div className="testimonial-card testimonial-card-m" />
+      <div className="testimonial-card testimonial-card-m" />
+      <div className="testimonial-card testimonial-card-m" />
     </>
   );
 }

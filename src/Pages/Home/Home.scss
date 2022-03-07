@@ -10,7 +10,7 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 
-    .home-image, .testimonial-wrapper {
+    .wrapper, .home-image{
         width: 98%;
         margin: .4rem auto 0 auto;
         border-radius: 1.6rem;
@@ -46,11 +46,22 @@
         }
     }
 
-    .testimonial-wrapper {
+    .wrapper {
         max-height: 80vh;
         height: 80vh;
         margin-top: 16rem;
+    }
+    
+    .testimonial-wrapper {
         background-color: $testimonialBackground;
+    }
+    
+    .faq-wrapper {
+        padding: 2rem 0;
+        height: auto;
+        max-height: unset;
+        margin-top: 8rem;
+        background-color: $faqBackground;
     }
 }
 
