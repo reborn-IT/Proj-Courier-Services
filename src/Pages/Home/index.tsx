@@ -1,7 +1,7 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useCallback, useEffect, useState } from 'react';
 import './Home.scss';
 import { ToastContainer } from 'react-toastify';
-import { useInView } from 'react-intersection-observer';
 import logo from '../../Assets/Images/logo.svg';
 import language from '../../Assets/Icons/language.svg';
 import userprofile from '../../Assets/Icons/userprofile.svg';
@@ -12,15 +12,56 @@ import Testimonial from '../../Lib/Testimonial';
 import FAQ from '../../Lib/FAQ';
 import Footer from '../../Lib/Footer';
 import 'react-toastify/dist/ReactToastify.css';
+import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 
 function Home() {
-  const [homeFeaturedRef, HomeFeaturedInView] = useInView({ threshold: 0.5 });
+  const size: Size = useWindowSize();
+  const [fixedNav, setFixedNav] = useState<boolean>(true);
+
+  function getMinHeight(): number {
+    if (size.width > 1024) {
+      if (!fixedNav) return 14;
+      return 65;
+    }
+    if (size.width > 960 && size.width <= 1024) {
+      return 6;
+    }
+    if (size.width > 767 && size.width <= 960) {
+      return 8;
+    }
+    return 0;
+  }
+
+  const [scrollDirection, setScrollDirection] = useState(window.scrollY);
+  const scrollTop = window.scrollY;
+
+  const handleNavigation = useCallback((e) => {
+    const window = e.currentTarget;
+    if (scrollDirection > window.scrollY && scrollTop < 50) {
+      setFixedNav(true);
+    } else if (scrollDirection < window.scrollY) {
+      setFixedNav(false);
+    }
+    setScrollDirection(window.scrollY);
+  }, [scrollDirection, scrollTop]);
+
+  useEffect(() => {
+    setScrollDirection(window.scrollY);
+    window.addEventListener('scroll', handleNavigation);
+
+    return () => {
+      window.removeEventListener('scroll', handleNavigation);
+    };
+  }, [handleNavigation]);
+
   return (
     <main className="main-wrapper">
       <ToastContainer />
       <nav
         className={`
-        home-image ${HomeFeaturedInView ? '' : 'home-image-neutral'}`}
+        transition-height
+        ${fixedNav ? 'home-image' : 'home-image-scrolling'}`}
+        style={{ height: `${getMinHeight()}vh` }}
       >
         <div className="flex-row">
           <img src={logo} className="icon" alt="Logo" />
@@ -31,10 +72,10 @@ function Home() {
           </div>
         </div>
 
-        <MainFilterComponent />
+        <div>
+          <MainFilterComponent />
+        </div>
       </nav>
-
-      <div className="invisible-part" ref={homeFeaturedRef} />
 
       <section className="container">
         <HomeFeatured />
@@ -51,10 +92,6 @@ function Home() {
       <section className="wrapper footer">
         <Footer />
       </section>
-
-      {/* <footer className="wrapper">
-        <Footer />
-      </footer> */}
     </main>
   );
 }

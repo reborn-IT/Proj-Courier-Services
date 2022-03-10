@@ -9,7 +9,6 @@
     transform: translateX(-50%);
     background-color: $white;
     z-index: 5;
-    width: 33%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,5 +17,6 @@
     .text-bold {
       font-weight: 900;
       color: $greyColor;
+      padding: 0 2rem;
     }
 }

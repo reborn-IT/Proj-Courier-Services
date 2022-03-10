@@ -1,4 +1,3 @@
-// @import url('../../Utils/Styles/typo');
 @import '../../Utils/Styles/variables.scss';
 
 .main-wrapper {
@@ -9,7 +8,7 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 
-    .wrapper, .home-image{
+    .wrapper, .transition-height{
         width: 98%;
         margin: .4rem auto 0 auto;
         border-radius: 1.6rem;
@@ -17,7 +16,17 @@
     }
 
     .container {
-        margin-top: 80vh;
+        margin-top: 7rem;
+        position: relative;
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            margin-top: 4rem;
+        }
+
+        @media (max-width: $layout-breakpoint-small) {
+            margin-top: 3rem;
+            padding: 0 1rem;
+        }
     }
     
     .home-image {
@@ -27,37 +36,15 @@
         background-position: top center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    .home-image-scrolling {
+        overflow: hidden;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         z-index: 50;
-        transition: all 0.4s ease-in;
-
-        .flex-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          margin-top: 1rem;
-          
-          .right-top {
-              display: flex;
-              align-items: center;
-              margin-right: 2rem;
-          }
-        }
-
-        .icon {
-            width: 3rem;
-            height: 3rem;
-            margin-left: 2rem;
-        }
-    }
-
-    .home-image-neutral {
-        overflow: hidden;
-        height: 5rem;
         box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
         background-image: unset;
         -webkit-backdrop-filter: blur(10px);
@@ -73,6 +60,15 @@
         max-height: 80vh;
         height: 80vh;
         margin-top: 16rem;
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            max-height: 50vh;
+        }
+
+        @media (min-width: $layout-breakpoint-medium) {
+            max-height: 50vh;
+        }
+
     }
     
     .testimonial-wrapper {
@@ -85,6 +81,22 @@
         max-height: unset;
         margin-top: 8rem;
         background-color: $faqBackground;
+        
+        @media (min-width: $layout-breakpoint-xsmall) {
+            margin-top: 12rem;
+        }
+
+        @media (min-width: $layout-breakpoint-small) {
+            margin-top: 6rem;
+        }
+
+        @media (min-width: $layout-breakpoint-tablets) {
+            margin-top: 6rem;
+        }
+
+        @media (min-width: $layout-breakpoint-medium) {
+            margin-top: 5rem;
+        }
     }
 
     .footer {
@@ -111,14 +123,47 @@
     margin-bottom: 1.32rem;
     font-weight: 900;
     color: $greyColor;
+
+    @media (min-width: $layout-breakpoint-medium) {
+        font-size: 3rem;
+    }
 }
 
 .linebreaked-description {
     max-width: 25vw;
     text-align: center;
     margin-bottom: 1.65rem;
+    
+    @media (min-width: $layout-breakpoint-medium) {
+        max-width: 40vw;
+        font-size: 1.7rem;
+    }
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--success {
     color: $primaryColor;
+}
+
+.transition-height{
+    transition: all .6s ease-in-out;
+
+    .flex-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 1rem;
+        
+        .right-top {
+            display: flex;
+            align-items: center;
+            margin-right: 2rem;
+        }
+      }
+
+      .icon {
+          width: 3rem;
+          height: 3rem;
+          margin-left: 2rem;
+      }
 }

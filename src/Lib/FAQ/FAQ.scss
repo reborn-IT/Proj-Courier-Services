@@ -5,4 +5,8 @@
     margin: 0 auto;
     margin-top: 1.4rem;
     width: 50%;
+    
+    @media (max-width: $layout-breakpoint-tablets) {
+        width: 70%;
+    }
 }

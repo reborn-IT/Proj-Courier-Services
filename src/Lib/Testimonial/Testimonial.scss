@@ -14,18 +14,41 @@
     background-image: url('../../Assets/Images/featuredThree.svg');
     top: -6.7rem;
     left: 40%;
+    transition: all .5s ease-in-out;
+
+    @media (max-width: $layout-breakpoint-small) {
+        transform: scale(0);
+    }
+    
+    @media (max-width: $layout-breakpoint-tablets) {
+        left: 80%;
+    }
 
     &:nth-last-of-type(2) {
         background-image: url('../../Assets/Images/featuredOne.svg');
         top: 75%;
         left: 58%;
         transform: scale(.6);
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            transform: scale(0);
+        }
     }
     
     &:nth-last-of-type(3){
         background-image: url('../../Assets/Images/featuredTwo.svg');
         top: 66%;
         left: 15%;
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            top: 77%;
+            left: 20%;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: $layout-breakpoint-small) {
+         transform: scale(0);
+        }
     }
 }
 
@@ -61,4 +84,10 @@
             }
         }
     }
+}
+
+.right-aligned-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
