@@ -7,8 +7,13 @@
     grid-auto-rows: 300px;
     margin-top: 7rem;
     
+    
     @media (max-width: $layout-breakpoint-small) {
         grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    }
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 
     .one {
@@ -18,7 +23,7 @@
         background-size: cover;
         border-radius: 3rem;
         grid-row: span 2 / auto;
-        @media (max-width: $layout-breakpoint-small) {
+        @media (max-width: $layout-breakpoint-small) { 
             grid-row: unset;
             grid-column: span 2 / auto;
         }

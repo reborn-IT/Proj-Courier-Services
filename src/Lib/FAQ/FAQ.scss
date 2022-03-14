@@ -4,9 +4,17 @@
 .questions-wrapper {
     margin: 0 auto;
     margin-top: 1.4rem;
-    width: 50%;
+    width: 98%;
     
-    @media (max-width: $layout-breakpoint-tablets) {
+    @media (min-width: $layout-breakpoint-small-tablets) {
+        width: 90%;
+    }
+
+    @media (min-width: $layout-breakpoint-tablets) {
         width: 70%;
+    }
+
+    @media (min-width: $layout-breakpoint-medium) {
+        width: 50%;
     }
 }

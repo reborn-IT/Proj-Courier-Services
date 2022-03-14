@@ -1,5 +1,6 @@
 import React from 'react';
 import StarIcon from '../../Assets/Icons/star.svg';
+import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 
 export interface TestimonialLargeProps {
     review: string
@@ -13,15 +14,17 @@ export interface TestimonialLargeProps {
 function TestimonialXL({
   review, author, starCount, topPos, rightPos, rightBiased,
 }: TestimonialLargeProps) {
+  const size: Size = useWindowSize();
   return (
     <div
       className="testimonial-card testimonial-card-xl"
       style={{
         top: `${topPos}rem`,
-        left: `${rightBiased ? rightPos : 'auto'}rem`,
-        right: `${rightBiased ? 'auto' : rightPos}rem`,
+        left: `${rightBiased ? `${rightPos}rem` : 'auto'}`,
+        right: `${rightBiased ? 'auto' : `${rightPos}rem`}`,
         borderWidth: 2,
         borderColor: 'red',
+        display: `${size.width < 480 ? 'none' : 'block'}`,
       }}
     >
       <div className="column-centered-flex review-testimonial">

@@ -22,4 +22,9 @@
         background-color: unset;
         transform: rotate(20deg);
     }
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        width: 80vw;
+        justify-content: space-between;
+    }
 }

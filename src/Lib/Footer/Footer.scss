@@ -10,9 +10,24 @@
     font-weight: 900;
     color: $white;
     
+    @media (min-width: $layout-breakpoint-small-tablets) {
+        width: 700px;
+        padding: 1rem 0rem;
+    }
+
     @media (min-width: $layout-breakpoint-medium) {
         width: 1200px;
         padding: 5rem 0rem;
+    }
+
+    @media (min-width: $layout-breakpoint-tablets) {
+        width: 960px;
+        padding: 3rem 0rem;
+    }
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        flex-direction: column;
+        // justify-content: center;
     }
 
     .flex-1 {
@@ -25,6 +40,14 @@
         align-items: flex-start;
         justify-content: flex-start;
         height: 100%;
+
+        @media (max-width: $layout-breakpoint-xsmall) {
+            max-width: 98vw;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
 
         h4 {
             font-size: 1.3rem;
@@ -42,7 +65,30 @@
         }
     }
 
+    .newsletter {
+        @media (max-width: $layout-breakpoint-xsmall) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        p {
+            @media (max-width: $layout-breakpoint-xsmall) {
+                text-align: center;
+            }
+        }
+    }
+
     .newsletter p{
         margin-bottom: 1.4rem;
+    }
+
+    .logo {
+        @media (max-width: $layout-breakpoint-xsmall) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 90vw;
+        }
     }
 }

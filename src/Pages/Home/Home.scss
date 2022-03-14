@@ -64,11 +64,14 @@
         @media (max-width: $layout-breakpoint-tablets) {
             max-height: 50vh;
         }
-
+        
         @media (min-width: $layout-breakpoint-medium) {
             max-height: 50vh;
         }
 
+        @media (max-width: $layout-breakpoint-xsmall) {
+            margin-top: 5rem;
+        }
     }
     
     .testimonial-wrapper {
@@ -86,6 +89,10 @@
             margin-top: 12rem;
         }
 
+        @media (min-width: $layout-breakpoint-small-tablets) {
+            margin-top: 7rem;
+        }
+
         @media (min-width: $layout-breakpoint-small) {
             margin-top: 6rem;
         }
@@ -96,6 +103,10 @@
 
         @media (min-width: $layout-breakpoint-medium) {
             margin-top: 5rem;
+        }
+
+        @media (max-width: $layout-breakpoint-xsmall) {
+            margin-top: 3rem;
         }
     }
 
@@ -127,6 +138,11 @@
     @media (min-width: $layout-breakpoint-medium) {
         font-size: 3rem;
     }
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        max-width: 80vw;
+        text-align: center;
+    }
 }
 
 .linebreaked-description {
@@ -137,6 +153,11 @@
     @media (min-width: $layout-breakpoint-medium) {
         max-width: 40vw;
         font-size: 1.7rem;
+    }
+    
+    @media (max-width: $layout-breakpoint-xsmall) {
+        font-size: 1.5rem;
+        max-width: 80vw;
     }
 }
 

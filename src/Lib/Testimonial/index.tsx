@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-nested-ternary */
 
 import React from 'react';
@@ -11,9 +12,14 @@ function Testimonial() {
   return (
     <>
       <div className={`
-      ${size.width <= 768 ? 'right-aligned-text' : 'column-centered-flex'}`}
+      ${
+        (size.width <= 768)
+          ? 'right-aligned-text'
+          : 'column-centered-flex'}`}
       >
-        <div className={`
+        <div
+          style={{ width: 'auto' }}
+          className={`
       column-centered-flex`}
         >
           <h3 className="highlighted-title">Become a Service Provider</h3>
@@ -33,7 +39,7 @@ function Testimonial() {
           size.width > 1024
             ? -10
             : size.width <= 1024 && size.width > 960 ? -10
-              : size.width <= 960 && size.width > 767 ? -14
+              : size.width <= 960 && size.width > 767 ? -9
                 : 0
         }
         rightPos={
@@ -49,7 +55,11 @@ function Testimonial() {
         review="I gained more web traffic beacase of DROP."
         author="grasshopers"
         starCount={5}
-        topPos={size.width > 1024 ? 4 : 20}
+        topPos={size.width > 1024
+          ? 4
+          : size.width <= 1024 && size.width > 960 ? 20
+            : size.width <= 960 && size.width > 767 ? 16
+              : 0}
         rightPos={
           size.width > 1024
             ? 5
@@ -57,8 +67,8 @@ function Testimonial() {
               : size.width <= 960 && size.width > 767 ? 1
                 : 0
         }
-        rightBiased={false}
-        // rightBiased={!(size.width > 768)}
+        // rightBiased={false}
+        rightBiased={size.width > 768 ? false : true}
       />
       <div className="testimonial-card testimonial-card-m" />
       <div className="testimonial-card testimonial-card-m" />

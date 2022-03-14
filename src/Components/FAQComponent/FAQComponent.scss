@@ -30,9 +30,17 @@
     transition: all 0.3s ease-in-out;
     height: 0;
     margin-left: 3rem;
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        font-size: 1.3rem;
+    }
 }
 
 .answer-revealed {
     margin-bottom: 1.6rem;
     height: 2rem;
+    
+    @media (max-width: $layout-breakpoint-xsmall) {
+        height: 6rem;
+    }
 }

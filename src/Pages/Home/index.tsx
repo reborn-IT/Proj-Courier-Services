@@ -19,17 +19,24 @@ function Home() {
   const [fixedNav, setFixedNav] = useState<boolean>(true);
 
   function getMinHeight(): number {
+    if (size.width > 1540) {
+      if (!fixedNav) return 8;
+      return 65;
+    }
     if (size.width > 1024) {
       if (!fixedNav) return 14;
       return 65;
     }
     if (size.width > 960 && size.width <= 1024) {
-      return 6;
+      if (!fixedNav) return 6;
+      return 65;
     }
     if (size.width > 767 && size.width <= 960) {
-      return 8;
+      if (!fixedNav) return 8;
+      return 65;
     }
-    return 0;
+    if (!fixedNav) return 10;
+    return 60;
   }
 
   const [scrollDirection, setScrollDirection] = useState(window.scrollY);
@@ -65,7 +72,10 @@ function Home() {
       >
         <div className="flex-row">
           <img src={logo} className="icon" alt="Logo" />
-          <div className="right-top">
+          <div
+            className="right-top"
+            style={{ display: `${size.width < 767 ? 'none' : 'block'}` }}
+          >
             <RoundedButton label="Become a Provider" />
             <img className="icon" src={language} alt="Language Icon" />
             <img className="icon" src={userprofile} alt="User Profile Icon" />
