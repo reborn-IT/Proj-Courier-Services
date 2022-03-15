@@ -12,6 +12,7 @@ import FAQ from '../../Lib/FAQ';
 import Footer from '../../Lib/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
+import Filters from '../../Lib/Filters';
 
 function Home() {
   const size: Size = useWindowSize();
@@ -142,6 +143,9 @@ function Home() {
           <MainFilterComponent />
         </div>
       </nav>
+      <div className="filter-menu">
+        <Filters />
+      </div>
 
       <section className="container">
         <HomeFeatured />
