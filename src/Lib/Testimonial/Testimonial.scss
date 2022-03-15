@@ -60,6 +60,7 @@
     display: flex;
     align-items: flex-end;
     background-image: url('../../Assets/Images/featuredOne.svg');
+    overflow: hidden;
     
     &:last-of-type {
         background-image: url('../../Assets/Images/featuredTwo.svg');

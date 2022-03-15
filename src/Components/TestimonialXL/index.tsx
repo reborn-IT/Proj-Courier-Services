@@ -22,9 +22,7 @@ function TestimonialXL({
         top: `${topPos}rem`,
         left: `${rightBiased ? `${rightPos}rem` : 'auto'}`,
         right: `${rightBiased ? 'auto' : `${rightPos}rem`}`,
-        borderWidth: 2,
-        borderColor: 'red',
-        display: `${size.width < 480 ? 'none' : 'block'}`,
+        display: `${size.width < 480 ? 'none' : 'flex'}`,
       }}
     >
       <div className="column-centered-flex review-testimonial">
