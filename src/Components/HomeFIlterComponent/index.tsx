@@ -7,7 +7,7 @@ function MainFilterComponent() {
     <div className="filter-container">
       <CommonRoundedButton label="View Nearby Services" />
       <p className="text-bold">Or</p>
-      <CommonRoundedButton label="Start Filtering" />
+      <CommonRoundedButton label="Start Filtering" action="openfilter" />
     </div>
   );
 }

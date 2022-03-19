@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import './filters.scss';
 import Switch from 'react-switch';
@@ -8,8 +7,35 @@ import CommonRoundedButton from '../../Components/CommonRoundedButton';
 
 function Filters() {
   const [scheduled, setScheduled] = useState<boolean>(false);
+  const [serviceInput, setServiceInput] = useState<string>('');
+  const servicesAPI = [
+    'Fragile', 'Confidential', 'Documents', 'Tender', 'Bulk', 'Stationary',
+  ];
+  const [services, setServices] = useState<string[]>(servicesAPI);
+  const [expandServices, setExpandServices] = useState<boolean>(true);
+
+  const filterServices = (needle: string) => {
+    const query: string = needle.toLowerCase();
+    setServices(servicesAPI.filter(
+      (item: string) => item.toLowerCase().indexOf(query) >= 0,
+    ));
+  };
+
+  const setNewServicesList = (e) => {
+    // eslint-disable-next-line no-sequences, no-unused-expressions
+    setServiceInput(e.currentTarget.value);
+    if (e.currentTarget.value === '') {
+      setServices(servicesAPI);
+      setExpandServices(true);
+    } else {
+      filterServices(serviceInput);
+    }
+  };
+
   return (
-    <div className="filters">
+    <div
+      className="filters"
+    >
       <h1 className="filter-container-maxw">Filters</h1>
       <div className="nature-parcel">
         <DropDownForm title="Nature of the parcel" />
@@ -19,22 +45,42 @@ function Filters() {
             method="post"
             className="content-form filter-container-maxw"
           >
-            <input type="text" placeholder="search for nature of the parcel" />
+            <input
+              type="text"
+              placeholder="search for nature of the parcel"
+              onChange={(e) => setNewServicesList(e)}
+              value={serviceInput}
+            />
           </form>
 
           <div className="checkboxes filter-container-maxw">
             {
-              ['Fragile', 'Confidential', 'Documents'].map((item) => (
-                <div key={item} className="checkbox">
-                  <input id="one" type="checkbox" />
-                  <span>
-                    {item}
-                  </span>
-                </div>
-              ))
+              expandServices
+                ? services.slice(0, 4).map((item) => (
+                  <div key={item} className="checkbox">
+                    <input id="one" type="checkbox" />
+                    <span>
+                      {item}
+                    </span>
+                  </div>
+                ))
+                : services.map((item) => (
+                  <div key={item} className="checkbox">
+                    <input id="one" type="checkbox" />
+                    <span>
+                      {item}
+                    </span>
+                  </div>
+                ))
               }
 
-            <a href="/">View all...</a>
+            <button
+              type="button"
+              className="link-button"
+              onClick={() => setExpandServices(!expandServices)}
+            >
+              View all...
+            </button>
           </div>
         </div>
       </div>

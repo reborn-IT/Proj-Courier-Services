@@ -19,10 +19,6 @@
         font-weight: 900;
     }
 
-    .nature-parcel {
-
-    }
-
     .button-dropdown {
         display: flex;
         align-items: center;
@@ -62,6 +58,7 @@
         .charges-text{
             font-weight: 900;
             color: $greyColor;
+            font-size: .89rem;
         }
 
         .checkboxes{
@@ -73,6 +70,7 @@
                 display: flex;
                 align-items: center;
                 margin-bottom: .7rem;
+                align-self: flex-start;
 
                 input[type="checkbox"] {
                     margin: 0;
@@ -112,10 +110,14 @@
 
             }
             
-            a {
+            a, .link-button {
                 text-decoration: none;
                 font-weight: 700;
                 color: $highlightedBlue;
+                appearance: none;
+                border: 0;
+                background-color: transparent;
+                align-self: flex-start;
             }
         }
     }

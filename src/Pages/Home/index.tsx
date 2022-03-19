@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './Home.scss';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import logo from '../../Assets/Images/logo.svg';
 import language from '../../Assets/Icons/language.svg';
 import userprofile from '../../Assets/Icons/userprofile.svg';
@@ -13,6 +14,7 @@ import Footer from '../../Lib/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import Filters from '../../Lib/Filters';
+import { RootStateInterface } from '../../App/RootState';
 
 function Home() {
   const size: Size = useWindowSize();
@@ -44,6 +46,7 @@ function Home() {
     setScrollDirection,
   ] = useState<number>(window.scrollY);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  // const [openFilters, setOpenFilters] = useState<boolean>(false);
   const scrollTop = window.scrollY;
 
   const handleNavigation = useCallback((e) => {
@@ -65,8 +68,21 @@ function Home() {
     };
   }, [handleNavigation]);
 
+  const filterMenuOpened = useSelector<RootStateInterface,
+  boolean>((state) => state.FilterMenuReducer.filterMenuOpened);
+
+  useEffect(() => {
+    if (filterMenuOpened) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'scroll';
+    }
+  }, [filterMenuOpened]);
+
   return (
-    <main className="main-wrapper">
+    <main
+      className="main-wrapper"
+    >
       <ToastContainer />
       <nav
         className={`
@@ -143,7 +159,10 @@ function Home() {
           <MainFilterComponent />
         </div>
       </nav>
-      <div className="filter-menu">
+      <div
+        className="filter-menu"
+        style={{ display: `${filterMenuOpened ? 'block' : 'none'}` }}
+      >
         <Filters />
       </div>
 
