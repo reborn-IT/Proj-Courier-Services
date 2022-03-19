@@ -1,0 +1,101 @@
+@import '../../Utils/Styles/variables.scss';
+
+.testimonial-card{
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.testimonial-card-m {
+    width: 9rem;
+    height: 13rem;
+    border-radius: 2rem;
+    background-image: url('../../Assets/Images/featuredThree.svg');
+    top: -6.7rem;
+    left: 40%;
+    transition: all .5s ease-in-out;
+
+    @media (max-width: $layout-breakpoint-small) {
+        transform: scale(0);
+    }
+    
+    @media (max-width: $layout-breakpoint-tablets) {
+        left: 80%;
+    }
+
+    &:nth-last-of-type(2) {
+        background-image: url('../../Assets/Images/featuredOne.svg');
+        top: 75%;
+        left: 58%;
+        transform: scale(.6);
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            transform: scale(0);
+        }
+    }
+    
+    &:nth-last-of-type(3){
+        background-image: url('../../Assets/Images/featuredTwo.svg');
+        top: 66%;
+        left: 15%;
+        
+        @media (max-width: $layout-breakpoint-tablets) {
+            top: 77%;
+            left: 20%;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: $layout-breakpoint-small) {
+         transform: scale(0);
+        }
+    }
+}
+
+.testimonial-card-xl{
+    width: 14rem;
+    height: 20rem;
+    border-radius: 2.5rem;
+    padding: 0 .8rem .8rem .8rem;
+    display: flex;
+    align-items: flex-end;
+    background-image: url('../../Assets/Images/featuredOne.svg');
+    overflow: hidden;
+    
+    &:last-of-type {
+        background-image: url('../../Assets/Images/featuredTwo.svg');
+    }
+    
+    .review-testimonial {
+        background-color: $white;
+        border-radius: 1.5rem;
+        height: auto;
+        padding: 1rem .8rem;
+        font-size: .8rem;
+        text-align: center;
+        font-weight: 900;
+
+        p {
+            margin-bottom: .7rem;
+            color: $greyColor;
+
+            &:first-child {
+                color: $gold;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+.right-aligned-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    padding-right: 2rem;
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        justify-content: center;
+        width: 100%;
+    }
+}

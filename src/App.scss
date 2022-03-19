@@ -1,5 +1,24 @@
-h1 {
-    font-size: 4vw;
-    font-family: serif;
-    color: red;
+// @import './Utils/Styles/typos.scss';
+@import './Utils/Styles/variables.scss';
+@import './Utils/Styles/reset.css';
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 500;
+  src: local('Gilroy'), url(assets/fonts/Gilroy-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 900;
+  src: local('Gilroy'), url(assets/fonts/Gilroy-ExtraBold.otf) format('opentype');
+}
+
+* {
+  font-family: Gilroy;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
 }

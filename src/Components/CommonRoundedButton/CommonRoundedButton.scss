@@ -1,0 +1,11 @@
+@import '../../Utils/Styles/variables.scss';
+
+.become-provider {
+    padding: 1rem 1.7rem;
+    border-radius: 5rem;
+    background-color: $primaryColor;
+    border: 0;
+    color: $white;
+    width: auto;
+    white-space: nowrap;
+}

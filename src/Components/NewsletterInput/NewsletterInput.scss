@@ -1,0 +1,30 @@
+@import '../../Utils/Styles/variables.scss';
+
+.newsletter-wrapper {
+
+    background-color: $white;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 5rem;
+    padding: .7rem .5rem .7rem 1.5rem;
+
+    input[type="text"] {
+        appearance: none;
+        border: 0;
+        background-color: transparent;
+        color: $primaryColor;
+    }
+
+    button {
+        appearance: none;
+        border: 0;
+        background-color: unset;
+        transform: rotate(20deg);
+    }
+
+    @media (max-width: $layout-breakpoint-xsmall) {
+        width: 80vw;
+        justify-content: space-between;
+    }
+}
