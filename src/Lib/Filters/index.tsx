@@ -4,12 +4,18 @@ import Switch from 'react-switch';
 import DropDownForm from '../../Components/DropDownForm';
 import CustomizedDatePicker from '../../Components/CustomizedDatePicker';
 import CommonRoundedButton from '../../Components/CommonRoundedButton';
+import SearchableDropDown from '../../Components/SearchableDropDown';
 
 function Filters() {
   const [scheduled, setScheduled] = useState<boolean>(false);
   const [serviceInput, setServiceInput] = useState<string>('');
   const servicesAPI = [
     'Fragile', 'Confidential', 'Documents', 'Tender', 'Bulk', 'Stationary',
+  ];
+  const priceListAPI = [
+    'Price High to Low',
+    'Average Price',
+    'Price Low to High',
   ];
   const [services, setServices] = useState<string[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
@@ -313,10 +319,7 @@ function Filters() {
             method="post"
             className="content-form filter-container-maxw"
           >
-            <input
-              type="number"
-              placeholder="Price High to Low"
-            />
+            <SearchableDropDown data={priceListAPI} />
           </form>
         </div>
       </div>

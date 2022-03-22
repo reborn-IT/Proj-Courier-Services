@@ -1,0 +1,40 @@
+@import '../../Utils/Styles/variables.scss';
+
+.searchable-dropdown {
+    width: calc(100% - 2rem);
+    position: relative;
+
+    svg {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 2;
+    }
+
+    ul {
+        background-color: $white;
+        color: $greyColor;
+        display: flex;
+        flex-direction: column;
+        border-radius: .4rem;
+
+        button {
+            text-transform: capitalize;
+            padding: .7rem 1rem;
+            appearance: none;
+            border: 0;
+            background-color: transparent;
+            text-align: start;
+            transition: all .1s ease;
+
+            &:hover {
+                background-color: $highlightedBlue;
+                color: $white;
+            }
+        }
+
+        &.hide {
+            display: none;
+        }
+    }
+}
