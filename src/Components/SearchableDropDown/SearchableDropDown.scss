@@ -4,6 +4,15 @@
     width: calc(100% - 2rem);
     position: relative;
 
+    input[type="text"], input[type="number"] {
+        appearance: none;
+        border: 1px solid $greyColor;
+        border-radius: .7rem;
+        padding: 1rem;
+        width: calc(100% - 2rem);
+        background-color: transparent;
+    }
+
     svg {
         position: absolute;
         top: 1rem;
@@ -30,6 +39,11 @@
             &:hover {
                 background-color: $highlightedBlue;
                 color: $white;
+            }
+            
+            &.create-button {
+                color: $white;
+                background-color: $highlightedBlue;
             }
         }
 

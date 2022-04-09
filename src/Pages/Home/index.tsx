@@ -15,6 +15,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import Filters from '../../Lib/Filters';
 import { RootStateInterface } from '../../App/RootState';
+import {
+  StateProvider,
+} from '../../Components/DropDownForm/DropDownStateProvider';
 
 function Home() {
   const size: Size = useWindowSize();
@@ -163,7 +166,9 @@ function Home() {
         className="filter-menu"
         style={{ display: `${filterMenuOpened ? 'block' : 'none'}` }}
       >
-        <Filters />
+        <StateProvider>
+          <Filters />
+        </StateProvider>
       </div>
 
       <section className="container">

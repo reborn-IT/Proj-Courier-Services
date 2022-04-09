@@ -2,13 +2,23 @@
 import React from 'react';
 import './CommonRoundedButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilterMenuState } from '../../Features/Slices/FilterMenu';
+import {
+  changeFilterMenuState,
+  changeSaveFilterModalState,
+} from '../../Features/Slices/FilterMenu';
 import { RootStateInterface } from '../../App/RootState';
+
+export enum CommonButtonActions {
+  OPEN_FILTER= 'OPEN_FILTER',
+  CLOSE_FILTER = ' CLOSE_FILTER',
+  OPEN_MODAL = 'OPEN_MODAL',
+  CLOSE_MODAL = 'CLOSE_MODAL'
+}
 
 export interface CommonRoundedButtonProps {
   label: string;
   styles?: object;
-  action?: string;
+  action?: CommonButtonActions;
 }
 
 function CommonRoundedButton({
@@ -18,10 +28,25 @@ function CommonRoundedButton({
 }: CommonRoundedButtonProps) {
   // eslint-disable-next-line max-len
   const filterMenuOpened = useSelector<RootStateInterface, boolean>((state) => state.FilterMenuReducer.filterMenuOpened);
+  // eslint-disable-next-line max-len
+  const saveFilterMenuOpened = useSelector<RootStateInterface, boolean>((state) => state.FilterMenuReducer.SaveFilterModalOpened);
   const dispatch = useDispatch();
-  const OpenFilerMenu = () => {
-    if (action === 'openfilter') {
-      dispatch(changeFilterMenuState({ filterMenuOpened: !filterMenuOpened }));
+  const HandleFilerMenu = () => {
+    switch (action) {
+      case CommonButtonActions.OPEN_FILTER:
+      case CommonButtonActions.CLOSE_FILTER:
+        dispatch(changeFilterMenuState({
+          filterMenuOpened: !filterMenuOpened,
+          SaveFilterModalOpened: saveFilterMenuOpened,
+        }));
+        break;
+      case CommonButtonActions.OPEN_MODAL:
+        dispatch(changeSaveFilterModalState({
+          filterMenuOpened,
+          SaveFilterModalOpened: !saveFilterMenuOpened,
+        }));
+        break;
+      default: break;
     }
   };
 
@@ -30,7 +55,7 @@ function CommonRoundedButton({
       type="button"
       className="become-provider"
       style={{ ...styles }}
-      onClick={() => OpenFilerMenu()}
+      onClick={() => HandleFilerMenu()}
     >
       {label}
 

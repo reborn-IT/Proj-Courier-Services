@@ -17,6 +17,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.name': JSON.stringify('Development'),
       'process.env.baseUrl': JSON.stringify('http://localhost:8080/'),
+      // eslint-disable-next-line max-len
+      'process.env.mapbox': JSON.stringify('pk.eyJ1Ijoic2l0aHVtZGV2MDciLCJhIjoiY2wxMmRlczBsMGFjYTNrcDRwd3F2cmdjZSJ9.mnJKqLrFikKsZlRqdCThQw'),
     }),
   ],
 };

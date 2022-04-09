@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import './SearchableDropDown.scss';
 
-interface SearchableDropDownInterface {
-  data: string[];
+enum SearchableDropDownEnums {
+  CREATE_NEW_TITLE = 'Create new title'
 }
 
-function SearchableDropDown({ data }: SearchableDropDownInterface) {
+interface SearchableDropDownInterface {
+  data: string[];
+  placeholder: string;
+  reset: boolean;
+  createmode: boolean;
+}
+
+function SearchableDropDown({
+  data,
+  placeholder,
+  reset,
+  createmode,
+}: SearchableDropDownInterface) {
   const [input, setInput] = useState<string>('');
   const [ListOpened, setListOpened] = useState<boolean>(true);
   const [List, setList] = useState<string[]>(data);
+  const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
 
   const filterList = (needle: string) => {
     const query: string = needle.toLowerCase();
-    setList(data.filter(
-      (item: string) => item.toLowerCase().indexOf(query) >= 0,
-    ));
+    const sortedData = data
+      .filter((item: string) => item.toLowerCase().indexOf(query) >= 0);
+    if (createmode) {
+      if (sortedData.length === 0) {
+        setCreateModeStatus(true);
+      }
+    }
+    setList(sortedData);
   };
 
   const setNewList = (e) => {
@@ -30,6 +48,24 @@ function SearchableDropDown({ data }: SearchableDropDownInterface) {
     setInput(item);
     setListOpened(true);
   };
+
+  const inputHandler = (e) => {
+    setNewList(e);
+    if (createModeStatus) {
+      setList(
+        (oldList) => [...oldList, SearchableDropDownEnums.CREATE_NEW_TITLE],
+      );
+    }
+  };
+
+  const buttonClickHandler = (item: string) => {
+    if (item === SearchableDropDownEnums.CREATE_NEW_TITLE) {
+      setChecked(input);
+    } else {
+      setChecked(item);
+    }
+  };
+
   return (
     <div className="searchable-dropdown">
       <svg
@@ -48,11 +84,10 @@ function SearchableDropDown({ data }: SearchableDropDownInterface) {
       </svg>
       <input
         type="text"
-        placeholder="Price High to Low"
+        placeholder={placeholder}
         onFocus={() => setListOpened(false)}
-                // onBlur={() => setPriceListOpened(true)}
-        onChange={(e) => setNewList(e)}
-        value={input}
+        onChange={(e) => inputHandler(e)}
+        value={reset ? input : ''}
       />
 
       <ul
@@ -62,7 +97,11 @@ function SearchableDropDown({ data }: SearchableDropDownInterface) {
                   List.map((item) => (
                     <button
                       type="button"
-                      onClick={() => setChecked(item)}
+                      onClick={() => buttonClickHandler(item)}
+                      className={`${
+                        item === SearchableDropDownEnums.CREATE_NEW_TITLE
+                          ? 'create-button'
+                          : ''}`}
                     >
                       {item}
 

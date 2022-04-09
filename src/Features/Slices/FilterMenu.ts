@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type TPayload = {
-    filterMenuOpened: boolean
+    filterMenuOpened: boolean;
+    SaveFilterModalOpened: boolean;
 }
 
 const initialState = {
   filterMenuOpened: false,
+  SaveFilterModalOpened: false,
 };
 
 const FilterMenuSlice = createSlice({
@@ -16,8 +18,16 @@ const FilterMenuSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.filterMenuOpened = payload.filterMenuOpened;
     },
+    // eslint-disable-next-line max-len
+    changeSaveFilterModalState: (state, { payload }: PayloadAction<TPayload>) => {
+      // eslint-disable-next-line no-param-reassign
+      state.SaveFilterModalOpened = payload.SaveFilterModalOpened;
+    },
   },
 });
 
 export const FilterMenuReducer = FilterMenuSlice.reducer;
-export const { changeFilterMenuState } = FilterMenuSlice.actions;
+export const {
+  changeFilterMenuState,
+  changeSaveFilterModalState,
+} = FilterMenuSlice.actions;
