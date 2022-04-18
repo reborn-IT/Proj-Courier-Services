@@ -2,11 +2,12 @@
 import React from 'react';
 import './CommonRoundedButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { getModalState } from '../../Store/FilterMenuModal/selectors';
+import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
+import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
 import {
-  changeFilterMenuState,
-  changeSaveFilterModalState,
-} from '../../Features/Slices/FilterMenu';
-import { RootStateInterface } from '../../App/RootState';
+  fetchSaveModalStateRequest,
+} from '../../Store/SaveFilterModal/actions';
 
 export enum CommonButtonActions {
   OPEN_FILTER= 'OPEN_FILTER',
@@ -26,25 +27,17 @@ function CommonRoundedButton({
   styles,
   action,
 }: CommonRoundedButtonProps) {
-  // eslint-disable-next-line max-len
-  const filterMenuOpened = useSelector<RootStateInterface, boolean>((state) => state.FilterMenuReducer.filterMenuOpened);
-  // eslint-disable-next-line max-len
-  const saveFilterMenuOpened = useSelector<RootStateInterface, boolean>((state) => state.FilterMenuReducer.SaveFilterModalOpened);
+  const filterMenuOpened = useSelector(getModalState);
+  const saveMenuOpened = useSelector(getSaveModalState);
   const dispatch = useDispatch();
   const HandleFilerMenu = () => {
     switch (action) {
       case CommonButtonActions.OPEN_FILTER:
       case CommonButtonActions.CLOSE_FILTER:
-        dispatch(changeFilterMenuState({
-          filterMenuOpened: !filterMenuOpened,
-          SaveFilterModalOpened: saveFilterMenuOpened,
-        }));
+        dispatch(fetchModalStateRequest(filterMenuOpened));
         break;
       case CommonButtonActions.OPEN_MODAL:
-        dispatch(changeSaveFilterModalState({
-          filterMenuOpened,
-          SaveFilterModalOpened: !saveFilterMenuOpened,
-        }));
+        dispatch(fetchSaveModalStateRequest(saveMenuOpened));
         break;
       default: break;
     }

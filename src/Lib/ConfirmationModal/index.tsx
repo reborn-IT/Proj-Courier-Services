@@ -1,27 +1,18 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStateInterface } from '../../App/RootState';
 import CommonRoundedButton from '../../Components/CommonRoundedButton';
-import SearchableDropDown from '../../Components/SearchableDropDown';
-import { changeSaveFilterModalState } from '../../Features/Slices/FilterMenu';
+import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
+import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import './ConfirmationModal.scss';
 
 function ConfirmationModal() {
-  // eslint-disable-next-line max-len
-  const filterMenuOpened = useSelector<RootStateInterface, boolean>((state) => state.FilterMenuReducer.filterMenuOpened);
+  const filterMenuOpened = useSelector(getModalState);
+  const [input, setInput] = useState<string>();
   const dispatch = useDispatch();
   const CloseModal = () => {
-    dispatch(changeSaveFilterModalState({
-      filterMenuOpened,
-      SaveFilterModalOpened: false,
-    }));
+    dispatch(fetchModalStateRequest(filterMenuOpened));
   };
-  const titleListAPI = [
-    'Fragile Special Delivery Office Panadura',
-    'Documents Delivery Office Panadura',
-    'Cake Delivery Home',
-  ];
   return (
     <div className="modal">
       <div className="row">
@@ -49,12 +40,7 @@ function ConfirmationModal() {
       <p>Save your filter data, so you can directly see and access them in your profile.</p>
       <form action="" method="post" className="form">
         <p>Title</p>
-        <SearchableDropDown
-          placeholder="Create or Select Titlt For Save Filter Data"
-          data={titleListAPI}
-          reset
-          createmode
-        />
+        <input type="text" placeholder="Enter title for save filter data" onChange={(e) => setInput(e.target.value)} value={input} />
 
         <div className="row button-row">
           <CommonRoundedButton label="No, Just Let me in" />

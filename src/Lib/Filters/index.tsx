@@ -11,7 +11,6 @@ import CommonRoundedButton,
 } from '../../Components/CommonRoundedButton';
 import SearchableDropDown from '../../Components/SearchableDropDown';
 import ConfirmationModal from '../ConfirmationModal';
-import { RootStateInterface } from '../../App/RootState';
 import MapBox from '../../Components/MapBox';
 import {
   useExpandedContext,
@@ -19,6 +18,7 @@ import {
 import {
   ExpandActionTypes,
 } from '../../Components/DropDownForm/DropDownReducer';
+import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
 
 enum ExpandButtonState {
   VIEW_ALL = 'View all...',
@@ -49,8 +49,7 @@ function Filters() {
     'Office',
     'Work',
   ];
-  const SaveFilterModalOpened = useSelector<RootStateInterface,
-  boolean>((state) => state.FilterMenuReducer.SaveFilterModalOpened);
+  const SaveFilterModalOpened = useSelector(getSaveModalState);
   const [services, setServices] = useState<string[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
   const

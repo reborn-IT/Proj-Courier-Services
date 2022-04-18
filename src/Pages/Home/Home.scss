@@ -56,6 +56,14 @@
         }
     }
 
+
+    .home-image-other {
+        background-image: url('../../Assets/Images/home-banner.svg');
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     .wrapper {
         max-height: 80vh;
         height: 80vh;

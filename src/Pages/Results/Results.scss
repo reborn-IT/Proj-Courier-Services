@@ -1,0 +1,10 @@
+@import '../../Utils/Styles/variables.scss';
+
+.main-wrapper {
+    background-color: $white;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
