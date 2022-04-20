@@ -16,11 +16,33 @@
 
 * {
   font-family: Gilroy;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  max-width: 960px;
+  width: 100%;
   margin: 0 auto;
+
+  @media (min-width: $layout-breakpoint-small-tablets) {
+    max-width: 640px;
+  }
+
+  @media (min-width: $layout-breakpoint-small) {
+    max-width: 768px;
+  }
+
+  @media (min-width: $layout-breakpoint-tablets) {
+    max-width: 1024px;
+  }
+
+  @media (min-width: $layout-breakpoint-medium) {
+    max-width: 1280px;
+  }
+
+  @media (min-width: $layout-breakpoint-large) {
+    max-width: 1536px;
+  }
 }
 
 /* Customize website's scrollbar like Mac OS

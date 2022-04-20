@@ -1,0 +1,108 @@
+@import '../../Utils/Styles/variables.scss';
+
+.pagination {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.pagination > ul {
+    padding: 0;
+    margin: 0;
+
+    li {
+        
+        a {
+            padding: 1.2rem;
+            margin: .5rem;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 100%;
+            background-color: $backgroundShadeGray;
+            color: $greyColor;
+            min-width: 1rem;
+            font-weight: 900;
+        }
+
+        &.selected {
+            a {
+                background-color: $primaryColor;
+                color: $white;
+            }
+        }
+        
+        &.previous {
+            a {
+                font-weight: normal;
+                background-color: $primaryColor;
+                color: $white;
+                padding: 1rem 2rem;
+                border-radius: 1.5rem;
+                margin-right: 2rem;
+            }
+            
+            &.disabled {
+                opacity: .6;
+                
+                a {
+                    cursor: no-drop;
+                }
+            }
+        }
+        
+        &.next {
+            
+            a {
+                font-weight: normal;
+                background-color: $primaryColor;
+                color: $white;
+                padding: 1rem 2rem;
+                border-radius: 1.5rem;
+                margin-left: 2rem;
+            }
+
+            &.disabled {
+                opacity: .6;
+
+                a {
+                    cursor: no-drop;
+                }
+            }
+        }
+    }
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li > a:focus {
+    outline: none;
+}
+
+
+// .issuesPagination .selected a {
+//     box-shadow: 0 0 2px #1b7d9e;
+//     background-color: #f3fcff;
+// }
+
+// .issuesPagination .disabled > a {
+//     color: #ccc;
+//     background-color: #f8f8f8;
+//     border-color: #eee;
+//     cursor: default;
+// }
+
+// .issuesPagination .disabled > a:hover {
+//     background-color: #f8f8f8;
+// }
+// .issuesPagination .break {
+//     margin: 0 8px;
+// }
+
+// .issuesPagination .previous {
+//     margin-right: 1rem;
+// }
+
+// .issuesPagination .next {
+//     margin-left: 1rem;
+// }

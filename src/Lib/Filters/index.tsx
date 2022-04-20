@@ -532,14 +532,16 @@ function Filters() {
 
         <div className="buttons">
           <CommonRoundedButton
-            label="Cancel"
             styles={{ backgroundColor: '#D32424', marginRight: '1rem' }}
             action={CommonButtonActions.CLOSE_FILTER}
-          />
+          >
+            Cancel
+          </CommonRoundedButton>
           <CommonRoundedButton
-            label="Done"
             action={CommonButtonActions.OPEN_MODAL}
-          />
+          >
+            Done
+          </CommonRoundedButton>
         </div>
 
       </div>

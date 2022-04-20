@@ -43,11 +43,14 @@ function ConfirmationModal() {
         <input type="text" placeholder="Enter title for save filter data" onChange={(e) => setInput(e.target.value)} value={input} />
 
         <div className="row button-row">
-          <CommonRoundedButton label="No, Just Let me in" />
+          <CommonRoundedButton>
+            No, Just Let me in
+          </CommonRoundedButton>
           <CommonRoundedButton
-            label="Save"
             styles={{ backgroundColor: '#D32424', marginRight: '1rem' }}
-          />
+          >
+            Save
+          </CommonRoundedButton>
         </div>
       </form>
     </div>
