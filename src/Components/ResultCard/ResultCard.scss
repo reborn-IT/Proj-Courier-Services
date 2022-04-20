@@ -12,12 +12,22 @@
     text-decoration: none;
     overflow: hidden;
     min-height: 15rem;
+    
+    //* Breakpoints XL
+    @media (max-width: $layout-breakpoint-medium) {
+        min-height: 13rem;
+    }
 
     .image {
         height: 15rem;
         flex: 1;
         width: 10rem;
         background-size: cover;
+
+        //* Breakpoints XL
+        @media (max-width: $layout-breakpoint-medium) {
+            height: 13rem;
+        }
     }
 
     button {
@@ -41,9 +51,60 @@
                 align-items: center;
                 font-size: 1.3rem;
 
+                //* Breakpoints XL
+                @media (max-width: $layout-breakpoint-medium) {
+                    font-size: .9rem;
+                    
+                    svg {
+                        width: 1rem;
+                        height: 1rem;
+                    }
+                }
+
+                //* Breakpoints Lg
+                @media (max-width: $layout-breakpoint-tablets) {
+                    font-size: 1rem;
+
+                    svg {
+                        width: 1.7rem;
+                        height: 1.7rem;
+                    }
+                }
+
                 span {
                     margin-left: .4rem;
                     margin-top: .3rem;
+                    
+                    //* Breakpoints XL
+                    @media (max-width: $layout-breakpoint-medium) {
+                        margin-top: .1rem;
+                        margin-left: .1rem;
+                    }
+
+                    //* Breakpoints Lg
+                    @media (max-width: $layout-breakpoint-tablets) {
+                        margin-top: .1rem;
+                        margin-left: .3rem;
+                    }
+                }
+            }
+
+            .fav-btn {
+
+                //* Breakpoints XL
+                @media (max-width: $layout-breakpoint-medium) {
+                    svg {
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+
+                //* Breakpoints Lg
+                @media (max-width: $layout-breakpoint-tablets) {
+                    svg {
+                        width: 3rem;
+                        height: 3rem;
+                    }
                 }
             }
         }
@@ -52,20 +113,41 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            //* Breakpoints XL
+            @media (max-width: $layout-breakpoint-medium) {
+                font-size: .9rem;
+            }
         }
 
         .title {
             font-size: 1.7rem;
             margin-bottom: 1rem;
+            
+            //* Breakpoints XL
+            @media (max-width: $layout-breakpoint-medium) {
+                font-size: 1.4rem;
+            }
         }
         
         .address {
             margin-bottom: 1rem;
+
+            //* Breakpoints XL
+            @media (max-width: $layout-breakpoint-medium) {
+                font-size: .9rem;
+            }
         }
 
         .services{
             display: flex;
             flex-wrap: wrap;
+
+            //* Breakpoints XL
+            @media (max-width: $layout-breakpoint-medium) {
+                font-size: .9rem;
+            }
+
             span {
                 margin-right: .4rem;
                 margin-left: .4rem;
@@ -78,6 +160,8 @@
             a {
                 text-decoration: none;
                 color: unset;
+                color: $highlightedBlue;
+                font-weight: 900;
             }
         }
     }

@@ -1,13 +1,27 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CommonRoundedButton, MapBox, NavBar } from '../../Components';
 import RoundedInput from '../../Components/RoundedInput';
 import { Footer, PaginatedItems } from '../../Lib';
+import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import './Results.scss';
 
 function Results() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchInput, setSearchInput] = useState<string>(null);
+  const [isSmallFilterButton, setIsSmallFilterButton] = useState<boolean>(false);
+  const size: Size = useWindowSize();
+
+  useEffect(() => {
+    if (size.width < 480) {
+      // eslint-disable-next-line no-console
+      console.warn('Small Filter Button');
+
+      setIsSmallFilterButton(true);
+    }
+    // eslint-disable-next-line no-console
+    console.warn('Not a Small Filter Button', size.width);
+  }, [size]);
 
   return (
     <main className="main-wrapper">
@@ -32,7 +46,11 @@ function Results() {
             <svg className="space-half" width={22} height={22} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
-            <p>Filters</p>
+            {
+              !isSmallFilterButton ? (
+                <p>Filters</p>
+              ) : null
+            }
           </div>
         </CommonRoundedButton>
       </div>
@@ -42,7 +60,7 @@ function Results() {
           marginTop: 0,
         }}
       >
-        <div className="results-cards-wrapper">
+        <div className="results-cards">
           <PaginatedItems itemsPerPage={4} />
         </div>
       </div>

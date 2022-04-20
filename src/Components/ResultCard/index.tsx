@@ -38,6 +38,7 @@ function ResultCard({
 
           <button
             type="button"
+            className="fav-btn"
             onClick={() => setFav(!fav)}
           >
             {
