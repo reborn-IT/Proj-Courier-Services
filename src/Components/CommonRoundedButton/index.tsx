@@ -17,13 +17,14 @@ export enum CommonButtonActions {
 }
 
 export interface CommonRoundedButtonProps {
-  label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: any;
   styles?: object;
   action?: CommonButtonActions;
 }
 
 function CommonRoundedButton({
-  label,
+  children,
   styles,
   action,
 }: CommonRoundedButtonProps) {
@@ -50,8 +51,7 @@ function CommonRoundedButton({
       style={{ ...styles }}
       onClick={() => HandleFilerMenu()}
     >
-      {label}
-
+      {children}
     </button>
   );
 }

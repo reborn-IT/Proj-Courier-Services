@@ -8,12 +8,15 @@ import './MainFilterComponent.scss';
 function MainFilterComponent() {
   return (
     <div className="filter-container">
-      <CommonRoundedButton label="View Nearby Services" />
+      <CommonRoundedButton>
+        View Nearby Services
+      </CommonRoundedButton>
       <p className="text-bold">Or</p>
       <CommonRoundedButton
-        label="Start Filtering"
         action={CommonButtonActions.OPEN_FILTER}
-      />
+      >
+        Start Filtering
+      </CommonRoundedButton>
     </div>
   );
 }

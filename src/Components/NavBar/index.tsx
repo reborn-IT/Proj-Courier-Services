@@ -133,7 +133,9 @@ function NavBar({ homeComponent } : NavBarProps) {
           className="right-top"
           style={{ display: `${size.width < 767 ? 'none' : 'block'}` }}
         >
-          <CommonRoundedButton label="Become a Provider" />
+          <CommonRoundedButton>
+            Become a Provider
+          </CommonRoundedButton>
           <img className="icon" src={language} alt="Language Icon" />
           <img className="icon" src={userprofile} alt="User Profile Icon" />
         </div>

@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import './Home.scss';
 import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import HomeFeatured from '../../Lib/HomeFeatured';
-import Testimonial from '../../Lib/Testimonial';
-import FAQ from '../../Lib/FAQ';
-import Footer from '../../Lib/Footer';
 import 'react-toastify/dist/ReactToastify.css';
-import Filters from '../../Lib/Filters';
+import {
+  Footer,
+  Filters,
+  Testimonial,
+  HomeFeatured,
+  FAQ,
+} from '../../Lib';
 import {
   StateProvider,
 } from '../../Components/DropDownForm/DropDownStateProvider';
-import NavBar from '../../Components/NavBar';
+import { NavBar } from '../../Components';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
 
 function Home() {

@@ -27,7 +27,9 @@ function Testimonial() {
             Give extra publicity and increase sales by becoming a
             service provider.
           </p>
-          <CommonRoundedButton label="Get Started" />
+          <CommonRoundedButton>
+            Get Started
+          </CommonRoundedButton>
         </div>
       </div>
 
