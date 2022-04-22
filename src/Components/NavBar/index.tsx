@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, { useCallback, useEffect, useState } from 'react';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
@@ -57,7 +58,6 @@ function NavBar({ homeComponent } : NavBarProps) {
   useEffect(() => {
     setScrollDirection(window.scrollY);
     window.addEventListener('scroll', handleNavigation);
-
     return () => {
       window.removeEventListener('scroll', handleNavigation);
     };
@@ -66,24 +66,25 @@ function NavBar({ homeComponent } : NavBarProps) {
   return (
     <nav
       className={`
-        transition-height
+        transition-all
+        duration-500
+        ease-in-out
         ${homeComponent
         ? fixedNav
-          ? 'home-image'
-          : 'home-image-scrolling'
-        : 'home-image-other'}`}
+          ? 'home-image max-h-[65vh] h-[65vh] bg-center bg-no-repeat bg-cover relative'
+          : 'home-image-scrolling overflow-hidden fixed top-0 left-0 right-0 z-50 shadow-xl'
+        : 'home-image-other bg-center bg-no-repeat bg-cover'}`}
       style={{ height: `${homeComponent ? getMinHeight() : '10'}vh` }}
     >
-      <div className="flex-row">
-        <img src={logo} className="icon" alt="Logo" />
+      <div className="flex items-center justify-between w-full pt-3 px-4">
+        <img src={logo} className="icon w-12 h-12 ml-2" alt="Logo" />
         <button
           type="button"
-          className="menu-icon"
+          className="menu-icon ml-2"
           onClick={() => setOpenMenu(!openMenu)}
           style={{ display: `${size.width < 480 ? 'block' : 'none'}` }}
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             height={48}
             width={48}
             fill="none"
@@ -98,9 +99,9 @@ function NavBar({ homeComponent } : NavBarProps) {
             />
           </svg>
         </button>
-        <div className={`fixed-menu ${openMenu ? '' : 'hidden'}`}>
-          <div className="relative">
-            <div className="middle-menu">
+        <div className={`fixed-menu ${openMenu ? '' : 'hidden overflow-hidden transform scale-0'} fixed top-0 left-0 right-0 bottom-0 z-40 h-full w-full shadow-xl transition-all duration-300 ease-in-out`}>
+          <div className="relative h-full w-full">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 z-50 flex items-end flex-col">
               <button
                 className="menu-icon"
                 type="button"
@@ -121,23 +122,23 @@ function NavBar({ homeComponent } : NavBarProps) {
                   />
                 </svg>
               </button>
-              <ul>
-                <li>Become a Provider</li>
-                <li>Language</li>
-                <li>My Account</li>
+              <ul className="px-4 py-3 bg-drop-white flex flex-col mt-2 space-y-3">
+                <li className="text-drop-primary font-semibold">Become a Provider</li>
+                <li className="text-drop-primary font-semibold">Language</li>
+                <li className="text-drop-primary font-semibold">My Account</li>
               </ul>
             </div>
           </div>
         </div>
         <div
-          className="right-top"
-          style={{ display: `${size.width < 767 ? 'none' : 'block'}` }}
+          className="items-center mr-2"
+          style={{ display: `${size.width < 767 ? 'none' : 'flex'}` }}
         >
           <CommonRoundedButton>
             Become a Provider
           </CommonRoundedButton>
-          <img className="icon" src={language} alt="Language Icon" />
-          <img className="icon" src={userprofile} alt="User Profile Icon" />
+          <img className="icon w-12 h-12 ml-2" src={language} alt="Language Icon" />
+          <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
         </div>
       </div>
 

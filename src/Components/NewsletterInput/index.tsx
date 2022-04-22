@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 import React, { useRef } from 'react';
-import './NewsletterInput.scss';
 import { toast } from 'react-toastify';
 import SendIcon from '../../Assets/Icons/send.svg';
 
@@ -35,9 +35,9 @@ function NewsletterInput() {
   };
 
   return (
-    <div className="newsletter-wrapper">
+    <div className="newsletter-wrapper bg-drop-white overflow-hidden flex items-center justify-between sm:justify-start rounded-full py-3 px-4 w-[80vw] sm:w-auto">
       <input type="text" placeholder="Your Email" ref={newsletter} />
-      <button type="button" onClick={() => handleSubscribe()}>
+      <button type="button" className="transform rotate-[30deg]" onClick={() => handleSubscribe()}>
         <img src={SendIcon} alt="send icon" style={{ width: '2.2rem' }} />
       </button>
     </div>

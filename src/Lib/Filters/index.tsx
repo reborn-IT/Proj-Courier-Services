@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import './filters.scss';
 import Switch from 'react-switch';
@@ -19,6 +20,7 @@ import {
   ExpandActionTypes,
 } from '../../Components/DropDownForm/DropDownReducer';
 import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
+import FilterMenuInput from '../../Components/FilterMenuInput';
 
 enum ExpandButtonState {
   VIEW_ALL = 'View all...',
@@ -142,10 +144,10 @@ function Filters() {
         <ConfirmationModal />
       </div>
       <div
-        className="filters"
+        className="filters rounded-3xl py-4 bg-drop-white overflow-y-auto absolute w-full md:w-4/5 h-full md:h-3/4 z-50 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-200 ease-in-out"
         style={{ display: `${SaveFilterModalOpened ? 'none' : 'block'}` }}
       >
-        <h1 className="filter-container-maxw">Filters</h1>
+        <h1 className="text-drop-primary text-5xl font-semibold max-w-[95%] mx-auto">Filters</h1>
         <div className="nature-parcel">
           <DropDownForm
             title="Nature of the parcel"
@@ -153,32 +155,31 @@ function Filters() {
             payload={!state.natureExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{ display: `${state.natureExpanded ? 'none' : 'block'}` }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="search for nature of the parcel"
-                onChange={(e) => setNewServicesList(e)}
+                onChangeHandler={(e) => setNewServicesList(e)}
                 value={serviceInput}
               />
             </form>
 
-            <div className="checkboxes filter-container-maxw">
+            <div className="checkboxes flex flex-col mt-4   px-6">
               {
               expandServices
                 ? services.slice(0, 4).map((item) => (
-                  <motion.div layout key={item} className="checkbox">
+                  <motion.div layout key={item} className="checkbox flex items-center mb-2 self-start">
                     <input
                       id="one"
                       type="checkbox"
                       checked={natureArray.includes(item)}
                       onChange={() => handleNatureArray(item)}
+                      className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                     />
                     <span>
                       {item}
@@ -186,7 +187,7 @@ function Filters() {
                   </motion.div>
                 ))
                 : services.map((item) => (
-                  <motion.div layout key={item} className="checkbox">
+                  <motion.div layout key={item} className="checkbox flex items-center mb-2 self-start">
                     <input
                       id="one"
                       type="checkbox"
@@ -202,7 +203,7 @@ function Filters() {
 
               <button
                 type="button"
-                className="link-button"
+                className="link-button font-semibold text-drop-blue self-start"
                 onClick={() => handleExpandButton()}
               >
                 {viewAllButtonState}
@@ -218,15 +219,13 @@ function Filters() {
             payload={!state.weightExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{ display: `${state.weightExpanded ? 'none' : 'block'}` }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
-              <input
+              <FilterMenuInput
                 type="number"
                 placeholder="Weight in kilograms"
               />
@@ -241,7 +240,7 @@ function Filters() {
             payload={!state.parcelCountExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{
               display: `${state.parcelCountExpanded
                 ? 'none'
@@ -249,11 +248,9 @@ function Filters() {
             }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
-              <input
+              <FilterMenuInput
                 type="number"
                 placeholder="Quantity"
               />
@@ -268,13 +265,11 @@ function Filters() {
             payload={!state.pickupExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{ display: `${state.pickupExpanded ? 'none' : 'block'}` }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
               <SearchableDropDown
                 data={PrimaryLocationDataAPI}
@@ -285,14 +280,15 @@ function Filters() {
                 createmode={false}
               />
             </form>
-            <div className="checkboxes filter-container-maxw">
-              <div className="checkbox">
+            <div className="checkboxes flex flex-col mt-4   px-6">
+              <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
                   type="checkbox"
                   onChange={
                     () => handleArriveSwitchAddress()
                   }
+                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                 />
                 <span>
                   Address
@@ -300,41 +296,40 @@ function Filters() {
               </div>
             </div>
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
               style={{
                 display:
                 `${arrivingpointAddressChecked ? 'block' : 'none'}`,
               }}
             >
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="City"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
-                type="text"
+              <FilterMenuInput
+                type="number"
                 placeholder="Postal Code"
               />
             </form>
 
-            <div className="checkboxes filter-container-maxw">
-              <div className="checkbox">
+            <div className="checkboxes flex flex-col mt-4   px-6">
+              <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
                   type="checkbox"
                   onChange={() => handleArriveMarkOnMap()}
+                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                 />
                 <span>
                   Mark on map
@@ -343,7 +338,7 @@ function Filters() {
             </div>
 
             <div
-              className="filter-container-maxw map"
+              className="map h-[40vh]  px-6"
               style={{
                 display: `${(
                   arriveMarkOnMap) ? 'block' : 'none'}`,
@@ -361,7 +356,7 @@ function Filters() {
             payload={!state.destinationExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{
               display: `${state.destinationExpanded
                 ? 'none'
@@ -369,9 +364,7 @@ function Filters() {
             }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
               <SearchableDropDown
                 data={PrimaryLocationDataAPI}
@@ -382,11 +375,12 @@ function Filters() {
                 createmode={false}
               />
             </form>
-            <div className="checkboxes filter-container-maxw">
-              <div className="checkbox">
+            <div className="checkboxes flex flex-col mt-4   px-6">
+              <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
                   type="checkbox"
+                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                   onChange={() => handleDestinationSwitchAddress()}
                 />
                 <span>
@@ -395,41 +389,40 @@ function Filters() {
               </div>
             </div>
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
               style={{
                 display:
                 `${DestinationpointAddressChecked ? 'block' : 'none'}`,
               }}
             >
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
+              <FilterMenuInput
                 type="text"
                 placeholder="City"
-                className="inputs-many"
+                extratailwindcss="mb-3"
               />
-              <input
-                type="text"
+              <FilterMenuInput
+                type="number"
                 placeholder="Postal Code"
               />
             </form>
 
-            <div className="checkboxes filter-container-maxw">
-              <div className="checkbox">
+            <div className="checkboxes flex flex-col mt-4   px-6">
+              <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
                   type="checkbox"
                   onChange={() => handleDestinationMarkOnMap()}
+                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                 />
                 <span>
                   Mark on map
@@ -438,7 +431,7 @@ function Filters() {
             </div>
 
             <div
-              className="filter-container-maxw map"
+              className="  px-6 map h-[40vh]"
               style={{
                 display:
                 `${DestinationMarkOnMap ? 'block' : 'none'}`,
@@ -450,7 +443,7 @@ function Filters() {
         </div>
 
         <div className="scheduled">
-          <div className="dropdown-flex">
+          <div className="dropdown-flex max-w-[96.5%] mx-auto">
             <DropDownForm
               title="Scheduled"
             />
@@ -467,7 +460,7 @@ function Filters() {
             </div>
           </div>
           <div
-            className="content-forms filter-container-maxw"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4   px-6"
             style={{
               padding: '2rem',
               display: `${scheduled ? 'block' : 'none'}`,
@@ -478,7 +471,7 @@ function Filters() {
         </div>
 
         <div className="immediate-courier">
-          <div className="dropdown-flex">
+          <div className="dropdown-flex max-w-[96.5%] mx-auto">
             <DropDownForm
               title="Immediate Courier?"
             />
@@ -495,13 +488,13 @@ function Filters() {
             </div>
           </div>
           <div
-            className="content-forms filter-container-maxw"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4   px-6"
             style={{
               padding: '2rem',
               display: `${isImmediateCourier ? 'block' : 'none'}`,
             }}
           >
-            <p className="charges-text">Extra charges may apply.</p>
+            <p className="font-semibold text-drop-grey text-sm">Extra charges may apply.</p>
           </div>
         </div>
 
@@ -512,13 +505,11 @@ function Filters() {
             payload={!state.costExpanded}
           />
           <div
-            className="content-forms"
+            className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{ display: `${state.costExpanded ? 'none' : 'block'}` }}
           >
             <form
-              action="/"
-              method="post"
-              className="content-form filter-container-maxw"
+              className="content-form   px-6"
             >
               <SearchableDropDown
                 data={priceListAPI}
