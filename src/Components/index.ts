@@ -9,3 +9,4 @@ export { default as NewsletterInput } from './NewsletterInput';
 export { default as ResultCard } from './ResultCard';
 export { default as SearchableDropDown } from './SearchableDropDown';
 export { default as TestimonialXL } from './TestimonialXL';
+export { default as FilterMenuInput } from './FilterMenuInput';

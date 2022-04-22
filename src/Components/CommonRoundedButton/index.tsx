@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable react/require-default-props */
 import React from 'react';
-import './CommonRoundedButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
@@ -47,7 +47,7 @@ function CommonRoundedButton({
   return (
     <button
       type="button"
-      className="become-provider"
+      className="become-provider px-5 py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap"
       style={{ ...styles }}
       onClick={() => HandleFilerMenu()}
     >

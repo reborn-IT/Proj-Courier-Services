@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import StarIcon from '../../Assets/Icons/star.svg';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
@@ -17,7 +18,7 @@ function TestimonialXL({
   const size: Size = useWindowSize();
   return (
     <div
-      className="testimonial-card testimonial-card-xl"
+      className="absolute bg-no-repeat bg-cover bg-center testimonial-card-xl w-56 2xl:w-72 h-[20rem] 2xl:h-[26rem] rounded-2xl px-3 pb-3 flex items-end overflow-hidden"
       style={{
         top: `${topPos}rem`,
         left: `${rightBiased ? `${rightPos}rem` : 'auto'}`,
@@ -25,16 +26,16 @@ function TestimonialXL({
         display: `${size.width < 480 ? 'none' : 'flex'}`,
       }}
     >
-      <div className="column-centered-flex review-testimonial">
-        <p>{review}</p>
-        <p>
+      <div className="flex flex-col items-center justify-center h-auto w-full bg-drop-white rounded-2xl px-4 py-3 text-sm text-center font-semibold">
+        <p className="mb-2 text-drop-gold text-md">{review}</p>
+        <p className="mb-2 text-drop-grey">
           -
           {' '}
           {author}
           {' '}
           -
         </p>
-        <div className="stars">
+        <div className="stars flex items-center">
           {
                 Array.from(Array(starCount).keys()).map((key) => (
                   <img key={key} src={StarIcon} alt="star icon" />

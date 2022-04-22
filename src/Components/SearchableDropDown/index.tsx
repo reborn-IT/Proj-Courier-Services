@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
-import './SearchableDropDown.scss';
 
 enum SearchableDropDownEnums {
   CREATE_NEW_TITLE = 'Create new title'
@@ -67,10 +67,14 @@ function SearchableDropDown({
   };
 
   return (
-    <div className="searchable-dropdown">
+    <div
+      className="searchable-dropdown relative"
+      style={{
+        width: 'calc(100% - 2rem)',
+      }}
+    >
       <svg
-        width={20}
-        height={20}
+        className="h-6 w-6 absolute top-4 right-14 z-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -84,23 +88,27 @@ function SearchableDropDown({
       </svg>
       <input
         type="text"
+        className="border border-drop-primary p-4 rounded-xl"
         placeholder={placeholder}
         onFocus={() => setListOpened(false)}
         onChange={(e) => inputHandler(e)}
         value={reset ? input : ''}
+        style={{
+          width: 'width: calc(100% - 2rem)',
+        }}
       />
 
       <ul
-        className={`price-list ${ListOpened ? 'hide' : ''}`}
+        className={`price-list bg-drop-white text-drop-grey overflow-hidden flex-col rounded-lg ${ListOpened ? 'hidden' : 'flex'}`}
       >
         {
                   List.map((item) => (
                     <button
                       type="button"
                       onClick={() => buttonClickHandler(item)}
-                      className={`${
+                      className={`capitalize px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
                         item === SearchableDropDownEnums.CREATE_NEW_TITLE
-                          ? 'create-button'
+                          ? 'text-drop-white bg-drop-blue'
                           : ''}`}
                     >
                       {item}
