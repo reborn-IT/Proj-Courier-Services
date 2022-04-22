@@ -96,7 +96,7 @@ interface IItems {
 
 function Items({ currentItems }: IItems) {
   return (
-    <div className="results-cards-wrapper">
+    <div className="results-cards-wrapper lg:max-h-[80vh] lg:overflow-y-auto flex flex-col w-full">
       {currentItems && currentItems.map(({
         title,
         address,
@@ -134,7 +134,7 @@ function PaginatedItems({ itemsPerPage }: IPaginatedItems) {
       <Items
         currentItems={currentItems}
       />
-      <div className="pagination">
+      <div className="pagination mt-4 text-center">
         <ReactPaginate
           breakLabel="..."
           nextLabel="Next"

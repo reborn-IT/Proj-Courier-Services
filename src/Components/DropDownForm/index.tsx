@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
-import './dropdownform.scss';
 import DownArrowIcon from '../../Assets/Icons/downArrow.svg';
 import { ExpandActionTypes } from './DropDownReducer';
 import { useExpandedContext } from './DropDownStateProvider';
@@ -27,18 +27,15 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
   return (
     <button
       type="button"
-      className="button-dropdown filter-container-maxw"
+      className="flex items-start mt-6 w-full max-w-[95%] mx-auto"
       onClick={() => ExpandForm()}
     >
       <img
         src={DownArrowIcon}
         alt="Down Arrow Icon"
-        style={{
-          width: '1.7rem',
-          transform: `rotate(${revealed ? '180deg' : '0'})`,
-        }}
+        className={`transition-all duration-300 ease-in-out w-7 transform ${revealed ? 'rotate-180' : 'rotate-0'}`}
       />
-      <p>{title}</p>
+      <p className="ml-4 font-semibold text-drop-grey text-xl">{title}</p>
     </button>
   );
 }

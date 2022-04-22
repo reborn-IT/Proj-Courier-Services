@@ -1,98 +1,14 @@
 @import '../../Utils/Styles/variables.scss';
 
 .filters {
-    border-radius: 2.4rem;
-    padding: 2rem 0;
-    background-color: $white;
-    overflow-y: auto;
-    position: absolute;
-    width: 80%;
-    height: 70%;
-    z-index: 61;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    @media (max-width: $layout-breakpoint-tablets) {
-        width: 100%;
-        height: 100%;
-    }
-
-    h1 {
-        color: $primaryColor;
-        font-size: 3rem;
-        font-weight: 900;
-    }
-
-    .button-dropdown {
-        display: flex;
-        align-items: center;
-        appearance: none;
-        border: 0;
-        background-color: transparent;
-        margin-top: 1.5rem;
-
-        p {
-            margin-left: 1rem;
-            font-weight: 900;
-            color: $greyColor;
-        }
-    }
 
     .content-forms{
-        margin-top: 1rem;
-        background-color: $backgroundShadeGray;
-        padding: 2rem 0;
-
-        .content-form{
-
-            input[type="text"], input[type="number"] {
-                appearance: none;
-                border: 1px solid $greyColor;
-                border-radius: .7rem;
-                padding: 1rem;
-                width: calc(100% - 2rem);
-                background-color: transparent;
-            }
-
-            .inputs-many {
-                margin-bottom: .8rem;
-            }
-        }
-
-        .charges-text{
-            font-weight: 900;
-            color: $greyColor;
-            font-size: .89rem;
-        }
-
         .checkboxes{
-            display: flex;
-            flex-direction: column;
-            margin-top: 2rem;
-
             .checkbox {
-                display: flex;
-                align-items: center;
-                margin-bottom: .7rem;
-                align-self: flex-start;
-
                 input[type="checkbox"] {
-                    margin: 0;
-                    margin-right: .7rem;
-                    appearance: none;
-                    background-color: #fff;
-                    font: inherit;
                     color: currentColor;
-                    width: 1.15em;
-                    height: 1.15em;
                     border: 0.15em solid currentColor;
-                    border-radius: 0.15em;
                     transform: translateY(-0.075em);
-                    display: grid;
-                    place-content: center;
-                    transition: all .3s ease-in-out;
-                    cursor: pointer;
 
                     &::before {
                         content: "";
@@ -114,20 +30,9 @@
                 }
 
             }
-            
-            a, .link-button {
-                text-decoration: none;
-                font-weight: 700;
-                color: $highlightedBlue;
-                appearance: none;
-                border: 0;
-                background-color: transparent;
-                align-self: flex-start;
-            }
         }
 
         .map {
-            height: 40vh;
             
             .mapboxgl-canvas-container {
                 height: 60vh !important;
@@ -135,10 +40,6 @@
                 width: 100% !important;
             }
         }
-    }
-
-    .filter-container-maxw {
-        padding: 0 2rem;
     }
 
     .dropdown-flex{

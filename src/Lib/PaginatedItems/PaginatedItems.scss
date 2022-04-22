@@ -1,10 +1,5 @@
 @import '../../Utils/Styles/variables.scss';
 
-.pagination {
-    padding-top: 1rem;
-    text-align: center;
-}
-
 .pagination > ul {
     padding: 0;
     margin: 0;
@@ -12,21 +7,32 @@
     li {
         
         a {
-            padding: 1.2rem;
             margin: .5rem;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             border-radius: 100%;
             background-color: $backgroundShadeGray;
             color: $greyColor;
             min-width: 1rem;
-            font-weight: 900;
+            width: 3rem;
+            height: 3rem;
+
+            //* Breakpoints Mobile
+            @media (max-width: $layout-breakpoint-xsmall) {
+                font-size: .75rem;
+                margin: .2rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
         }
 
         &.selected {
             a {
                 background-color: $primaryColor;
                 color: $white;
+                font-weight: 900;
             }
         }
         
@@ -38,7 +44,14 @@
                 padding: 1rem 2rem;
                 border-radius: 1.5rem;
                 margin-right: 2rem;
+                width: auto;
+
+                //* Breakpoints Mobile
+                @media (max-width: $layout-breakpoint-xsmall) {
+                    margin-right: .5rem;
+                }
             }
+
             
             &.disabled {
                 opacity: .6;
@@ -58,6 +71,12 @@
                 padding: 1rem 2rem;
                 border-radius: 1.5rem;
                 margin-left: 2rem;
+                width: auto;
+
+                //* Breakpoints Mobile
+                @media (max-width: $layout-breakpoint-xsmall) {
+                    margin-left: .5rem;
+                }
             }
 
             &.disabled {
@@ -78,31 +97,3 @@
 .pagination li > a:focus {
     outline: none;
 }
-
-
-// .issuesPagination .selected a {
-//     box-shadow: 0 0 2px #1b7d9e;
-//     background-color: #f3fcff;
-// }
-
-// .issuesPagination .disabled > a {
-//     color: #ccc;
-//     background-color: #f8f8f8;
-//     border-color: #eee;
-//     cursor: default;
-// }
-
-// .issuesPagination .disabled > a:hover {
-//     background-color: #f8f8f8;
-// }
-// .issuesPagination .break {
-//     margin: 0 8px;
-// }
-
-// .issuesPagination .previous {
-//     margin-right: 1rem;
-// }
-
-// .issuesPagination .next {
-//     margin-left: 1rem;
-// }
