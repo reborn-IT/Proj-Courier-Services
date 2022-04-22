@@ -26,108 +26,14 @@
         @media (max-width: $layout-breakpoint-xsmall) {
             width: 100%;
         }
-
-        .space-half {
-            margin-right: .7rem;
-            //* Breakpoints Mobile
-            @media (max-width: $layout-breakpoint-xsmall) {
-                margin-right: .3rem;
-            }
-        }
-
-        .space-1 {
-            margin-right: 1.5rem;
-            //* Breakpoints Mobile
-            @media (max-width: $layout-breakpoint-xsmall) {
-                margin-right: 1rem;
-            }
-        }
-
-        .space-2 {
-            margin-right: 2.5rem;
-            //* Breakpoints Mobile
-            @media (max-width: $layout-breakpoint-xsmall) {
-                margin-right: 1rem;
-            }
-        }
     }
 
 }
 
 .map {
-    min-width: 40vw;
-    background-color: $faqBackground;
-    position: absolute;
-    right: 0;
-    top: 22%;
-    min-height: 70vh;
-    border-radius: 2rem 0 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-
-    //* Breakpoints XL
-    @media (max-width: $layout-breakpoint-medium) {
-        top: unset;
-        bottom: 0%;
-    }
-
-    //* Breakpoints XL
-    @media (max-width: $layout-breakpoint-tablets) {
-        bottom: 25%;
-        transform: translateY(25%);
-        right: -35%;
-    }
-
-    //* Breakpoints Mobile
-    @media (max-width: $layout-breakpoint-xsmall) {
-        visibility: hidden;
-    }
 
     .mapboxgl-canvas-container {
         min-height: 70vh !important;
-        width: 100% !important;
-    }
-}
-
-.results-map-wrapper {
-    margin-top: 0;
-    position: relative;
-
-    //* Breakpoints XL
-    @media (max-width: $layout-breakpoint-medium) {
-        margin-left: 5rem;
-    }
-
-    //* Breakpoints XL
-    @media (max-width: $layout-breakpoint-tablets) {
-        margin-left: unset;
-    }
-    
-    .results-cards-wrapper {
-        max-height: 80vh;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        width:75%;
-
-        //* Breakpoints XL
-        @media (max-width: $layout-breakpoint-medium) {
-            width: 80%;
-        }
-
-        //* Breakpoints Lg
-        @media (max-width: $layout-breakpoint-tablets) {
-            margin-left: unset;
-            margin: 0 auto;
-        }
-
-        //* Breakpoints Md
-        @media (max-width: $layout-breakpoint-small) {
-            width: 100%;
-            overflow-y: unset;
-            max-height: unset;
-        }
+        width: auto !important;
     }
 }
