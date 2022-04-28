@@ -10,9 +10,11 @@ import userprofile from '../../Assets/Icons/userprofile.svg';
 
 interface NavBarProps {
     homeComponent: boolean;
+    // eslint-disable-next-line react/require-default-props
+    isMainFilterComponentExists?: boolean;
 }
 
-function NavBar({ homeComponent } : NavBarProps) {
+function NavBar({ homeComponent, isMainFilterComponentExists } : NavBarProps) {
   const size: Size = useWindowSize();
   const [fixedNav, setFixedNav] = useState<boolean>(true);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -142,7 +144,7 @@ function NavBar({ homeComponent } : NavBarProps) {
         </div>
       </div>
 
-      <div style={{ display: `${homeComponent ? 'block' : 'none'}` }}>
+      <div style={{ display: `${homeComponent ? !isMainFilterComponentExists ? 'none' : 'block' : 'none'}` }}>
         <MainFilterComponent />
       </div>
     </nav>
