@@ -4,6 +4,7 @@ import './App.scss';
 import Home from './Pages/Home';
 import Results from './Pages/Results';
 import Result from './Pages/Results/Result';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="results" element={<Results />} />
         <Route path="results/:resultId" element={<Result />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </Router>
   );

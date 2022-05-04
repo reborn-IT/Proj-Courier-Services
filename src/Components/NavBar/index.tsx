@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import CommonRoundedButton from '../CommonRoundedButton';
 import MainFilterComponent from '../HomeFIlterComponent';
@@ -140,7 +141,9 @@ function NavBar({ homeComponent, isMainFilterComponentExists } : NavBarProps) {
             Become a Provider
           </CommonRoundedButton>
           <img className="icon w-12 h-12 ml-2" src={language} alt="Language Icon" />
-          <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
+          <Link to="/profile">
+            <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
+          </Link>
         </div>
       </div>
 

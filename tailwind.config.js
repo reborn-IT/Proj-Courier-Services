@@ -6,6 +6,7 @@ module.exports = {
         'drop-primary': '#525298',
         'drop-white': '#FFFFFF',
         'drop-lightest-grey': '#F9F9F9',
+        'drop-light-grey': '#E7E0E0',
         'drop-red': '#D32424',
         'drop-blue': '#276AEC',
         'drop-gold': '#FE7B01',

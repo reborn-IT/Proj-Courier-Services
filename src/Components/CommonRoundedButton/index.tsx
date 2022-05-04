@@ -21,12 +21,14 @@ export interface CommonRoundedButtonProps {
   children: any;
   styles?: object;
   action?: CommonButtonActions;
+  extraTailwindClasses?: string;
 }
 
 function CommonRoundedButton({
   children,
   styles,
   action,
+  extraTailwindClasses,
 }: CommonRoundedButtonProps) {
   const filterMenuOpened = useSelector(getModalState);
   const saveMenuOpened = useSelector(getSaveModalState);
@@ -47,7 +49,7 @@ function CommonRoundedButton({
   return (
     <button
       type="button"
-      className="become-provider px-5 py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap"
+      className={`become-provider px-5 py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap ${extraTailwindClasses}`}
       style={{ ...styles }}
       onClick={() => HandleFilerMenu()}
     >
