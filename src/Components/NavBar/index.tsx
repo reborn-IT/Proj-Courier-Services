@@ -15,7 +15,7 @@ interface NavBarProps {
     isMainFilterComponentExists?: boolean;
 }
 
-function NavBar({ homeComponent, isMainFilterComponentExists } : NavBarProps) {
+function NavBar({ homeComponent, isMainFilterComponentExists = true } : NavBarProps) {
   const size: Size = useWindowSize();
   const [fixedNav, setFixedNav] = useState<boolean>(true);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -59,11 +59,15 @@ function NavBar({ homeComponent, isMainFilterComponentExists } : NavBarProps) {
   }, [scrollDirection, scrollTop, homeComponent]);
 
   useEffect(() => {
+    // console.warn(homeComponent ? !isMainFilterComponentExists ? 'none' : 'block' : 'none');
+    // eslint-disable-next-line no-console
+    console.warn(isMainFilterComponentExists);
     setScrollDirection(window.scrollY);
     window.addEventListener('scroll', handleNavigation);
     return () => {
       window.removeEventListener('scroll', handleNavigation);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleNavigation]);
 
   return (
@@ -80,7 +84,9 @@ function NavBar({ homeComponent, isMainFilterComponentExists } : NavBarProps) {
       style={{ height: `${homeComponent ? getMinHeight() : '10'}vh` }}
     >
       <div className="flex items-center justify-between w-full pt-3 px-4">
-        <img src={logo} className="icon w-12 h-12 ml-2" alt="Logo" />
+        <Link to="/">
+          <img src={logo} className="icon w-12 h-12 ml-2" alt="Logo" />
+        </Link>
         <button
           type="button"
           className="menu-icon ml-2"

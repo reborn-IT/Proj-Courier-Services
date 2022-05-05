@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import CommonRoundedButton from '../../Components/CommonRoundedButton';
 import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
@@ -51,7 +52,9 @@ function ConfirmationModal() {
 
         <div className="flex items-center justify-end mt-7">
           <CommonRoundedButton>
-            No, Just Let me in
+            <Link to="results">
+              No, Just Let me in
+            </Link>
           </CommonRoundedButton>
           <span className="mx-2" />
           <CommonRoundedButton

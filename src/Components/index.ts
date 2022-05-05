@@ -13,3 +13,5 @@ export { default as FilterMenuInput } from './FilterMenuInput';
 export { default as StaticDropDownRounded } from './StaticDropDownRounded';
 export { default as CourierService } from './CourierService';
 export { default as ReviewCard } from './ReviewCard';
+export { default as RoundedInput } from './RoundedInput';
+export { default as FilterLogCard } from './FilterLogCard';

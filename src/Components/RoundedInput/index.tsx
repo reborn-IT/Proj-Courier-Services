@@ -6,17 +6,19 @@ interface IRoundedInput {
     type: TEXT | NUMBER;
     placeholder: string;
     onChange: (e) => void;
+    // eslint-disable-next-line react/require-default-props
+    extraTailwindClasses?: string;
 }
 
 function RoundedInput({
-  type, placeholder, onChange,
+  type, placeholder, onChange, extraTailwindClasses,
 }: IRoundedInput) {
   return (
     <input
       type={type}
       placeholder={placeholder}
       onChange={(e) => onChange(e)}
-      className="rounded-input ml-2 md:ml-0 flex-1 border border-drop-primary rounded-full p-3 md:p-4 text-sm md:text-base"
+      className={`rounded-input ml-2 md:ml-0 flex-1 border border-drop-primary rounded-full p-3 md:p-4 text-sm md:text-base ${extraTailwindClasses}`}
     />
   );
 }

@@ -61,7 +61,7 @@ function Results() {
         }}
       >
         <div className="results-cards w-[90%] mx-auto lg:mx-0 lg:w-1/2 2xl:w-3/5">
-          <PaginatedItems itemsPerPage={4} />
+          <PaginatedItems cardType="resultcard" itemsPerPage={4} />
         </div>
       </div>
 

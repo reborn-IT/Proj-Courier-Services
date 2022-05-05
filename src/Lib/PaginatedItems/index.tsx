@@ -1,12 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { ResultCard } from '../../Components';
+import { FilterLogCard, ResultCard } from '../../Components';
 import './PaginatedItems.scss';
+import {
+  RESULTCARD, FILTERLOGCARD, HIGH_TO_LOW, LOW_TO_HIGH, BEST_MATCH,
+} from '../../Utils/constants';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { IFilterLogCardData } from '../../Components/FilterLogCard';
 
 interface IPaginatedItems {
     itemsPerPage: number;
+    cardType: RESULTCARD | FILTERLOGCARD;
 }
 
 interface IResultCardData {
@@ -90,40 +96,195 @@ const RESULTSCARD_DATA: IResultCardData[] = [
   },
 ];
 
+const FILTER_LOG_DATA: IFilterLogCardData[] = [
+  {
+    id: 1,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 2,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 3,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 4,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 5,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 6,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 7,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 8,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 9,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+  {
+    id: 10,
+    title: 'Fragile Special Delivery Office Panadura',
+    weight: 3.4,
+    scheduled: true,
+    to: 'Kalmunai',
+    from: 'Panadura',
+    cost: 'High to Low',
+    date: '2022/03/12',
+    time: '09.23 a.m',
+  },
+];
+
 interface IItems {
-    currentItems: IResultCardData[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    currentItems: any;
+    cardType: RESULTCARD | FILTERLOGCARD;
 }
 
-function Items({ currentItems }: IItems) {
+function Items({ cardType, currentItems }: IItems) {
   return (
-    <div className="results-cards-wrapper lg:max-h-[80vh] lg:overflow-y-auto flex flex-col w-full">
-      {currentItems && currentItems.map(({
-        title,
-        address,
-        rating,
-        website,
-      }) => (
-        <ResultCard
-          title={title}
-          address={address}
-          rating={rating}
-          website={website}
-        />
-      ))}
+    <div className="results-cards-wrapper lg:max-h-[80vh] lg:overflow-y-auto flex flex-col w-full px-4">
+      {
+        cardType === 'resultcard'
+          ? currentItems && currentItems.map(({
+            id,
+            title,
+            address,
+            rating,
+            website,
+          }) => (
+            <ResultCard
+              id={id}
+              key={id}
+              title={title}
+              address={address}
+              rating={rating}
+              website={website}
+            />
+          )) : currentItems && currentItems.map(({
+            id,
+            title,
+            weight,
+            scheduled,
+            to,
+            from,
+            cost,
+            date,
+            time,
+          }) => (
+            <FilterLogCard
+              id={id}
+              key={id}
+              title={title}
+              weight={weight}
+              scheduled={scheduled}
+              to={to}
+              from={from}
+              cost={cost}
+              date={date}
+              time={time}
+              extraTailWindClasses="mb-3"
+            />
+          ))
+}
     </div>
   );
 }
 
-function PaginatedItems({ itemsPerPage }: IPaginatedItems) {
+function PaginatedItems({ itemsPerPage, cardType }: IPaginatedItems) {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [itemOffset, setItemOffset] = useState<number>(0);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(RESULTSCARD_DATA.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(RESULTSCARD_DATA.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+    switch (cardType) {
+      case 'resultcard':
+        setCurrentItems(RESULTSCARD_DATA.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(RESULTSCARD_DATA.length / itemsPerPage));
+        break;
+      case 'filterlogcard':
+        setCurrentItems(FILTER_LOG_DATA.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(FILTER_LOG_DATA.length / itemsPerPage));
+        break;
+      default:
+        break;
+    }
+  }, [itemOffset, itemsPerPage, cardType]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % RESULTSCARD_DATA.length;
@@ -132,6 +293,7 @@ function PaginatedItems({ itemsPerPage }: IPaginatedItems) {
   return (
     <>
       <Items
+        cardType={cardType}
         currentItems={currentItems}
       />
       <div className="pagination mt-4 text-center">
