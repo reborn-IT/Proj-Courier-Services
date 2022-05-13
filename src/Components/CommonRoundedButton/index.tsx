@@ -49,7 +49,7 @@ function CommonRoundedButton({
   return (
     <button
       type="button"
-      className={`become-provider px-5 py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap ${extraTailwindClasses}`}
+      className={`become-provider px-5 py-3 md:py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap ${extraTailwindClasses}`}
       style={{ ...styles }}
       onClick={() => HandleFilerMenu()}
     >

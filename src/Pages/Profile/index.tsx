@@ -32,13 +32,18 @@ function Profile() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <main className="main-wrapper bg-drop-white w-full overflow-x-hidden box-border h-screen">
+    <main className="main-wrapper bg-drop-white w-full overflow-x-hidden box-border min-h-screen">
       <NavBar homeComponent={false} />
 
       <div className="w-[95vw] md:w-[80vw] xl:w-[60vw] 2xl:w-[40vw] mx-auto">
         {/* TAB NAVIGATION */}
-        <nav className="mt-8 md:mt-16">
+        <nav className="mt-28 md:mt-[7.5rem] 2xl:mt-40">
           <ul className="relative flex items-center">
             <li className="option-aside border border-sky-500 flex justify-center" style={{ width: '33.33%' }}>
               <Link to="overview" className={`flex px-4 items-center text-base md:text-xl hover:text-drop-primary transition-colors duration-300 font-semibold ${tabLocation === 1 ? 'text-drop-primary' : 'text-drop-grey'}`}>
@@ -58,7 +63,7 @@ function Profile() {
                 <p className="hidden sm:block">Filter Log</p>
               </Link>
             </li>
-            <span className="z-40 absolute -bottom-4 sm:-bottom-2 md:-bottom-4 bg-drop-light-grey left-0 h-1 transform transition-all duration-500 rounded-full w-full">
+            <span className="z-20 absolute -bottom-4 sm:-bottom-2 md:-bottom-4 bg-drop-light-grey left-0 h-1 transform transition-all duration-500 rounded-full w-full">
               <span className={`bg-drop-primary absolute top-0 bottom-0 ${tabLocation === 1 ? 'left-0' : tabLocation === 2 ? 'left-1/2 -translate-x-1/2' : 'right-0'} right-0 h-1 transform transition-all duration-500 rounded-full`} style={{ width: '33.33%' }} />
             </span>
           </ul>

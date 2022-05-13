@@ -22,7 +22,7 @@ function FAQComponent({ id, Question, Answer } :FAQDataInterface) {
       </button>
       <div
         className={`
-          ans-${id} answer-wrapper mx-auto w-[90%] overflow-hidden transition-all duration-300 ease-in-out sm:ml-12 ${revealed ? 'h-24 sm:h-8 mb-7' : 'h-0'}
+          ans-${id} answer-wrapper xl:px-10 mx-auto w-[90%] overflow-hidden transition-all duration-300 ease-in-out sm:ml-12 ${revealed ? 'h-24 sm:h-8 mb-7' : 'h-0'}
         `}
       >
         <p>

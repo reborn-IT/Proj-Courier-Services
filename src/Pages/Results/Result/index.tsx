@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import {
-  CommonRoundedButton, MapBox, NavBar, ReviewCard, StaticDropDownRounded,
+  CommonRoundedButton, NavBar, ReviewCard, StaticDropDownRounded,
 } from '../../../Components';
 import './Result.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -16,6 +17,7 @@ import { fetchCourierServiceModalStateRequest } from '../../../Store/CourierServ
 import { getCourierServiceModalState } from '../../../Store/CourierServiceModal/selectors';
 import { IReviewCard } from '../../../Components/ReviewCard';
 import useLazyLoad from '../../../Utils/Hooks/useLazyLoad';
+import { RESULTSCARD_DATA } from '../../../Lib/PaginatedItems';
 
 const REVIEW_CATEGORIES = [
   {
@@ -328,24 +330,28 @@ function Result() {
   const { data, loading } = useLazyLoad({ triggerRef, onGrabData, options });
 
   const ServiceItemHandler = async (title: string, description: string) => {
-    // eslint-disable-next-line no-console
-    console.warn('Works');
     dispatch(fetchCourierServiceModalStateRequest(state));
     setSelectedService({
       title,
       description,
     });
   };
+
+  const params = useParams();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [params]);
+
   return (
     <main>
       <NavBar
-        homeComponent
-        isMainFilterComponentExists={false}
+        homeComponent={false}
+        navBarPhoto={RESULTSCARD_DATA[parseInt(params.resultId, 10) - 1].bannerURL}
       />
-      <section className="container mx-auto mt-6">
+      <section className="container px-5 xl:px-0 mx-auto mt-6">
         <div className="content-para">
-          <div className="title flex items-center text-6xl justify-between font-semibold text-drop-grey mb-3">
-            <h1>Domestic Courier Service - Negombo</h1>
+          <div className="title flex items-center text-4xl lg:text-6xl justify-between font-semibold text-drop-grey mb-3">
+            <h1>{RESULTSCARD_DATA[parseInt(params.resultId, 10) - 1].title}</h1>
             {
                 !fav
                   ? (
@@ -359,7 +365,7 @@ function Result() {
                   )
             }
           </div>
-          <p>With experience and the aptitude of serving the nation for over a decade, The stability and the accuracy gained through our vast years of service and experience, Domex functions with the highest confidence in widest coverage, security and the rapid delivery of your important documents and packages.</p>
+          <p>{RESULTSCARD_DATA[parseInt(params.resultId, 10) - 1].description}</p>
         </div>
 
         {/* Services */}
@@ -406,11 +412,6 @@ function Result() {
           </div>
         </div>
 
-        {/* Map */}
-        <div className="map overflow-hidden rounded-3xl mt-10">
-          <MapBox />
-        </div>
-
         {/* Reviews */}
         <div className="reviews mt-10 mb-36">
           <h3 className="text-3xl font-semibold text-drop-grey">
@@ -429,7 +430,7 @@ function Result() {
                         className="h-5 w-5 rounded-lg -ml-1"
                       />
                       <p className="w-28">{category}</p>
-                      <div className="bar flex-1 h-5 rounded-full bg-drop-lightest-grey relative overflow-hidden">
+                      <div className="bar flex-1 h-3 lg:h-5 rounded-full bg-drop-lightest-grey relative overflow-hidden">
                         <div
                           className="absolute left-0 top-0 bottom-0 h-full bg-drop-primary rounded-full"
                           style={{ width: `${percentage}%` }}
@@ -444,8 +445,8 @@ function Result() {
               }
           </div>
 
-          <div className="flex items-center space-x-4 mt-8 mb-10">
-            <div className="flex items-center space-x-2 flex-1">
+          <div className="flex flex-col md:flex-row md:items-center md:space-x-4 mt-8 mb-10">
+            <div className="flex items-center space-x-3 md:space-x-2 flex-1">
               <RoundedInput onChange={() => {}} placeholder="Search Reviews..." type="text" />
               <CommonRoundedButton>
                 <p>Search</p>

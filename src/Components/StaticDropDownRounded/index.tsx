@@ -20,7 +20,7 @@ function StaticDropDownRounded() {
   return (
     <button
       type="button"
-      className="searchable-dropdown relative"
+      className="searchable-dropdown relative mt-5 md:mt-0 text-sm md:text-base"
       onClick={() => setListOpened(!listOpened)}
     >
       <div className="flex flex-col items-center absolute right-4 top-1/2 transform -translate-y-1/2 text-drop-primary">
@@ -29,7 +29,7 @@ function StaticDropDownRounded() {
       </div>
       <input
         type="text"
-        className="border border-drop-primary p-4 rounded-full placeholder:text-drop-primary"
+        className="border border-drop-primary w-full md:w-auto p-3 md:p-4 rounded-full placeholder:text-drop-primary"
         placeholder="Rating High to Low"
         value={selectedValue}
       />

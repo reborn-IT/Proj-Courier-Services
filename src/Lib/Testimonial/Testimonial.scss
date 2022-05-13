@@ -1,7 +1,7 @@
 @import '../../Utils/Styles/variables.scss';
 
 .testimonial-card-m {
-    background-image: url('../../Assets/Images/featuredThree.svg');
+    background-image: url('https://images.unsplash.com/photo-1556741574-0ddb65d14311?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
     &:nth-last-of-type(2) {
         background-image: url('../../Assets/Images/featuredOne.svg');
         top: 75%;
@@ -14,7 +14,7 @@
     }
     
     &:nth-last-of-type(3){
-        background-image: url('../../Assets/Images/featuredTwo.svg');
+        background-image: url('https://images.unsplash.com/photo-1586880244406-556ebe35f282?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
         top: 66%;
         left: 15%;
         
@@ -31,9 +31,9 @@
 }
 
 .testimonial-card-xl{
-    background-image: url('../../Assets/Images/featuredOne.svg');
+    background-image: url('https://images.unsplash.com/photo-1556741533-927182355585?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
     
     &:last-of-type {
-        background-image: url('../../Assets/Images/featuredTwo.svg');
+        background-image: url('https://images.unsplash.com/photo-1556741574-0ddb65d14311?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
     }
 }

@@ -27,13 +27,13 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
   return (
     <button
       type="button"
-      className="flex items-start mt-6 w-full max-w-[95%] mx-auto"
+      className="flex items-center mt-6 w-full max-w-[95%] mx-auto"
       onClick={() => ExpandForm()}
     >
       <img
         src={DownArrowIcon}
         alt="Down Arrow Icon"
-        className={`transition-all duration-300 ease-in-out w-7 transform ${revealed ? 'rotate-180' : 'rotate-0'}`}
+        className={`transition-all duration-300 ease-in-out w-5 transform ${revealed ? 'rotate-180' : 'rotate-0'}`}
       />
       <p className="ml-4 font-semibold text-drop-grey text-xl">{title}</p>
     </button>

@@ -66,7 +66,8 @@ function ResultCard({
             <li>Special Parcel Delivery</li>
           </ul>
           <div className="text-xs md:text-sm mt-1 md:mt-0 contact flex items-center justify-between">
-            <a href="domex.lk">{website}</a>
+            {/* <a href="domex.lk">{website}</a> */}
+            <p>{website}</p>
             <p>
               Hotline
               {' '}
