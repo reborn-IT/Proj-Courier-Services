@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'react/jsx-props-no-spreading': ['warn'],
     'react/jsx-filename-extension': [
       'warn',
       {

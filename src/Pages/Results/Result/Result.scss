@@ -1,0 +1,14 @@
+.home-image {
+    background-image: url('../../../Assets/Images/home-banner.svg');
+}
+
+.home-image-scrolling {
+    background-image: unset;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(30px);
+    background-color: rgba(0, 0, 0, 0); 
+
+    .filter-container {
+        display: none;
+    }
+}

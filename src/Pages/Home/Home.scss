@@ -3,14 +3,14 @@
 .main-wrapper {
 
     .home-image {
-        background-image: url('../../Assets/Images/home-banner.svg');
+        background-image: url('https://www.business.hsbc.lk/-/media/library/markets-selective/sri-lanka/images/srilanka-800x495.jpg?w=1400&usecustomfunctions=1&centercrop=1&hash=FDC81A069E22100362FF5A4BEC6816A7C9365A68');
     }
 
     .home-image-scrolling {
         background-image: unset;
         -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        background-color: rgba(255, 255, 255, 0.5); 
+        backdrop-filter: blur(30px);
+        background-color: rgba(0, 0, 0, 0); 
 
         .filter-container {
             display: none;
@@ -19,7 +19,7 @@
 
 
     .home-image-other {
-        background-image: url('../../Assets/Images/home-banner.svg');
+        background-image: url('https://images2.alphacoders.com/546/thumb-1920-546678.jpg');
 
     }
     

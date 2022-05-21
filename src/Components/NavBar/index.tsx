@@ -1,86 +1,73 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
+import { useSelector } from 'react-redux';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import CommonRoundedButton from '../CommonRoundedButton';
 import MainFilterComponent from '../HomeFIlterComponent';
 import logo from '../../Assets/Images/logo.svg';
 import language from '../../Assets/Icons/language.svg';
 import userprofile from '../../Assets/Icons/userprofile.svg';
+import { getNavigationBarStatus } from '../../Store/NavigationBar/selectors';
+import ModalCloseButton from '../ModalCloseButton';
 
 interface NavBarProps {
     homeComponent: boolean;
+    // eslint-disable-next-line react/require-default-props
+    navBarPhoto?: string;
 }
 
-function NavBar({ homeComponent } : NavBarProps) {
+function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
   const size: Size = useWindowSize();
-  const [fixedNav, setFixedNav] = useState<boolean>(true);
+  const control = useAnimation();
+  const navigationBarStatus = useSelector(getNavigationBarStatus);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const scrollTop:number = window.scrollY;
-  const [
-    scrollDirection,
-    setScrollDirection,
-  ] = useState<number>(window.scrollY);
 
-  function getMinHeight(): number {
-    if (size.width > 1540) {
-      if (!fixedNav) return 8;
-      return 65;
-    }
-    if (size.width > 1024) {
-      if (!fixedNav) return 14;
-      return 65;
-    }
-    if (size.width > 960 && size.width <= 1024) {
-      if (!fixedNav) return 6;
-      return 65;
-    }
-    if (size.width > 767 && size.width <= 960) {
-      if (!fixedNav) return 8;
-      return 65;
-    }
-    if (!fixedNav) return 10;
-    return 60;
-  }
-
-  const handleNavigation = useCallback((e) => {
-    if (homeComponent) {
-      const window = e.currentTarget;
-      if (scrollDirection > window.scrollY && scrollTop < 50) {
-        setFixedNav(true);
-      } else if (scrollDirection < window.scrollY) {
-        setFixedNav(false);
-      }
-      setScrollDirection(window.scrollY);
-    }
-  }, [scrollDirection, scrollTop, homeComponent]);
+  const navVariants = {
+    normal: {
+      height: `${size.width < 1025 ? '45vh' : '65vh'}`,
+      position: 'relative',
+    },
+    scrolling: {
+      height: 'auto',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 50,
+    },
+    courierPage: {
+      height: '65vh',
+      position: 'relative',
+      backgroundImage: `url(${navBarPhoto})`,
+    },
+  };
 
   useEffect(() => {
-    setScrollDirection(window.scrollY);
-    window.addEventListener('scroll', handleNavigation);
-    return () => {
-      window.removeEventListener('scroll', handleNavigation);
-    };
-  }, [handleNavigation]);
+    if (homeComponent) {
+      control.start(navigationBarStatus);
+    }
+  }, [control, navigationBarStatus, homeComponent]);
 
   return (
-    <nav
+    <motion.nav
+      initial={`${homeComponent ? 'normal' : navBarPhoto ? 'courierPage' : 'scrolling'}`}
+      variants={navVariants}
+      animate={control}
       className={`
-        transition-all
-        duration-500
-        ease-in-out
-        ${homeComponent
-        ? fixedNav
-          ? 'home-image max-h-[65vh] h-[65vh] bg-center bg-no-repeat bg-cover relative'
-          : 'home-image-scrolling overflow-hidden fixed top-0 left-0 right-0 z-50 shadow-xl'
-        : 'home-image-other bg-center bg-no-repeat bg-cover'}`}
-      style={{ height: `${homeComponent ? getMinHeight() : '10'}vh` }}
+        rounded-none lg:rounded-3xl
+        home-image-other bg-center bg-no-repeat bg-cover
+        `}
     >
-      <div className="flex items-center justify-between w-full pt-3 px-4">
-        <img src={logo} className="icon w-12 h-12 ml-2" alt="Logo" />
+      <div className="flex items-center justify-between w-full px-4 py-3">
+        <Link to="/">
+          <img src={logo} className="icon w-12 h-12 ml-2" alt="Logo" />
+        </Link>
         <button
           type="button"
-          className="menu-icon ml-2"
+          className="menu-icon ml-2 text-white"
           onClick={() => setOpenMenu(!openMenu)}
           style={{ display: `${size.width < 480 ? 'block' : 'none'}` }}
         >
@@ -100,52 +87,46 @@ function NavBar({ homeComponent } : NavBarProps) {
           </svg>
         </button>
         <div className={`fixed-menu ${openMenu ? '' : 'hidden overflow-hidden transform scale-0'} fixed top-0 left-0 right-0 bottom-0 z-40 h-full w-full shadow-xl transition-all duration-300 ease-in-out`}>
-          <div className="relative h-full w-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 z-50 flex items-end flex-col">
-              <button
-                className="menu-icon"
-                type="button"
-                onClick={() => setOpenMenu(!openMenu)}
-              >
-                <svg
-                  width={54}
-                  height={54}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="#D32424"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-              <ul className="px-4 py-3 bg-drop-white flex flex-col mt-2 space-y-3">
+          <div className="relative h-full w-full backdrop-blur-md">
+            <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-4/5 z-50 flex items-end flex-col transition-all duration-300">
+              <ModalCloseButton
+                ClickHandler={() => setOpenMenu(!openMenu)}
+              />
+              <ul className="px-6 rounded-md py-6 bg-drop-white flex flex-col mt-2 space-y-3 w-full h-full">
+                <li className="text-drop-primary font-semibold">
+                  <Link to="/">
+                    Home
+                  </Link>
+                </li>
                 <li className="text-drop-primary font-semibold">Become a Provider</li>
-                <li className="text-drop-primary font-semibold">Language</li>
-                <li className="text-drop-primary font-semibold">My Account</li>
+                <li className="text-drop-primary font-semibold">Switch Language</li>
+                <li className="text-drop-primary font-semibold">
+                  <Link to="/profile">
+                    My Account
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </div>
         <div
-          className="items-center mr-2"
+          className={`items-center mr-2 ${homeComponent ? 'flex' : 'none'}`}
           style={{ display: `${size.width < 767 ? 'none' : 'flex'}` }}
         >
           <CommonRoundedButton>
             Become a Provider
           </CommonRoundedButton>
           <img className="icon w-12 h-12 ml-2" src={language} alt="Language Icon" />
-          <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
+          <Link to="/profile">
+            <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
+          </Link>
         </div>
       </div>
 
-      <div style={{ display: `${homeComponent ? 'block' : 'none'}` }}>
+      <div style={{ display: `${homeComponent && navigationBarStatus === 'normal' ? 'block' : 'none'}` }}>
         <MainFilterComponent />
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 

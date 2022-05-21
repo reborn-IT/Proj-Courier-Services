@@ -10,9 +10,8 @@ import CommonRoundedButton,
 {
   CommonButtonActions,
 } from '../../Components/CommonRoundedButton';
-import SearchableDropDown from '../../Components/SearchableDropDown';
+import SearchableDropDown, { IDropDownData } from '../../Components/SearchableDropDown';
 import ConfirmationModal from '../ConfirmationModal';
-import MapBox from '../../Components/MapBox';
 import {
   useExpandedContext,
 } from '../../Components/DropDownForm/DropDownStateProvider';
@@ -38,21 +37,62 @@ function Filters() {
   const [serviceInput, setServiceInput] = useState<string>('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [natureArray, setNatureArray] = useState<string[]>([]);
-  const servicesAPI = [
-    'Fragile', 'Confidential', 'Documents', 'Tender', 'Bulk', 'Stationary',
+  const servicesAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: 'Fragile',
+    },
+    {
+      id: 2,
+      title: 'Confidential',
+    },
+    {
+      id: 3,
+      title: 'Documents',
+    },
+    {
+      id: 4,
+      title: 'Tender',
+    },
+    {
+      id: 5,
+      title: 'Bulk',
+    },
+    {
+      id: 6,
+      title: 'Stationary',
+    },
   ];
-  const priceListAPI = [
-    'Price High to Low',
-    'Average Price',
-    'Price Low to High',
+  const priceListAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: 'Price High to Low',
+    },
+    {
+      id: 2,
+      title: 'Average Price',
+    },
+    {
+      id: 3,
+      title: 'Price Low to High',
+    },
   ];
-  const PrimaryLocationDataAPI = [
-    'Home',
-    'Office',
-    'Work',
+  const PrimaryLocationDataAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: 'Home',
+    },
+    {
+      id: 2,
+      title: 'Office',
+    },
+    {
+      id: 3,
+      title: 'Work',
+    },
   ];
   const SaveFilterModalOpened = useSelector(getSaveModalState);
-  const [services, setServices] = useState<string[]>(servicesAPI);
+  const [services, setServices] = useState<IDropDownData[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
   const
     [
@@ -60,11 +100,11 @@ function Filters() {
       setArrivepointAddressChecked,
     ] = useState<boolean>(false);
 
-  const
-    [
-      arriveMarkOnMap,
-      setArriveMarkOnMap,
-    ] = useState<boolean>(false);
+  // const
+  //   [
+  //     arriveMarkOnMap,
+  //     setArriveMarkOnMap,
+  //   ] = useState<boolean>(false);
 
   const
     [
@@ -72,16 +112,16 @@ function Filters() {
       setDestinationpointAddressChecked,
     ] = useState<boolean>(false);
 
-  const
-    [
-      DestinationMarkOnMap,
-      setDestinationMarkOnMap,
-    ] = useState<boolean>(false);
+  // const
+  //   [
+  //     DestinationMarkOnMap,
+  //     setDestinationMarkOnMap,
+  //   ] = useState<boolean>(false);
 
   const filterServices = (needle: string) => {
     const query: string = needle.toLowerCase();
     setServices(servicesAPI.filter(
-      (item: string) => item.toLowerCase().indexOf(query) >= 0,
+      ({ title }) => title.toLowerCase().indexOf(query) >= 0,
     ));
   };
 
@@ -96,17 +136,17 @@ function Filters() {
     }
   };
 
-  const handleArriveMarkOnMap = () => {
-    setArriveMarkOnMap(!arriveMarkOnMap);
-  };
+  // const handleArriveMarkOnMap = () => {
+  //   setArriveMarkOnMap(!arriveMarkOnMap);
+  // };
 
   const handleArriveSwitchAddress = () => {
     setArrivepointAddressChecked(!arrivingpointAddressChecked);
   };
 
-  const handleDestinationMarkOnMap = () => {
-    setDestinationMarkOnMap(!DestinationMarkOnMap);
-  };
+  // const handleDestinationMarkOnMap = () => {
+  //   setDestinationMarkOnMap(!DestinationMarkOnMap);
+  // };
 
   const handleDestinationSwitchAddress = () => {
     setDestinationpointAddressChecked(!DestinationpointAddressChecked);
@@ -116,12 +156,12 @@ function Filters() {
     if (natureArray.includes(item)) {
       setNatureArray(natureArray.filter((element: string) => element !== item));
       setServices(services
-        .filter((element) => element !== item)
-        .concat(services.filter((element) => element === item)));
+        .filter(({ title }) => title !== item)
+        .concat(services.filter(({ title }) => title === item)));
     } else {
       setServices(services
         // eslint-disable-next-line no-nested-ternary
-        .sort((a, b) => (a === item ? -1 : b === item ? 1 : 0)));
+        .sort((a, b) => (a.title === item ? -1 : b.title === item ? 1 : 0)));
       setNatureArray((oldArray: string[]) => [...oldArray, item]);
     }
   };
@@ -172,30 +212,30 @@ function Filters() {
             <div className="checkboxes flex flex-col mt-4   px-6">
               {
               expandServices
-                ? services.slice(0, 4).map((item) => (
-                  <motion.div layout key={item} className="checkbox flex items-center mb-2 self-start">
+                ? services.slice(0, 4).map(({ id, title }) => (
+                  <motion.div layout key={id} className="checkbox flex items-center mb-2 self-start">
                     <input
                       id="one"
                       type="checkbox"
-                      checked={natureArray.includes(item)}
-                      onChange={() => handleNatureArray(item)}
+                      checked={natureArray.includes(title)}
+                      onChange={() => handleNatureArray(title)}
                       className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                     />
                     <span>
-                      {item}
+                      {title}
                     </span>
                   </motion.div>
                 ))
-                : services.map((item) => (
-                  <motion.div layout key={item} className="checkbox flex items-center mb-2 self-start">
+                : services.map(({ id, title }) => (
+                  <motion.div layout key={id} className="checkbox flex items-center mb-2 self-start">
                     <input
                       id="one"
                       type="checkbox"
-                      checked={natureArray.includes(item)}
-                      onChange={() => handleNatureArray(item)}
+                      checked={natureArray.includes(title)}
+                      onChange={() => handleNatureArray(title)}
                     />
                     <span>
-                      {item}
+                      {title}
                     </span>
                   </motion.div>
                 ))
@@ -275,7 +315,7 @@ function Filters() {
                 data={PrimaryLocationDataAPI}
                 placeholder="- Select Starting Location -"
                 reset={
-                  !(arriveMarkOnMap || arrivingpointAddressChecked)
+                  !(arrivingpointAddressChecked)
                 }
                 createmode={false}
               />
@@ -323,7 +363,7 @@ function Filters() {
               />
             </form>
 
-            <div className="checkboxes flex flex-col mt-4   px-6">
+            {/* <div className="checkboxes flex flex-col mt-4   px-6">
               <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
@@ -345,7 +385,7 @@ function Filters() {
               }}
             >
               <MapBox />
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -370,7 +410,7 @@ function Filters() {
                 data={PrimaryLocationDataAPI}
                 placeholder="- Select Destination Location -"
                 reset={
-                  !(DestinationMarkOnMap || DestinationpointAddressChecked)
+                  !(DestinationpointAddressChecked)
 }
                 createmode={false}
               />
@@ -416,7 +456,7 @@ function Filters() {
               />
             </form>
 
-            <div className="checkboxes flex flex-col mt-4   px-6">
+            {/* <div className="checkboxes flex flex-col mt-4   px-6">
               <div className="checkbox flex items-center mb-2 self-start">
                 <input
                   id="one"
@@ -438,7 +478,7 @@ function Filters() {
               }}
             >
               <MapBox />
-            </div>
+            </div> */}
           </div>
         </div>
 

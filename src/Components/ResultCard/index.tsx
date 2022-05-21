@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import image from '../../Assets/Images/featuredOne.svg';
 
 interface IResultCard {
+  id: number;
   title: string;
   address: string;
   rating: number;
@@ -11,7 +12,7 @@ interface IResultCard {
 }
 
 function ResultCard({
-  title, address, rating, website,
+  id, title, address, rating, website,
 }: IResultCard) {
   const [fav, setFav] = useState<boolean>(false);
   return (
@@ -34,7 +35,7 @@ function ResultCard({
                   )
               }
       </button>
-      <Link to="button" className="flex items-center text-drop-grey shadow-xl mb-4 bg-drop-white overflow-hidden max-h-[8rem] md:max-h-[12rem] 2xl:max-h-[15rem] rounded-2xl">
+      <Link to={`${id}`} className="flex items-center text-drop-grey shadow-xl mb-4 bg-drop-white overflow-hidden max-h-[8rem] md:max-h-[12rem] 2xl:max-h-[15rem] rounded-2xl">
         <div
           className="h-32 md:h-48 2xl:h-60 flex-1 w-40 bg-cover"
           style={{
@@ -65,7 +66,8 @@ function ResultCard({
             <li>Special Parcel Delivery</li>
           </ul>
           <div className="text-xs md:text-sm mt-1 md:mt-0 contact flex items-center justify-between">
-            <a href="domex.lk">{website}</a>
+            {/* <a href="domex.lk">{website}</a> */}
+            <p>{website}</p>
             <p>
               Hotline
               {' '}

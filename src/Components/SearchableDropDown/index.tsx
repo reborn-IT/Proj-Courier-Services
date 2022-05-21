@@ -5,8 +5,13 @@ enum SearchableDropDownEnums {
   CREATE_NEW_TITLE = 'Create new title'
 }
 
+export interface IDropDownData {
+  id: number;
+  title: string;
+}
+
 interface SearchableDropDownInterface {
-  data: string[];
+  data: IDropDownData[];
   placeholder: string;
   reset: boolean;
   createmode: boolean;
@@ -20,13 +25,13 @@ function SearchableDropDown({
 }: SearchableDropDownInterface) {
   const [input, setInput] = useState<string>('');
   const [ListOpened, setListOpened] = useState<boolean>(true);
-  const [List, setList] = useState<string[]>(data);
+  const [List, setList] = useState<IDropDownData[]>(data);
   const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
 
   const filterList = (needle: string) => {
     const query: string = needle.toLowerCase();
     const sortedData = data
-      .filter((item: string) => item.toLowerCase().indexOf(query) >= 0);
+      .filter(({ title }) => title.toLowerCase().indexOf(query) >= 0);
     if (createmode) {
       if (sortedData.length === 0) {
         setCreateModeStatus(true);
@@ -53,7 +58,7 @@ function SearchableDropDown({
     setNewList(e);
     if (createModeStatus) {
       setList(
-        (oldList) => [...oldList, SearchableDropDownEnums.CREATE_NEW_TITLE],
+        (oldList) => [...oldList, { id: oldList[oldList.length].id + 1, title: SearchableDropDownEnums.CREATE_NEW_TITLE }],
       );
     }
   };
@@ -74,7 +79,7 @@ function SearchableDropDown({
       }}
     >
       <svg
-        className="h-6 w-6 absolute top-4 right-14 z-10"
+        className="h-6 w-6 absolute top-4 right-6 z-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -88,7 +93,7 @@ function SearchableDropDown({
       </svg>
       <input
         type="text"
-        className="border border-drop-primary p-4 rounded-xl"
+        className="border border-drop-primary p-4 rounded-xl w-full"
         placeholder={placeholder}
         onFocus={() => setListOpened(false)}
         onChange={(e) => inputHandler(e)}
@@ -102,16 +107,17 @@ function SearchableDropDown({
         className={`price-list bg-drop-white text-drop-grey overflow-hidden flex-col rounded-lg ${ListOpened ? 'hidden' : 'flex'}`}
       >
         {
-                  List.map((item) => (
+                  List.map(({ id, title }) => (
                     <button
+                      key={id}
                       type="button"
-                      onClick={() => buttonClickHandler(item)}
+                      onClick={() => buttonClickHandler(title)}
                       className={`capitalize px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
-                        item === SearchableDropDownEnums.CREATE_NEW_TITLE
+                        title === SearchableDropDownEnums.CREATE_NEW_TITLE
                           ? 'text-drop-white bg-drop-blue'
                           : ''}`}
                     >
-                      {item}
+                      {title}
 
                     </button>
                   ))

@@ -60,7 +60,7 @@ function Testimonial() {
         starCount={5}
         topPos={size.width > 1024
           ? 4
-          : size.width <= 1024 && size.width > 960 ? 20
+          : size.width <= 1024 && size.width > 960 ? 16
             : size.width <= 960 && size.width > 767 ? 16
               : 0}
         rightPos={
