@@ -1,11 +1,11 @@
 import { AppState } from '../RootReducer';
 
 // eslint-disable-next-line max-len
-export const getPending = (state: AppState) => state.courierServiceModalState.pending;
+export const getPending = (state: AppState) => state.courierServiceLabelState.pending;
 
 export const getCourierServiceModalState = (state: AppState) => {
-  if (state.courierServiceModalState.state) {
-    return state.courierServiceModalState.state;
+  if (state.courierServiceLabelState.state) {
+    return state.courierServiceLabelState.state;
   }
   return null;
 };

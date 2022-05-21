@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CommonRoundedButton } from '../../../Components';
 import UserImage from '../../../Assets/Images/user.png';
 
@@ -24,10 +25,10 @@ function Overview() {
       <CommonRoundedButton
         extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10"
       >
-        <div className="flex items-center">
+        <Link to="/profile/edit" className="flex items-center">
           <p>Edit Profile</p>
           <i className="bi bi-arrow-right-short ml-2 text-xl" />
-        </div>
+        </Link>
       </CommonRoundedButton>
 
     </div>

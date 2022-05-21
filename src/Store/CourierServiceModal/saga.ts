@@ -1,33 +1,33 @@
 import {
   all, fork, put, takeLatest,
 } from 'redux-saga/effects';
-import { fetchCourierServiceModalStateSuccess } from './actions';
+import { fetchCourierServiceLabelStateSuccess } from './actions';
 import {
-  FetchCourierServiceModalStateRequest,
-  FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST,
+  FetchCourierServiceLabelStateRequest,
+  FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
 } from './actionTypes';
 
-function* fetchCourierServiceModalStateSagaWorker(
-  action: FetchCourierServiceModalStateRequest,
+function* fetchCourierServiceLabelStateSagaWorker(
+  action: FetchCourierServiceLabelStateRequest,
 ) {
   yield put(
-    fetchCourierServiceModalStateSuccess({
+    fetchCourierServiceLabelStateSuccess({
       state: action.payload,
     }),
   );
 }
 
-function* fetchCourierServiceModalStateSaga() {
+function* fetchCourierServiceLabelStateSaga() {
   yield all([
     takeLatest(
-      FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST,
-      fetchCourierServiceModalStateSagaWorker,
+      FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
+      fetchCourierServiceLabelStateSagaWorker,
     ),
   ]);
 }
 
-export default function* ModalsSaga() {
+export default function* ServiceLabelSaga() {
   yield all([
-    fork(fetchCourierServiceModalStateSaga),
+    fork(fetchCourierServiceLabelStateSaga),
   ]);
 }

@@ -19,6 +19,8 @@ module.exports = {
       'process.env.baseUrl': JSON.stringify('http://localhost:8080/'),
       // eslint-disable-next-line max-len
       'process.env.mapbox': JSON.stringify('pk.eyJ1Ijoic2l0aHVtZGV2MDciLCJhIjoiY2wxMmRlczBsMGFjYTNrcDRwd3F2cmdjZSJ9.mnJKqLrFikKsZlRqdCThQw'),
+      // eslint-disable-next-line max-len
+      'process.env.googleauthid': JSON.stringify('915154064810-hkdb5g5st5dhumnin6tih27hf56vv9rj.apps.googleusercontent.com'),
     }),
   ],
 };

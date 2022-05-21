@@ -12,6 +12,7 @@ function Profile() {
   const { pathname } = useLocation();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tabLocation, setTabLocation] = useState<number>(null);
+  const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
   const navigate = useNavigate();
   useEffect(() => {
     switch (pathname) {
@@ -23,6 +24,9 @@ function Profile() {
         break;
       case '/profile/filterlog':
         setTabLocation(3);
+        break;
+      case '/profile/edit':
+        setIsEditProfile(pathname === '/profile/edit');
         break;
       case '/profile':
         navigate('overview');
@@ -43,7 +47,7 @@ function Profile() {
 
       <div className="w-[95vw] md:w-[80vw] xl:w-[60vw] 2xl:w-[40vw] mx-auto">
         {/* TAB NAVIGATION */}
-        <nav className="mt-28 md:mt-[7.5rem] 2xl:mt-40">
+        <nav className={`mt-28 md:mt-[7.5rem] 2xl:mt-40 ${isEditProfile ? 'hidden' : 'block'}`}>
           <ul className="relative flex items-center">
             <li className="option-aside border border-sky-500 flex justify-center" style={{ width: '33.33%' }}>
               <Link to="overview" className={`flex px-4 items-center text-base md:text-xl hover:text-drop-primary transition-colors duration-300 font-semibold ${tabLocation === 1 ? 'text-drop-primary' : 'text-drop-grey'}`}>

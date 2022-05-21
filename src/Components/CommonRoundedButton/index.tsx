@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-/* eslint-disable react/require-default-props */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
 import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
@@ -21,7 +21,9 @@ export interface CommonRoundedButtonProps {
   children: any;
   styles?: object;
   action?: CommonButtonActions;
+  ClickHandler?: () => void;
   extraTailwindClasses?: string;
+  motionDiv?: boolean;
 }
 
 function CommonRoundedButton({
@@ -29,6 +31,8 @@ function CommonRoundedButton({
   styles,
   action,
   extraTailwindClasses,
+  motionDiv,
+  ClickHandler,
 }: CommonRoundedButtonProps) {
   const filterMenuOpened = useSelector(getModalState);
   const saveMenuOpened = useSelector(getSaveModalState);
@@ -44,8 +48,22 @@ function CommonRoundedButton({
         break;
       default: break;
     }
+    ClickHandler();
   };
-
+  if (motionDiv) {
+    return (
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        type="button"
+        className={`become-provider px-5 py-3 md:py-4 rounded-full bg-drop-primary text-drop-white w-auto whitespace-nowrap ${extraTailwindClasses}`}
+        style={{ ...styles }}
+        onClick={() => HandleFilerMenu()}
+      >
+        {children}
+      </motion.button>
+    );
+  }
   return (
     <button
       type="button"
@@ -57,5 +75,14 @@ function CommonRoundedButton({
     </button>
   );
 }
+
+CommonRoundedButton.defaultProps = {
+  styles: {},
+  action: '',
+  extraTailwindClasses: '',
+  motionDiv: false,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ClickHandler: () => {},
+};
 
 export default CommonRoundedButton;

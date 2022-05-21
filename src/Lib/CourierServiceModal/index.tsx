@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './CourierServiceModal.scss';
 import { getCourierServiceModalState } from '../../Store/CourierServiceModal/selectors';
-import { fetchCourierServiceModalStateRequest } from '../../Store/CourierServiceModal/actions';
+import { fetchCourierServiceLabelStateRequest } from '../../Store/CourierServiceModal/actions';
 import ModalCloseButton from '../../Components/ModalCloseButton';
+import './CourierServiceModal.scss';
 
 export interface ICourierServiceModal {
   title: string;
@@ -16,7 +16,7 @@ function CourierServiceModal({ title, description }: ICourierServiceModal) {
   const dispatch = useDispatch();
 
   const CloseModal = () => {
-    dispatch(fetchCourierServiceModalStateRequest(state));
+    dispatch(fetchCourierServiceLabelStateRequest(false));
   };
 
   return (

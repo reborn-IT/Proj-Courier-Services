@@ -17,6 +17,8 @@ function Results() {
   const filterMenuOpened = useSelector(getModalState);
   const dispatch = useDispatch();
 
+  // const reviewPopupState = useSelector(getReviewPopupState);
+
   useEffect(() => {
     dispatch(fetchModalStateRequest(filterMenuOpened));
   // eslint-disable-next-line react-hooks/exhaustive-deps

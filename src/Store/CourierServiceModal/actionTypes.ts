@@ -1,38 +1,38 @@
 /* eslint-disable max-len */
-export const FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST = 'FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST';
-export const FETCH_COURIER_SERVICE_MODAL_STATE_SUCCESS = 'FETCH_COURIER_SERVICE_MODAL_STATE_SUCCESS';
-export const FETCH_COURIER_SERVICE_MODAL_STATE_FAILURE = 'FETCH_COURIER_SERVICE_MODAL_STATE_FAILURE';
+export const FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST = 'FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST';
+export const FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS = 'FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS';
+export const FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE = 'FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE';
 
-export interface CourierServiceModalState {
+export interface CourierServiceLabelState {
     pending: boolean;
-    state: boolean;
+    state: boolean | null;
     error: string | null;
 }
 
-export interface FetchCourierServiceModalStateSuccessPayload {
+export interface FetchCourierServiceLabelStateSuccessPayload {
     state: boolean;
 }
 
-export interface FetchCourierServiceModalStateFailurePayload {
+export interface FetchCourierServiceLabelStateFailurePayload {
     error: string;
 }
 
-export interface FetchCourierServiceModalStateRequest {
-    type: typeof FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST;
+export interface FetchCourierServiceLabelStateRequest {
+    type: typeof FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST;
     payload: boolean;
 }
 
-export interface FetchCourierServiceModalStateSuccess {
-    type: typeof FETCH_COURIER_SERVICE_MODAL_STATE_SUCCESS;
-    payload: FetchCourierServiceModalStateSuccessPayload;
+export interface FetchCourierServiceLabelStateSuccess {
+    type: typeof FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS;
+    payload: FetchCourierServiceLabelStateSuccessPayload;
 }
 
-export interface FetchCourierServiceModalStateFailure {
-    type: typeof FETCH_COURIER_SERVICE_MODAL_STATE_FAILURE;
-    payload: FetchCourierServiceModalStateFailurePayload;
+export interface FetchCourierServiceLabelStateFailure {
+    type: typeof FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE;
+    payload: FetchCourierServiceLabelStateFailurePayload;
 }
 
-export type CourierServiceModalStateActions =
-  | FetchCourierServiceModalStateRequest
-  | FetchCourierServiceModalStateSuccess
-  | FetchCourierServiceModalStateFailure;
+export type CourierServiceLabelStateActions =
+  | FetchCourierServiceLabelStateRequest
+  | FetchCourierServiceLabelStateSuccess
+  | FetchCourierServiceLabelStateFailure;

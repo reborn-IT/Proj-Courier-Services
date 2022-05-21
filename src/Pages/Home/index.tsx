@@ -18,7 +18,7 @@ import { SCROLLING_DOWN, SCROLLING_UP } from '../../Utils/constants';
 function Home() {
   const modalState: boolean | null = useSelector(getModalState);
   const dispatch = useDispatch();
-  const testimonialref = useRef(null);
+  const testimonialRef = useRef(null);
 
   const { ref, inView } = useInView();
   const [topTriggerRef1, inViewTopTrigger1] = useInView();
@@ -74,8 +74,8 @@ function Home() {
       if (inView && inViewTopTrigger1) {
         window.scrollTo(
           0,
-          testimonialref.current?.offsetTop
-            + testimonialref.current?.clientHeight,
+          testimonialRef.current?.offsetTop
+            + testimonialRef.current?.clientHeight,
         );
         dispatch(fetchNavigationBarStatusRequest('scrolling'));
       } else {
@@ -124,7 +124,7 @@ function Home() {
         <section className="wrapper h-[36vh] xl:h-[60vh] md:mt-[12rem] lg:mt-[16rem] w-[98%] mx-auto relative testimonial-wrapper rounded-3xl container">
           <Testimonial />
           <div
-            ref={testimonialref}
+            ref={testimonialRef}
             className="top-trigger bottom-0 w-full h-5 -z-50"
           />
         </section>

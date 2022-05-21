@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
+
 import { useParams } from 'react-router-dom';
 import {
   CommonRoundedButton, NavBar, ReviewCard, StaticDropDownRounded,
@@ -13,11 +14,12 @@ import CourierService from '../../../Components/CourierService';
 import { Footer, CourierServiceModal } from '../../../Lib';
 import RoundedInput from '../../../Components/RoundedInput';
 import { ICourierServiceModal } from '../../../Lib/CourierServiceModal';
-import { fetchCourierServiceModalStateRequest } from '../../../Store/CourierServiceModal/actions';
-import { getCourierServiceModalState } from '../../../Store/CourierServiceModal/selectors';
+import { fetchCourierServiceLabelStateRequest } from '../../../Store/CourierServiceModal/actions';
 import { IReviewCard } from '../../../Components/ReviewCard';
 import useLazyLoad from '../../../Utils/Hooks/useLazyLoad';
 import { RESULTSCARD_DATA } from '../../../Lib/PaginatedItems';
+import ReviewForm from '../../../Lib/ReviewForm';
+import { fetchReviewCardStateRequest } from '../../../Store/ReviewCard/actions';
 
 const REVIEW_CATEGORIES = [
   {
@@ -311,7 +313,7 @@ const TOTAL_PAGES = 3;
 function Result() {
   const [fav, setFav] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const state: boolean | null = useSelector(getCourierServiceModalState);
+  const params = useParams();
   const [selectedService, setSelectedService] = useState<ICourierServiceModal>({
     title: '',
     description: '',
@@ -330,17 +332,24 @@ function Result() {
   const { data, loading } = useLazyLoad({ triggerRef, onGrabData, options });
 
   const ServiceItemHandler = async (title: string, description: string) => {
-    dispatch(fetchCourierServiceModalStateRequest(state));
+    dispatch(fetchCourierServiceLabelStateRequest(true));
     setSelectedService({
       title,
       description,
     });
   };
 
-  const params = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [params]);
+
+  function reviewCardHandler() {
+    dispatch(fetchReviewCardStateRequest(true));
+  }
+
+  function favHandler(state: boolean) {
+    setFav(state);
+  }
 
   return (
     <main>
@@ -355,11 +364,11 @@ function Result() {
             {
                 !fav
                   ? (
-                    <button type="button" className="active:scale-75 transform transition-all hover:scale-110" onClick={() => setFav(true)}>
+                    <button type="button" className="active:scale-75 transform transition-all hover:scale-110" onClick={() => favHandler(true)}>
                       <i className="bi bi-heart text-drop-red" />
                     </button>
                   ) : (
-                    <button type="button" className="active:scale-75 transform transition-all hover:scale-110" onClick={() => setFav(false)}>
+                    <button type="button" className="active:scale-75 transform transition-all hover:scale-110" onClick={() => favHandler(false)}>
                       <i className="bi bi-heart-fill text-drop-red" />
                     </button>
                   )
@@ -454,6 +463,24 @@ function Result() {
             </div>
             <StaticDropDownRounded />
           </div>
+
+          {/* Review Form */}
+          <div className="w-full flex flex-col items-center my-12">
+            <p className="text-5xl font-semibold text-drop-grey">
+              How is your experience with
+              {' '}
+              <span className="text-drop-primary">
+                {RESULTSCARD_DATA[parseInt(params.resultId, 10) - 1].title}
+                ?
+              </span>
+            </p>
+            <p className="mt-4 mb-5 text-xl font-semibold text-drop-grey">Great feedbacks, towards more clarity. Add yours.</p>
+            <CommonRoundedButton ClickHandler={() => reviewCardHandler()}>
+              Add My Review
+            </CommonRoundedButton>
+          </div>
+
+          <ReviewForm />
 
           {/* Review Loader */}
           {

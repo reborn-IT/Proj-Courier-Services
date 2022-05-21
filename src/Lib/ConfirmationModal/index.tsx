@@ -12,7 +12,7 @@ function ConfirmationModal() {
   const [input, setInput] = useState<string>();
   const dispatch = useDispatch();
   const CloseModal = () => {
-    dispatch(fetchModalStateRequest(filterMenuOpened));
+    if (filterMenuOpened) { dispatch(fetchModalStateRequest(filterMenuOpened)); }
   };
   return (
     <div className="modal rounded-2xl p-8 bg-drop-white fixed overflow-y-auto w-[95%] lg:w-3/5 h-auto z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

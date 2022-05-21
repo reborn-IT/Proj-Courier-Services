@@ -15,6 +15,8 @@ module.exports = {
         'drop-scrollbar': '#babac0',
         'drop-grey': '#404040',
         'drop-textshaded': '#666666',
+        'highlight-no-selected': '#D0D0F9',
+        'highligh-selected': '#6868F4',
       },
     },
   },

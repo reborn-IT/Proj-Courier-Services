@@ -1,31 +1,31 @@
 import {
-  FetchCourierServiceModalStateRequest,
-  FetchCourierServiceModalStateSuccess,
-  FetchCourierServiceModalStateFailure,
-  FetchCourierServiceModalStateSuccessPayload,
-  FetchCourierServiceModalStateFailurePayload,
-  FETCH_COURIER_SERVICE_MODAL_STATE_SUCCESS,
-  FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST,
-  FETCH_COURIER_SERVICE_MODAL_STATE_FAILURE,
+  FetchCourierServiceLabelStateRequest,
+  FetchCourierServiceLabelStateSuccess,
+  FetchCourierServiceLabelStateFailure,
+  FetchCourierServiceLabelStateSuccessPayload,
+  FetchCourierServiceLabelStateFailurePayload,
+  FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
+  FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS,
+  FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE,
 } from './actionTypes';
 
-export const fetchCourierServiceModalStateRequest = (
+export const fetchCourierServiceLabelStateRequest = (
   state: boolean,
-): FetchCourierServiceModalStateRequest => ({
-  type: FETCH_COURIER_SERVICE_MODAL_STATE_REQUEST,
+): FetchCourierServiceLabelStateRequest => ({
+  type: FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
   payload: state,
 });
 
-export const fetchCourierServiceModalStateSuccess = (
-  payload: FetchCourierServiceModalStateSuccessPayload,
-): FetchCourierServiceModalStateSuccess => ({
-  type: FETCH_COURIER_SERVICE_MODAL_STATE_SUCCESS,
+export const fetchCourierServiceLabelStateSuccess = (
+  payload: FetchCourierServiceLabelStateSuccessPayload,
+): FetchCourierServiceLabelStateSuccess => ({
+  type: FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS,
   payload,
 });
 
-export const fetchCourierServicedalStateFailurePayload = (
-  payload: FetchCourierServiceModalStateFailurePayload,
-): FetchCourierServiceModalStateFailure => ({
-  type: FETCH_COURIER_SERVICE_MODAL_STATE_FAILURE,
+export const fetchCourierServiceLabelStateFailurePayload = (
+  payload: FetchCourierServiceLabelStateFailurePayload,
+): FetchCourierServiceLabelStateFailure => ({
+  type: FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE,
   payload,
 });
