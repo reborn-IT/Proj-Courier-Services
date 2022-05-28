@@ -317,7 +317,7 @@ function Filters() {
                 reset={
                   !(arrivingpointAddressChecked)
                 }
-                createmode={false}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -345,17 +345,17 @@ function Filters() {
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
@@ -412,7 +412,7 @@ function Filters() {
                 reset={
                   !(DestinationpointAddressChecked)
 }
-                createmode={false}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -438,17 +438,17 @@ function Filters() {
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
@@ -553,9 +553,9 @@ function Filters() {
             >
               <SearchableDropDown
                 data={priceListAPI}
-                placeholder={priceListAPI[0]}
+                placeholder={priceListAPI[0].title}
                 reset
-                createmode={false}
+                createMode={false}
               />
             </form>
           </div>

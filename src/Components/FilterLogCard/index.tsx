@@ -13,7 +13,6 @@ export interface IFilterLogCardData {
     cost: HIGH_TO_LOW | LOW_TO_HIGH | BEST_MATCH;
     date: string;
     time: string;
-    // eslint-disable-next-line react/require-default-props
     extraTailWindClasses?: string;
 }
 
@@ -110,5 +109,9 @@ function FilterLogCard({
     </div>
   );
 }
+
+FilterLogCard.defaultProps = {
+  extraTailWindClasses: '',
+};
 
 export default FilterLogCard;

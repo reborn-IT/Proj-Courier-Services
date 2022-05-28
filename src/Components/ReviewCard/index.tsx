@@ -18,9 +18,7 @@ export interface IReviewCard {
     time: string;
     rating: number;
     description: string;
-    // eslint-disable-next-line react/require-default-props
     photos?: IPhotoProperties[];
-    // eslint-disable-next-line react/require-default-props
     additionalTailwindCss?: string;
 }
 
@@ -59,5 +57,10 @@ function ReviewCard({
     </div>
   );
 }
+
+ReviewCard.defaultProps = {
+  photos: [],
+  additionalTailwindCss: '',
+};
 
 export default ReviewCard;

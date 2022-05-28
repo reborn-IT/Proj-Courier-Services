@@ -6,7 +6,6 @@ interface IRoundedInput {
     type: TEXT | NUMBER;
     placeholder: string;
     onChange: (e) => void;
-    // eslint-disable-next-line react/require-default-props
     extraTailwindClasses?: string;
 }
 
@@ -22,5 +21,9 @@ function RoundedInput({
     />
   );
 }
+
+RoundedInput.defaultProps = {
+  extraTailwindClasses: '',
+};
 
 export default RoundedInput;

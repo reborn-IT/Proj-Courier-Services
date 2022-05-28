@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 interface HighlightI {
     type?: string;
     highlight: string;
-    picked?: boolean;
+    picked?: boolean; // Optional
     extraTailwindCss?: string;
     ClickHandler?: () => void;
 }
@@ -14,7 +14,15 @@ function Highlight({
   highlight, picked, extraTailwindCss, ClickHandler,
   type,
 }: HighlightI) {
-  const [selected, setSelected] = useState<boolean>(picked);
+  // Check for existence
+  let pickedValue = true;
+  if (picked === undefined) {
+    pickedValue = false;
+  } else {
+    pickedValue = picked;
+  }
+
+  const [selected, setSelected] = useState<boolean>(pickedValue);
   function HandleClick() {
     setSelected(!selected);
     if (ClickHandler) {

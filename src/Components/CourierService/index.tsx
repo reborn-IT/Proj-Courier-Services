@@ -4,7 +4,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 interface ICourierService {
     serviceName: string;
-    // eslint-disable-next-line react/require-default-props
     optionalTailwindCss?: string;
     onClickHandler: () => void;
 }
@@ -21,5 +20,9 @@ function CourierService({ serviceName, optionalTailwindCss, onClickHandler }: IC
     </button>
   );
 }
+
+CourierService.defaultProps = {
+  optionalTailwindCss: '',
+};
 
 export default CourierService;

@@ -27,7 +27,7 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
 
   const navVariants = {
     normal: {
-      height: `${size.width < 1025 ? '45vh' : '65vh'}`,
+      height: `${size.width && size.width < 1025 ? '45vh' : '65vh'}`,
       position: 'relative',
     },
     scrolling: {
@@ -46,7 +46,7 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
   };
 
   useEffect(() => {
-    if (homeComponent) {
+    if (homeComponent && navigationBarStatus) {
       control.start(navigationBarStatus);
     }
   }, [control, navigationBarStatus, homeComponent]);
@@ -69,7 +69,7 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
           type="button"
           className="menu-icon ml-2 text-white"
           onClick={() => setOpenMenu(!openMenu)}
-          style={{ display: `${size.width < 480 ? 'block' : 'none'}` }}
+          style={{ display: `${size.width && size.width < 480 ? 'block' : 'none'}` }}
         >
           <svg
             height={48}
@@ -111,7 +111,7 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
         </div>
         <div
           className={`items-center mr-2 ${homeComponent ? 'flex' : 'none'}`}
-          style={{ display: `${size.width < 767 ? 'none' : 'flex'}` }}
+          style={{ display: `${size.width && size.width < 767 ? 'none' : 'flex'}` }}
         >
           <CommonRoundedButton>
             Become a Provider

@@ -41,14 +41,14 @@ function CommonRoundedButton({
     switch (action) {
       case CommonButtonActions.OPEN_FILTER:
       case CommonButtonActions.CLOSE_FILTER:
-        dispatch(fetchModalStateRequest(filterMenuOpened));
+        if (filterMenuOpened) { dispatch(fetchModalStateRequest(filterMenuOpened)); }
         break;
       case CommonButtonActions.OPEN_MODAL:
-        dispatch(fetchSaveModalStateRequest(saveMenuOpened));
+        if (saveMenuOpened) { dispatch(fetchSaveModalStateRequest(saveMenuOpened)); }
         break;
       default: break;
     }
-    ClickHandler();
+    if (ClickHandler) { ClickHandler(); }
   };
   if (motionDiv) {
     return (

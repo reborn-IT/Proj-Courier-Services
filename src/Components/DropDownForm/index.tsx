@@ -6,9 +6,7 @@ import { useExpandedContext } from './DropDownStateProvider';
 
 interface DropDownForm {
     title: string;
-    // eslint-disable-next-line react/require-default-props
     trigger?: ExpandActionTypes,
-    // eslint-disable-next-line react/require-default-props
     payload?: boolean,
 }
 
@@ -39,5 +37,10 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
     </button>
   );
 }
+
+DropDownForm.defaultProps = {
+  trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
+  payload: false,
+};
 
 export default DropDownForm;

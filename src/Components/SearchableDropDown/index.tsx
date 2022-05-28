@@ -14,14 +14,14 @@ interface SearchableDropDownInterface {
   data: IDropDownData[];
   placeholder: string;
   reset: boolean;
-  createmode: boolean;
+  createMode: boolean;
 }
 
 function SearchableDropDown({
   data,
   placeholder,
   reset,
-  createmode,
+  createMode,
 }: SearchableDropDownInterface) {
   const [input, setInput] = useState<string>('');
   const [ListOpened, setListOpened] = useState<boolean>(true);
@@ -32,7 +32,7 @@ function SearchableDropDown({
     const query: string = needle.toLowerCase();
     const sortedData = data
       .filter(({ title }) => title.toLowerCase().indexOf(query) >= 0);
-    if (createmode) {
+    if (createMode) {
       if (sortedData.length === 0) {
         setCreateModeStatus(true);
       }
