@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './filters.scss';
 import Switch from 'react-switch';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import DropDownForm from '../../Components/DropDownForm';
 import CustomizedDatePicker from '../../Components/CustomizedDatePicker';
@@ -20,6 +20,7 @@ import {
 } from '../../Components/DropDownForm/DropDownReducer';
 import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
 import FilterMenuInput from '../../Components/FilterMenuInput';
+import { fetchSaveModalStateRequest } from '../../Store/SaveFilterModal/actions';
 
 enum ExpandButtonState {
   VIEW_ALL = 'View all...',
@@ -30,6 +31,7 @@ function Filters() {
   const { state } = useExpandedContext();
   const [scheduled, setScheduled] = useState<boolean>(false);
   const [isImmediateCourier, setIsImmediateCourier] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const [
     viewAllButtonState,
     setViewAllButtonState,
@@ -147,6 +149,10 @@ function Filters() {
   // const handleDestinationMarkOnMap = () => {
   //   setDestinationMarkOnMap(!DestinationMarkOnMap);
   // };
+
+  function saveModalHandler() {
+    dispatch(fetchSaveModalStateRequest(true));
+  }
 
   const handleDestinationSwitchAddress = () => {
     setDestinationpointAddressChecked(!DestinationpointAddressChecked);
@@ -569,7 +575,7 @@ function Filters() {
             Cancel
           </CommonRoundedButton>
           <CommonRoundedButton
-            action={CommonButtonActions.OPEN_MODAL}
+            ClickHandler={() => saveModalHandler()}
           >
             Done
           </CommonRoundedButton>
