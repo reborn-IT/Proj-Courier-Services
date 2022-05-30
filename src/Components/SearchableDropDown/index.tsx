@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { v4 as UniqueId } from 'uuid';
 
 enum SearchableDropDownEnums {
   CREATE_NEW_TITLE = 'Create new title'
@@ -23,8 +25,8 @@ function SearchableDropDown({
   reset,
   createMode,
 }: SearchableDropDownInterface) {
+  const [uniqueKey, setUniqueKey] = useState<string>();
   const [input, setInput] = useState<string>('');
-  const [ListOpened, setListOpened] = useState<boolean>(true);
   const [List, setList] = useState<IDropDownData[]>(data);
   const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
 
@@ -51,7 +53,6 @@ function SearchableDropDown({
 
   const setChecked = (item: string) => {
     setInput(item);
-    setListOpened(true);
   };
 
   const inputHandler = (e) => {
@@ -71,59 +72,53 @@ function SearchableDropDown({
     }
   };
 
+  useEffect(() => {
+    setUniqueKey(UniqueId());
+  }, []);
+
   return (
-    <div
-      className="searchable-dropdown relative"
-      style={{
-        width: 'calc(100% - 2rem)',
-      }}
-    >
-      <svg
-        className="h-6 w-6 absolute top-4 right-6 z-10"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="2"
+    <>
+      <button
+        type="button"
+        className="w-full"
+        id={`dropdownDefault-${uniqueKey}`}
+        data-dropdown-toggle={`dropdown-${uniqueKey}`}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19 9l-7 7-7-7"
+        <input
+          type="text"
+          className="border border-drop-primary p-4 rounded-xl w-full"
+          placeholder={placeholder}
+          onChange={(e) => inputHandler(e)}
+          value={reset ? input : ''}
         />
-      </svg>
-      <input
-        type="text"
-        className="border border-drop-primary p-4 rounded-xl w-full"
-        placeholder={placeholder}
-        onFocus={() => setListOpened(false)}
-        onChange={(e) => inputHandler(e)}
-        value={reset ? input : ''}
+      </button>
+      <div
+        id={`dropdown-${uniqueKey}`}
         style={{
-          width: 'width: calc(100% - 2rem)',
+          width: 'calc(100% - 2rem)',
         }}
-      />
-
-      <ul
-        className={`price-list bg-drop-white text-drop-grey overflow-hidden flex-col rounded-lg ${ListOpened ? 'hidden' : 'flex'}`}
+        className="price-list z-10 hidden bg-drop-white shadow-xl text-drop-grey overflow-hidden rounded-lg"
       >
-        {
-                  List.map(({ id, title }) => (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => buttonClickHandler(title)}
-                      className={`capitalize px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
-                        title === SearchableDropDownEnums.CREATE_NEW_TITLE
-                          ? 'text-drop-white bg-drop-blue'
-                          : ''}`}
-                    >
-                      {title}
+        <ul className="py-1 text-sm text-gray-700 overflow-hidden" aria-labelledby={`dropdownDefault-${uniqueKey}`}>
+          {
+                List.map(({ id, title }) => (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => buttonClickHandler(title)}
+                    className={`capitalize block w-full px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
+                      title === SearchableDropDownEnums.CREATE_NEW_TITLE
+                        ? 'text-drop-white bg-drop-blue'
+                        : ''}`}
+                  >
+                    {title}
 
-                    </button>
-                  ))
-                }
-      </ul>
-    </div>
+                  </button>
+                ))
+              }
+        </ul>
+      </div>
+    </>
   );
 }
 
