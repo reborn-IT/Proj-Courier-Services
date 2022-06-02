@@ -4,6 +4,7 @@ import SaveModalSaga from './SaveFilterModal/saga';
 import ServiceLabelSaga from './CourierServiceModal/saga';
 import NavigationBarSaga from './NavigationBar/saga';
 import ReviewSaga from './ReviewCard/saga';
+import DeletingFilterLogListSaga from './DeletingFilterCards/saga';
 
 export function* rootSaga() {
   yield all(
@@ -13,6 +14,7 @@ export function* rootSaga() {
       fork(ServiceLabelSaga),
       fork(NavigationBarSaga),
       fork(ReviewSaga),
+      fork(DeletingFilterLogListSaga),
     ],
   );
 }

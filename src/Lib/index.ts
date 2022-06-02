@@ -6,3 +6,4 @@ export { default as HomeFeatured } from './HomeFeatured';
 export { default as Testimonial } from './Testimonial';
 export { default as PaginatedItems } from './PaginatedItems';
 export { default as CourierServiceModal } from './CourierServiceModal';
+export { default as DeleteConfirmationModal } from './DeleteConfirmationModal';

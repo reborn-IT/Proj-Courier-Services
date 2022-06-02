@@ -12,6 +12,8 @@ interface IFilterMenuInput {
     styles?: object;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extraAttributes?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    innerRef?: React.Ref<any>;
 }
 function FilterMenuInput({
   type,
@@ -21,9 +23,11 @@ function FilterMenuInput({
   value,
   styles,
   extraAttributes,
+  innerRef,
 }: IFilterMenuInput) {
   return (
     <input
+      ref={innerRef}
       type={type}
       className={`border border-drop-grey rounded-lg p-4 ${extraTailwindCSS}`}
       style={{
@@ -45,6 +49,7 @@ FilterMenuInput.defaultProps = {
   value: '',
   styles: {},
   extraAttributes: '',
+  innerRef: null,
 };
 
 export default FilterMenuInput;

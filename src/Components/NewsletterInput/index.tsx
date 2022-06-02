@@ -36,7 +36,7 @@ function NewsletterInput() {
 
   return (
     <div className="newsletter-wrapper bg-drop-white overflow-hidden flex items-center justify-between sm:justify-start rounded-full py-3 px-4 w-[80vw] sm:w-auto">
-      <input type="text" placeholder="Your Email" ref={newsletter} />
+      <input type="text" className="border-0" placeholder="Your Email" ref={newsletter} />
       <button type="button" className="transform rotate-[30deg]" onClick={() => handleSubscribe()}>
         <img src={SendIcon} alt="send icon" style={{ width: '2.2rem' }} />
       </button>
