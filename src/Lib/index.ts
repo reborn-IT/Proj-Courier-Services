@@ -7,3 +7,4 @@ export { default as Testimonial } from './Testimonial';
 export { default as PaginatedItems } from './PaginatedItems';
 export { default as CourierServiceModal } from './CourierServiceModal';
 export { default as DeleteConfirmationModal } from './DeleteConfirmationModal';
+export { default as SavedFilters } from './SavedFilters';

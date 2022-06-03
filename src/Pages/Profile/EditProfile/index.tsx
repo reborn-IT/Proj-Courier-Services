@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable max-len */
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CommonRoundedButton, FilterMenuInput } from '../../../Components';
 import UserImage from '../../../Assets/Images/user-placeholder.jpg';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -29,6 +29,8 @@ function EditProfile() {
   const [anotherAddressLineTwo, setAnotherAddressLineTwo] = useState<string>('');
   const [anotherAddressCity, setAnotherAddressCity] = useState<string>('');
   const [anotherAddresses, setAnotherAddresses] = useState<AddNewAddressI[]>([]);
+
+  const navigate = useNavigate();
 
   // Ref
 
@@ -272,10 +274,9 @@ function EditProfile() {
       <div className="flex items-center space-x-4">
         <CommonRoundedButton
           extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10 bg-drop-red"
+          ClickHandler={() => navigate(-1)}
         >
-          <Link to="/profile/overview" className="flex items-center">
-            <p>Go Back</p>
-          </Link>
+          <p>Go Back</p>
         </CommonRoundedButton>
         <CommonRoundedButton
           extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10"

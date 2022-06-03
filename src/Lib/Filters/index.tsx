@@ -102,23 +102,11 @@ function Filters() {
       setArrivepointAddressChecked,
     ] = useState<boolean>(false);
 
-  // const
-  //   [
-  //     arriveMarkOnMap,
-  //     setArriveMarkOnMap,
-  //   ] = useState<boolean>(false);
-
   const
     [
       DestinationpointAddressChecked,
       setDestinationpointAddressChecked,
     ] = useState<boolean>(false);
-
-  // const
-  //   [
-  //     DestinationMarkOnMap,
-  //     setDestinationMarkOnMap,
-  //   ] = useState<boolean>(false);
 
   const filterServices = (needle: string) => {
     const query: string = needle.toLowerCase();
@@ -138,17 +126,9 @@ function Filters() {
     }
   };
 
-  // const handleArriveMarkOnMap = () => {
-  //   setArriveMarkOnMap(!arriveMarkOnMap);
-  // };
-
   const handleArriveSwitchAddress = () => {
     setArrivepointAddressChecked(!arrivingpointAddressChecked);
   };
-
-  // const handleDestinationMarkOnMap = () => {
-  //   setDestinationMarkOnMap(!DestinationMarkOnMap);
-  // };
 
   function saveModalHandler() {
     dispatch(fetchSaveModalStateRequest(true));
@@ -368,30 +348,6 @@ function Filters() {
                 placeholder="Postal Code"
               />
             </form>
-
-            {/* <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleArriveMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>
-                  Mark on map
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="map h-[40vh]  px-6"
-              style={{
-                display: `${(
-                  arriveMarkOnMap) ? 'block' : 'none'}`,
-              }}
-            >
-              <MapBox />
-            </div> */}
           </div>
         </div>
 
@@ -461,30 +417,6 @@ function Filters() {
                 placeholder="Postal Code"
               />
             </form>
-
-            {/* <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleDestinationMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>
-                  Mark on map
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="  px-6 map h-[40vh]"
-              style={{
-                display:
-                `${DestinationMarkOnMap ? 'block' : 'none'}`,
-              }}
-            >
-              <MapBox />
-            </div> */}
           </div>
         </div>
 

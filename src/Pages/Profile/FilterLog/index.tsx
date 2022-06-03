@@ -3,8 +3,8 @@ import React, { useRef, useState } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useSelector } from 'react-redux';
 import { RoundedInput } from '../../../Components';
-import { PaginatedItems, DeleteConfirmationModal } from '../../../Lib';
-
+import { PaginatedItems, DeleteConfirmationModal, SavedFilters } from '../../../Lib';
+import { StateProvider } from '../../../Components/DropDownForm/DropDownStateProvider';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { getDeletingFilterLogList } from '../../../Store/DeletingFilterCards/selectors';
 
@@ -49,6 +49,9 @@ function FilterLog() {
           },
         ]}
       />
+      <StateProvider>
+        <SavedFilters />
+      </StateProvider>
       <div className="mt-12 md:mt-12">
         <RoundedInput
           onChange={(e) => searchHandler(e.target.value)}

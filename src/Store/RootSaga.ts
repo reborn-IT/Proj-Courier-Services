@@ -5,6 +5,7 @@ import ServiceLabelSaga from './CourierServiceModal/saga';
 import NavigationBarSaga from './NavigationBar/saga';
 import ReviewSaga from './ReviewCard/saga';
 import DeletingFilterLogListSaga from './DeletingFilterCards/saga';
+import SavedFilterFormSaga from './SavedFilterForm/saga';
 
 export function* rootSaga() {
   yield all(
@@ -15,6 +16,7 @@ export function* rootSaga() {
       fork(NavigationBarSaga),
       fork(ReviewSaga),
       fork(DeletingFilterLogListSaga),
+      fork(SavedFilterFormSaga),
     ],
   );
 }

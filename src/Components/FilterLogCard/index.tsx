@@ -1,7 +1,11 @@
 /* eslint-disable max-len */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { HIGH_TO_LOW, LOW_TO_HIGH, BEST_MATCH } from '../../Utils/constants';
 import './FilterLogCard.scss';
+import {
+  fetchSavedFilterFormRequest,
+} from '../../Store/SavedFilterForm/actions';
 
 export interface IFilterLogCardData {
     id: number;
@@ -20,6 +24,14 @@ function FilterLogCard({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   id, title, weight, scheduled, from, to, cost, date, time, extraTailWindClasses,
 }: IFilterLogCardData) {
+  const dispatch = useDispatch();
+
+  function openFilterMenuForm() {
+    dispatch(
+      fetchSavedFilterFormRequest(true),
+    );
+  }
+
   return (
     <div
       className={`filter-log-card flex-1 px-5 py-5 rounded-2xl bg-drop-white shadow-xl relative min-h-[9rem] overflow-hidden ${extraTailWindClasses}`}
@@ -28,7 +40,7 @@ function FilterLogCard({
         <h3 className="text-xl md:text-2xl font-semibold">
           {title}
         </h3>
-        <button type="button" className="relative">
+        <button type="button" className="relative" onClick={() => openFilterMenuForm()}>
           <i className="bi bi-pencil-square text-drop-grey text-2xl" />
         </button>
       </div>
