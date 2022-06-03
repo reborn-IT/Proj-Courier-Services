@@ -1,18 +1,21 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-import { FilterLogCard, ResultCard } from '../../Components';
+import { CustomCheckBox, FilterLogCard, ResultCard } from '../../Components';
 import './PaginatedItems.scss';
 import {
-  RESULTCARD, FILTERLOGCARD, HIGH_TO_LOW, LOW_TO_HIGH, BEST_MATCH,
+  RESULTCARD, FILTERLOGCARD,
 } from '../../Utils/constants';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { IFilterLogCardData } from '../../Components/FilterLogCard';
+import { fetchDeletingFilterLogListRequest } from '../../Store/DeletingFilterCards/actions';
+import { getDeletingFilterLogList } from '../../Store/DeletingFilterCards/selectors';
 
 interface IPaginatedItems {
     itemsPerPage: number;
     cardType: RESULTCARD | FILTERLOGCARD;
+    deleting: boolean;
 }
 
 interface IResultCardData {
@@ -235,9 +238,32 @@ interface IItems {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currentItems: any;
     cardType: RESULTCARD | FILTERLOGCARD;
+    deleting: boolean;
 }
 
-function Items({ cardType, currentItems }: IItems) {
+function Items({ cardType, currentItems, deleting }: IItems) {
+  const dispatch = useDispatch();
+  const currentDeletingList = useSelector(getDeletingFilterLogList);
+
+  function deleteFilterLogHandler(id: number) {
+    const deletingItem = {
+      id,
+    };
+    let currentArray = currentDeletingList;
+    if (currentArray) {
+      const contains = currentDeletingList?.some((item) => JSON.stringify({ id }) === JSON.stringify(item));
+      if (contains) {
+        currentArray = currentArray.filter((item) => item.id !== id);
+      } else { currentArray = [...currentArray, deletingItem]; }
+    } else {
+      currentArray = [];
+      currentArray.push(deletingItem);
+    }
+    dispatch(fetchDeletingFilterLogListRequest(
+      currentArray,
+    ));
+  }
+
   return (
     <div className="results-cards-wrapper flex flex-col w-full px-4">
       {
@@ -268,26 +294,34 @@ function Items({ cardType, currentItems }: IItems) {
             date,
             time,
           }) => (
-            <FilterLogCard
-              id={id}
-              key={id}
-              title={title}
-              weight={weight}
-              scheduled={scheduled}
-              to={to}
-              from={from}
-              cost={cost}
-              date={date}
-              time={time}
-              extraTailWindClasses="mb-3"
-            />
+            <div key={id} className="flex items-center justify-between">
+              <div className={`${deleting ? 'flex' : 'hidden'} items-center mr-5`}>
+                <CustomCheckBox
+                  id={id}
+                  key={id}
+                  onChangeHandler={() => deleteFilterLogHandler(id)}
+                />
+              </div>
+              <FilterLogCard
+                id={id}
+                title={title}
+                weight={weight}
+                scheduled={scheduled}
+                to={to}
+                from={from}
+                cost={cost}
+                date={date}
+                time={time}
+                extraTailWindClasses="mb-3"
+              />
+            </div>
           ))
 }
     </div>
   );
 }
 
-function PaginatedItems({ itemsPerPage, cardType }: IPaginatedItems) {
+function PaginatedItems({ itemsPerPage, cardType, deleting }: IPaginatedItems) {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState<number>(0);
   const [itemOffset, setItemOffset] = useState<number>(0);
@@ -317,6 +351,7 @@ function PaginatedItems({ itemsPerPage, cardType }: IPaginatedItems) {
       <Items
         cardType={cardType}
         currentItems={currentItems}
+        deleting={deleting}
       />
       <div className="pagination mt-4 text-center">
         <ReactPaginate
@@ -326,7 +361,7 @@ function PaginatedItems({ itemsPerPage, cardType }: IPaginatedItems) {
           pageRangeDisplayed={5}
           pageCount={pageCount}
           previousLabel="Previous"
-          renderOnZeroPageCount={null}
+          renderOnZeroPageCount={undefined}
         />
       </div>
     </>

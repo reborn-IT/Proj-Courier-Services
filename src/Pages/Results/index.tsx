@@ -8,6 +8,7 @@ import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import './Results.scss';
+import { fetchSaveModalStateRequest } from '../../Store/SaveFilterModal/actions';
 
 function Results() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,14 +21,15 @@ function Results() {
   // const reviewPopupState = useSelector(getReviewPopupState);
 
   useEffect(() => {
-    dispatch(fetchModalStateRequest(filterMenuOpened));
+    dispatch(fetchModalStateRequest(false));
+    dispatch(fetchSaveModalStateRequest(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.warn('Modal State: ', filterMenuOpened);
-    if (size.width < 480) {
+    if (size.width && size.width < 480) {
       setIsSmallFilterButton(true);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

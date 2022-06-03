@@ -23,7 +23,7 @@ function TestimonialXL({
         top: `${topPos}rem`,
         left: `${rightBiased ? `${rightPos}rem` : 'auto'}`,
         right: `${rightBiased ? 'auto' : `${rightPos}rem`}`,
-        display: `${size.width < 480 ? 'none' : 'flex'}`,
+        display: `${size.width && size.width < 480 ? 'none' : 'flex'}`,
       }}
     >
       <div className="flex flex-col items-center justify-center h-auto w-full bg-drop-white rounded-2xl px-4 py-3 text-sm text-center font-semibold">

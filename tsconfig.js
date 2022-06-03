@@ -5,7 +5,8 @@
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */ /* Type declaration files to be included in compilation. */,
     "lib": [
       "DOM",
-      "ESNext"
+      "ESNext",
+      "DOM.iterable"
     ] /* Specify library files to be included in the compilation. */,
     "jsx": "react-jsx" /* Specify JSX code generation: 'preserve', 'react-native', 'react' or 'react-jsx'. */,
     "noEmit": true /* Do not emit outputs. */,

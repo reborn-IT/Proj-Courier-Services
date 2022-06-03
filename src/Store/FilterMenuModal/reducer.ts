@@ -27,7 +27,7 @@ export default (
     case FETCH_MODAL_STATE_SUCCESS:
       return produce(state, (draft: FilterMenuModalState) => {
         draft.pending = false;
-        draft.state = !action.payload.state;
+        draft.state = action.payload.state;
         draft.error = null;
       });
     case FETCH_MODAL_STATE_FAILURE:

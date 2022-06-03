@@ -4,7 +4,7 @@ export const FETCH_SAVE_MODAL_STATE_FAILURE = 'FETCH_SAVE_MODAL_STATE_FAILURE';
 
 export interface SaveMenuModalState {
     pending: boolean;
-    state: boolean;
+    state: boolean | null;
     error: string | null;
 }
 

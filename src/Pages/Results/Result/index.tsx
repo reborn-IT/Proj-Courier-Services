@@ -325,6 +325,7 @@ function Result() {
       resolve(data2);
     }, 1000);
   });
+
   const options = {
 
   };

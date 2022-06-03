@@ -37,18 +37,23 @@ function CommonRoundedButton({
   const filterMenuOpened = useSelector(getModalState);
   const saveMenuOpened = useSelector(getSaveModalState);
   const dispatch = useDispatch();
-  const HandleFilerMenu = () => {
+  const HandleFilerMenu = async () => {
     switch (action) {
       case CommonButtonActions.OPEN_FILTER:
+        dispatch(fetchModalStateRequest(true));
+        break;
       case CommonButtonActions.CLOSE_FILTER:
-        dispatch(fetchModalStateRequest(filterMenuOpened));
+        if (filterMenuOpened) { dispatch(fetchModalStateRequest(false)); }
         break;
       case CommonButtonActions.OPEN_MODAL:
-        dispatch(fetchSaveModalStateRequest(saveMenuOpened));
+        await dispatch(fetchModalStateRequest(false));
+        // eslint-disable-next-line no-console
+        console.warn('Save Menu State', saveMenuOpened, ' and Filter Menu Status', filterMenuOpened);
+        if (saveMenuOpened) { dispatch(fetchSaveModalStateRequest(true)); }
         break;
       default: break;
     }
-    ClickHandler();
+    if (ClickHandler) { ClickHandler(); }
   };
   if (motionDiv) {
     return (

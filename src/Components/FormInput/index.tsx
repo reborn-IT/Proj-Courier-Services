@@ -24,7 +24,7 @@ function FormInput({
         <div className="absolute text-xl inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           {icon}
         </div>
-        <input onChange={() => input.OnChange()} type="text" className={`border w-full border-drop-primary text-gray-900 rounded-xl focus:ring-blue-500 focus:border-blue-500 block pl-10 pr-5 py-4 ${extraTailwindCss}`} placeholder={input?.placeholder} />
+        <input onChange={() => input.OnChange && input.OnChange()} type="text" className={`border w-full border-drop-primary text-gray-900 rounded-xl focus:ring-blue-500 focus:border-blue-500 block pl-10 pr-5 py-4 ${extraTailwindCss}`} placeholder={input?.placeholder} />
       </div>
     </>
   );

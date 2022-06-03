@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './filters.scss';
 import Switch from 'react-switch';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import DropDownForm from '../../Components/DropDownForm';
 import CustomizedDatePicker from '../../Components/CustomizedDatePicker';
@@ -20,6 +20,7 @@ import {
 } from '../../Components/DropDownForm/DropDownReducer';
 import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
 import FilterMenuInput from '../../Components/FilterMenuInput';
+import { fetchSaveModalStateRequest } from '../../Store/SaveFilterModal/actions';
 
 enum ExpandButtonState {
   VIEW_ALL = 'View all...',
@@ -30,6 +31,7 @@ function Filters() {
   const { state } = useExpandedContext();
   const [scheduled, setScheduled] = useState<boolean>(false);
   const [isImmediateCourier, setIsImmediateCourier] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const [
     viewAllButtonState,
     setViewAllButtonState,
@@ -100,23 +102,11 @@ function Filters() {
       setArrivepointAddressChecked,
     ] = useState<boolean>(false);
 
-  // const
-  //   [
-  //     arriveMarkOnMap,
-  //     setArriveMarkOnMap,
-  //   ] = useState<boolean>(false);
-
   const
     [
       DestinationpointAddressChecked,
       setDestinationpointAddressChecked,
     ] = useState<boolean>(false);
-
-  // const
-  //   [
-  //     DestinationMarkOnMap,
-  //     setDestinationMarkOnMap,
-  //   ] = useState<boolean>(false);
 
   const filterServices = (needle: string) => {
     const query: string = needle.toLowerCase();
@@ -136,17 +126,13 @@ function Filters() {
     }
   };
 
-  // const handleArriveMarkOnMap = () => {
-  //   setArriveMarkOnMap(!arriveMarkOnMap);
-  // };
-
   const handleArriveSwitchAddress = () => {
     setArrivepointAddressChecked(!arrivingpointAddressChecked);
   };
 
-  // const handleDestinationMarkOnMap = () => {
-  //   setDestinationMarkOnMap(!DestinationMarkOnMap);
-  // };
+  function saveModalHandler() {
+    dispatch(fetchSaveModalStateRequest(true));
+  }
 
   const handleDestinationSwitchAddress = () => {
     setDestinationpointAddressChecked(!DestinationpointAddressChecked);
@@ -317,7 +303,7 @@ function Filters() {
                 reset={
                   !(arrivingpointAddressChecked)
                 }
-                createmode={false}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -345,47 +331,23 @@ function Filters() {
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
                 placeholder="Postal Code"
               />
             </form>
-
-            {/* <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleArriveMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>
-                  Mark on map
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="map h-[40vh]  px-6"
-              style={{
-                display: `${(
-                  arriveMarkOnMap) ? 'block' : 'none'}`,
-              }}
-            >
-              <MapBox />
-            </div> */}
           </div>
         </div>
 
@@ -412,7 +374,7 @@ function Filters() {
                 reset={
                   !(DestinationpointAddressChecked)
 }
-                createmode={false}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -438,47 +400,23 @@ function Filters() {
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
                 placeholder="Postal Code"
               />
             </form>
-
-            {/* <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleDestinationMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>
-                  Mark on map
-                </span>
-              </div>
-            </div>
-
-            <div
-              className="  px-6 map h-[40vh]"
-              style={{
-                display:
-                `${DestinationMarkOnMap ? 'block' : 'none'}`,
-              }}
-            >
-              <MapBox />
-            </div> */}
           </div>
         </div>
 
@@ -553,9 +491,9 @@ function Filters() {
             >
               <SearchableDropDown
                 data={priceListAPI}
-                placeholder={priceListAPI[0]}
+                placeholder={priceListAPI[0].title}
                 reset
-                createmode={false}
+                createMode={false}
               />
             </form>
           </div>
@@ -569,7 +507,7 @@ function Filters() {
             Cancel
           </CommonRoundedButton>
           <CommonRoundedButton
-            action={CommonButtonActions.OPEN_MODAL}
+            ClickHandler={() => saveModalHandler()}
           >
             Done
           </CommonRoundedButton>
