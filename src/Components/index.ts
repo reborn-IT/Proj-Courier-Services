@@ -18,3 +18,4 @@ export { default as FilterLogCard } from './FilterLogCard';
 export { default as FormInput } from './FormInput';
 export { default as CustomCheckBox } from './CustomCheckBox';
 export { default as ModalCloseButton } from './ModalCloseButton';
+export { default as LoadingSpinner } from './Loading';
