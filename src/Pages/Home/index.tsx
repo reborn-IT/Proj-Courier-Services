@@ -1,10 +1,11 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable max-len */
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Home.scss';
 import { ToastContainer } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import {
   Footer, Filters, Testimonial, HomeFeatured, FAQ,
