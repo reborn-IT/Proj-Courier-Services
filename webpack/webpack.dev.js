@@ -26,7 +26,7 @@ module.exports = {
         '915154064810-hkdb5g5st5dhumnin6tih27hf56vv9rj.apps.googleusercontent.com'
       ),
       'process.env.backendAPIPath': JSON.stringify(
-        'https://pure-atoll-00605.herokuapp.com/api/v1'
+        'http://localhost:8080/api/v1'
       ),
     }),
   ],

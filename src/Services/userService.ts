@@ -25,6 +25,13 @@ class UserService {
     );
   }
 
+  async loginUser(formData: FormDataType) {
+    return this.apiService.apiPOST(
+      `${backendAPIPath}/user/login`,
+      formData
+    );
+  }
+
   async getUser(userid: string) {
     return this.apiService.apiGET(`${backendAPIPath}/user/${userid}`);
   }

@@ -1,7 +1,7 @@
 /* eslint-disable max-len,no-console,implicit-arrow-linebreak */
 import * as React from 'react';
-import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import GoogleLogin from 'react-google-login';
@@ -16,7 +16,7 @@ import {
 import { isEmailValid, IsPasswordValid } from '../../Utils/Validations';
 
 // API service
-// import UserService from '../../Services/userService';
+import UserService from '../../Services/userService';
 
 const notifyError = (error: string) => toast.error(error, {
   position: 'top-right',
@@ -41,50 +41,43 @@ export default function Register() {
   const formRef = useRef<HTMLFormElement>(document.createElement('form'));
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState<boolean>(false);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const subscription = watch((value) => {
-  //     if (value.emailAddress && isEmailValid(value.emailAddress)) {
-  //       clearErrors('emailAddress');
-  //     }
-  //   });
-  //   return () => subscription.unsubscribe();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [watch]);
+  const navigate = useNavigate();
+  const [googleAuthID, setGoogleAuthID] = useState<string|null>('');
 
   const HandleSuccess = () => {
     // eslint-disable-next-line no-alert
-    alert('Login Success');
+    // alert('Login Success');
   };
   const HandleFailure = () => {
     // eslint-disable-next-line no-alert
-    alert('Login Failed');
+    // alert('Login Failed');
   };
 
-  const googleAuthId = process.env.googleauthid;
+  // Getting the google auth ID
+  useEffect(() => {
+    const { googleauthid } = process.env;
+    if (googleauthid) {
+      setGoogleAuthID(googleauthid);
+    } else setGoogleAuthID(null);
+  }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function registerUser() {
-    console.log(true);
-    // if (password === confirmPassword) {
-
-    //   const response = await UserService.registerUser({
-    //     role: 'ROLE_PUBLIC_USER',
-    //     email,
-    //     password,
-    //   });
-    //   if (response && response.status === 201) {
-    //     setLoading(false);
-    //     navigate('profile');
-    //   } else if (response && response.errorCode === 409) {
-    //     notifyError('An account is already associated with this email address. Please log in');
-    //     setLoading(false);
-    //   } else {
-    //     notifyError('Something went wrong');
-    //     setLoading(false);
-    //   }
-    // }
+  async function registerUser(data: inputTypes) {
+    setLoading(true);
+    const response = await UserService.registerUser({
+      role: 'ROLE_PUBLIC_USER',
+      email: data.emailAddress,
+      password: data.password,
+    });
+    if (response && response.status === 201) {
+      setLoading(false);
+      navigate('/profile');
+    } else if (response && response.errorCode === 409) {
+      notifyError('An account is already associated with this email address. Please log in');
+      setLoading(false);
+    } else {
+      notifyError('Something went wrong');
+      setLoading(false);
+    }
   }
 
   const onSubmit = (data: inputTypes) => {
@@ -94,9 +87,9 @@ export default function Register() {
         message: 'Invalid Email address',
       });
       notifyError('Invalid Email address');
-    } else {
-      clearErrors('emailAddress');
+      return;
     }
+    clearErrors('emailAddress');
 
     if (!IsPasswordValid(data.password)) {
       setError('password', {
@@ -104,7 +97,9 @@ export default function Register() {
         message: 'Password should have at least 6 characters',
       });
       notifyError('Password should have at least 6 characters');
-    } else clearErrors('password');
+      return;
+    }
+    clearErrors('password');
 
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', {
@@ -112,7 +107,11 @@ export default function Register() {
         message: 'Passwords does not match',
       });
       notifyError('Passwords does not match');
-    } else clearErrors('confirmPassword');
+      return;
+    }
+    clearErrors('confirmPassword');
+
+    registerUser(data);
   };
 
   return (
@@ -196,24 +195,28 @@ export default function Register() {
                 Or
               </p>
               <div className="flex justify-center">
-                <GoogleLogin
-                  clientId={googleAuthId}
-                  buttonText="Login with Google"
-                  onSuccess={HandleSuccess}
-                  onFailure={HandleFailure}
-                  cookiePolicy="single_host_origin"
-                  render={(renderProps) => (
-                    <button
-                      type="button"
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      className="px-5 py-3 md:py-4 rounded-full border text-blue-600 w-auto whitespace-nowrap flex items-center cursor-pointer"
-                    >
-                      <i className="bi bi-google" />
-                      <p className="ml-2">Signup with Google</p>
-                    </button>
-                  )}
-                />
+                {
+                  googleAuthID && (
+                    <GoogleLogin
+                      clientId={googleAuthID}
+                      buttonText="Login with Google"
+                      onSuccess={HandleSuccess}
+                      onFailure={HandleFailure}
+                      cookiePolicy="single_host_origin"
+                      render={(renderProps) => (
+                        <button
+                          type="button"
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          className="px-5 py-3 md:py-4 rounded-full border text-blue-600 w-auto whitespace-nowrap flex items-center cursor-pointer"
+                        >
+                          <i className="bi bi-google" />
+                          <p className="ml-2">Signup with Google</p>
+                        </button>
+                      )}
+                    />
+                  )
+                }
               </div>
             </form>
           )}
