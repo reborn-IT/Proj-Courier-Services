@@ -55,7 +55,6 @@ function EditProfile() {
   function addNewItem() {
     let addressID: number;
     if (anotherAddresses.length >= 1) {
-      console.warn(anotherAddresses);
       addressID = anotherAddresses[anotherAddresses.length - 1].id + 1;
     } else {
       addressID = 1;

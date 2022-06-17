@@ -47,8 +47,6 @@ function CommonRoundedButton({
         break;
       case CommonButtonActions.OPEN_MODAL:
         await dispatch(fetchModalStateRequest(false));
-        // eslint-disable-next-line no-console
-        console.warn('Save Menu State', saveMenuOpened, ' and Filter Menu Status', filterMenuOpened);
         if (saveMenuOpened) { dispatch(fetchSaveModalStateRequest(true)); }
         break;
       default: break;

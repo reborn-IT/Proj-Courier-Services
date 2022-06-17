@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Switch from 'react-switch';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
@@ -207,11 +207,6 @@ function ReviewForm() {
   const [isTextareaValid, setIsTextareaValid] = useState<boolean>(true);
   const [review, setReview] = useState<string>('');
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.warn(selectedHighlights);
-  }, [selectedHighlights]);
 
   function handleMotionHighlights() {
     if (showHighlights) {

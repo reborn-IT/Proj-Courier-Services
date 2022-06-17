@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import { toast, ToastContainer } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { CommonRoundedButton, FormInput, LoadingSpinner } from '../../Components';
 import { isEmailValid } from '../../Utils/Validations';
@@ -35,6 +36,7 @@ function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [googleAuthID, setGoogleAuthID] = useState<string|null>('');
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['user']);
 
   const HandleSuccess = () => {
     // eslint-disable-next-line no-alert
@@ -47,11 +49,15 @@ function Login() {
 
   // Getting the google auth ID
   useEffect(() => {
+    if (cookies.user) {
+      navigate('/');
+    }
     const { googleauthid } = process.env;
     if (googleauthid) {
       setGoogleAuthID(googleauthid);
     } else setGoogleAuthID(null);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cookies.user]);
 
   async function loginUser(data: inputTypes) {
     setLoading(true);
@@ -63,7 +69,10 @@ function Login() {
     if (response && response.status === 200) {
       // TODO: Save User ID in Cookies
       setLoading(false);
-      navigate('/');
+      if (response.data?.body) {
+        setCookie('user', response.data?.body, { path: '/' });
+        navigate('/');
+      }
     } else {
       notifyError('Something went wrong');
       setLoading(false);

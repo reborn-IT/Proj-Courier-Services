@@ -1,12 +1,11 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CommonRoundedButton, NavBar } from '../../Components';
 import RoundedInput from '../../Components/RoundedInput';
 import { Footer, PaginatedItems } from '../../Lib';
 import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
 import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import './Results.scss';
 import { fetchSaveModalStateRequest } from '../../Store/SaveFilterModal/actions';
 
@@ -15,7 +14,6 @@ function Results() {
   const [searchInput, setSearchInput] = useState<string>(null);
   const [isSmallFilterButton, setIsSmallFilterButton] = useState<boolean>(false);
   const size: Size = useWindowSize();
-  const filterMenuOpened = useSelector(getModalState);
   const dispatch = useDispatch();
 
   // const reviewPopupState = useSelector(getReviewPopupState);
@@ -27,8 +25,6 @@ function Results() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.warn('Modal State: ', filterMenuOpened);
     if (size.width && size.width < 480) {
       setIsSmallFilterButton(true);
     }
