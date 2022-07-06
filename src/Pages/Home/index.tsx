@@ -2,19 +2,19 @@
 /* eslint-disable max-len */
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import './Home.scss';
+import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { useInView } from 'react-intersection-observer';
-import {
-  Footer, Filters, Testimonial, HomeFeatured, FAQ,
-} from '../../Lib';
-import { StateProvider } from '../../Components/DropDownForm/DropDownStateProvider';
 import { NavBar } from '../../Components';
+import { StateProvider } from '../../Components/DropDownForm/DropDownStateProvider';
+import {
+  FAQ, Filters, Footer, HomeFeatured, Testimonial,
+} from '../../Lib';
 import { getModalState } from '../../Store/FilterMenuModal/selectors';
 import { fetchNavigationBarStatusRequest } from '../../Store/NavigationBar/actions';
 import { SCROLLING_DOWN, SCROLLING_UP } from '../../Utils/constants';
+import './Home.scss';
 
 function Home() {
   const modalState: boolean | null = useSelector(getModalState);

@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {
+  Link, useLocation, useNavigate,
+} from 'react-router-dom';
 import CommonRoundedButton from '../../Components/CommonRoundedButton';
 import ModalCloseButton from '../../Components/ModalCloseButton';
 import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
@@ -14,6 +16,24 @@ function ConfirmationModal() {
   const CloseModal = () => {
     if (filterMenuOpened) { dispatch(fetchModalStateRequest(filterMenuOpened)); }
   };
+
+  const currentPath = useLocation();
+  const navigate = useNavigate();
+
+  function handleRoute() {
+    switch (currentPath.pathname) {
+      case '/':
+        navigate('results', { replace: true });
+        break;
+      case '/results':
+        dispatch(fetchModalStateRequest(false));
+        break;
+      default:
+        navigate('results', { replace: true });
+        break;
+    }
+  }
+
   return (
     <div className="modal rounded-2xl p-8 bg-drop-white fixed overflow-y-auto w-[95%] lg:w-3/5 h-auto z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div className="flex items-center justify-between">
@@ -38,10 +58,8 @@ function ConfirmationModal() {
         />
 
         <div className="flex items-center justify-center md:justify-end mt-7">
-          <CommonRoundedButton>
-            <Link to="results">
-              No, Just Let me in
-            </Link>
+          <CommonRoundedButton ClickHandler={() => handleRoute()}>
+            No, Just Let me in
           </CommonRoundedButton>
           <span className="mx-2" />
           <CommonRoundedButton
