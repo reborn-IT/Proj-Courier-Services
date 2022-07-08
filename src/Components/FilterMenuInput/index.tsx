@@ -7,8 +7,8 @@ interface IFilterMenuInput {
     type: TEXT | NUMBER | TEL;
     placeholder: string;
     extraTailwindCSS?: string;
-    onChangeHandler?: (e) => void;
-    value?: string | number;
+    onChangeHandler: (e) => void;
+    value: string | number;
     styles?: object;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extraAttributes?: any;
@@ -25,6 +25,12 @@ function FilterMenuInput({
   extraAttributes,
   innerRef,
 }: IFilterMenuInput) {
+  function takeValue(e) {
+    onChangeHandler(e);
+    // eslint-disable-next-line no-console
+    console.log('value: ', e.target.value);
+  }
+
   return (
     <input
       ref={innerRef}
@@ -35,8 +41,8 @@ function FilterMenuInput({
         ...styles,
       }}
       placeholder={placeholder}
-      onChange={(e) => onChangeHandler && onChangeHandler(e)}
       value={value}
+      onChange={(e) => takeValue(e)}
       {...extraAttributes}
     />
   );
@@ -44,9 +50,6 @@ function FilterMenuInput({
 
 FilterMenuInput.defaultProps = {
   extraTailwindCSS: '',
-  // eslint-disable-next-line no-console
-  onChangeHandler: () => { console.warn('Add Onchange Handler'); },
-  value: '',
   styles: {},
   extraAttributes: '',
   innerRef: null,

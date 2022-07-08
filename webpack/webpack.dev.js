@@ -29,9 +29,6 @@ module.exports = {
       'process.env.backendAPIPath': JSON.stringify(
         'http://localhost:8080/api/v1',
       ),
-      'process.env.BROWSER': JSON.stringify(
-        'Firefox Developer Edition',
-      ),
     }),
   ],
 };

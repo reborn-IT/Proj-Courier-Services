@@ -79,7 +79,7 @@ function Filters() {
       title: 'Price Low to High',
     },
   ];
-  const PrimaryLocationDataAPI: IDropDownData[] = [
+  const PickupPointLocationAPI: IDropDownData[] = [
     {
       id: 1,
       title: 'Home',
@@ -93,19 +93,33 @@ function Filters() {
       title: 'Work',
     },
   ];
+  const DestinationPointLocationAPI: IDropDownData[] = [
+    {
+      id: 4,
+      title: 'Home',
+    },
+    {
+      id: 5,
+      title: 'Office',
+    },
+    {
+      id: 6,
+      title: 'Work',
+    },
+  ];
   const SaveFilterModalOpened = useSelector(getSaveModalState);
   const [services, setServices] = useState<IDropDownData[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
   const
     [
-      arrivingpointAddressChecked,
-      setArrivepointAddressChecked,
+      arrivingPointAddressChecked,
+      setArrivePointAddressChecked,
     ] = useState<boolean>(false);
 
   const
     [
-      DestinationpointAddressChecked,
-      setDestinationpointAddressChecked,
+      DestinationPointAddressChecked,
+      setDestinationPointAddressChecked,
     ] = useState<boolean>(false);
 
   const filterServices = (needle: string) => {
@@ -114,6 +128,25 @@ function Filters() {
       ({ title }) => title.toLowerCase().indexOf(query) >= 0,
     ));
   };
+
+  const [weight, setWeight] = useState<number>(0);
+  const [parcelCount, setParcelCount] = useState<number>(0);
+
+  function numberInputHandler(value) {
+    let checkedValue;
+
+    const regExp = /^[0-9\b]+$/;
+    if (value === '' || regExp.test(value)) {
+      checkedValue = value;
+    }
+
+    return checkedValue;
+  }
+
+  function simpleFunc() {
+    // eslint-disable-next-line no-console
+    // console.log('hello');
+  }
 
   const setNewServicesList = (e) => {
     // eslint-disable-next-line no-sequences, no-unused-expressions
@@ -127,7 +160,7 @@ function Filters() {
   };
 
   const handleArriveSwitchAddress = () => {
-    setArrivepointAddressChecked(!arrivingpointAddressChecked);
+    setArrivePointAddressChecked(!arrivingPointAddressChecked);
   };
 
   function saveModalHandler() {
@@ -135,7 +168,7 @@ function Filters() {
   }
 
   const handleDestinationSwitchAddress = () => {
-    setDestinationpointAddressChecked(!DestinationpointAddressChecked);
+    setDestinationPointAddressChecked(!DestinationPointAddressChecked);
   };
 
   const handleNatureArray = (item: string) => {
@@ -249,11 +282,13 @@ function Filters() {
             style={{ display: `${state.weightExpanded ? 'none' : 'block'}` }}
           >
             <form
-              className="content-form   px-6"
+              className="content-form px-6"
             >
               <FilterMenuInput
                 type="number"
+                onChangeHandler={(e) => setWeight(numberInputHandler(e.target.value))}
                 placeholder="Weight in kilograms"
+                value={weight}
               />
             </form>
           </div>
@@ -279,6 +314,8 @@ function Filters() {
               <FilterMenuInput
                 type="number"
                 placeholder="Quantity"
+                onChangeHandler={(e) => setParcelCount(numberInputHandler(e.target.value))}
+                value={parcelCount}
               />
             </form>
           </div>
@@ -298,10 +335,10 @@ function Filters() {
               className="content-form   px-6"
             >
               <SearchableDropDown
-                data={PrimaryLocationDataAPI}
+                data={PickupPointLocationAPI}
                 placeholder="- Select Starting Location -"
                 reset={
-                  !(arrivingpointAddressChecked)
+                  !(arrivingPointAddressChecked)
                 }
                 createMode={false}
               />
@@ -325,26 +362,34 @@ function Filters() {
               className="content-form   px-6"
               style={{
                 display:
-                `${arrivingpointAddressChecked ? 'block' : 'none'}`,
+                `${arrivingPointAddressChecked ? 'block' : 'none'}`,
               }}
             >
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 placeholder="Postal Code"
               />
             </form>
@@ -369,10 +414,10 @@ function Filters() {
               className="content-form   px-6"
             >
               <SearchableDropDown
-                data={PrimaryLocationDataAPI}
+                data={DestinationPointLocationAPI}
                 placeholder="- Select Destination Location -"
                 reset={
-                  !(DestinationpointAddressChecked)
+                  !(DestinationPointAddressChecked)
 }
                 createMode={false}
               />
@@ -394,26 +439,34 @@ function Filters() {
               className="content-form   px-6"
               style={{
                 display:
-                `${DestinationpointAddressChecked ? 'block' : 'none'}`,
+                `${DestinationPointAddressChecked ? 'block' : 'none'}`,
               }}
             >
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="number"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
                 placeholder="Postal Code"
               />
             </form>

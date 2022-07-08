@@ -6,8 +6,8 @@ import { useExpandedContext } from './DropDownStateProvider';
 
 interface DropDownForm {
     title: string;
-    trigger?: ExpandActionTypes,
-    payload?: boolean,
+    trigger: ExpandActionTypes,
+    payload: boolean,
 }
 
 function DropDownForm({ title, trigger, payload }: DropDownForm) {
@@ -39,8 +39,8 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
 }
 
 DropDownForm.defaultProps = {
-  trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
-  payload: false,
+  // trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
+  // payload: false,
 };
 
 export default DropDownForm;
