@@ -1,13 +1,13 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-param-reassign */
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_MODAL_STATE_FAILURE,
   FETCH_MODAL_STATE_REQUEST,
   FETCH_MODAL_STATE_SUCCESS,
   FilterMenuModalState,
   ModalStateActions,
-} from './actionsTypes';
+} from "./actionsTypes";
 
 const initialState: FilterMenuModalState = {
   pending: false,
@@ -15,10 +15,7 @@ const initialState: FilterMenuModalState = {
   error: null,
 };
 
-export default (
-  state = initialState,
-  action: ModalStateActions,
-) => {
+export default (state = initialState, action: ModalStateActions) => {
   switch (action.type) {
     case FETCH_MODAL_STATE_REQUEST:
       return produce(state, (draft: FilterMenuModalState) => {
@@ -36,8 +33,9 @@ export default (
         draft.state = false;
         draft.error = action.payload.error;
       });
-    default: return {
-      ...state,
-    };
+    default:
+      return {
+        ...state,
+      };
   }
 };

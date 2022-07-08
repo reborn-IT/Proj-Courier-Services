@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CommonRoundedButton from '../../Components/CommonRoundedButton';
-import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CommonRoundedButton from "../../Components/CommonRoundedButton";
+import { fetchModalStateRequest } from "../../Store/FilterMenuModal/actions";
+import { getModalState } from "../../Store/FilterMenuModal/selectors";
 
 function ConfirmationModal() {
   const filterMenuOpened = useSelector(getModalState);
@@ -15,17 +15,11 @@ function ConfirmationModal() {
   return (
     <div className="modal rounded-2xl p-8 bg-drop-white fixed overflow-y-auto w-3/5 h-2/3 2xl:h-[55%] z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div className="flex items-center justify-between">
-        <h4 className="text-4xl text-drop-primary font-semibold">Save filter data?</h4>
-        <button
-          type="button"
-          onClick={() => CloseModal()}
-        >
-          <svg
-            width="71"
-            height="71"
-            viewBox="0 0 71 71"
-            fill="none"
-          >
+        <h4 className="text-4xl text-drop-primary font-semibold">
+          Save filter data?
+        </h4>
+        <button type="button" onClick={() => CloseModal()}>
+          <svg width="71" height="71" viewBox="0 0 71 71" fill="none">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -35,7 +29,10 @@ function ConfirmationModal() {
           </svg>
         </button>
       </div>
-      <p className="text-xl font-semibold my-8 text-drop-grey">Save your filter data, so you can directly see and access them in your profile.</p>
+      <p className="text-xl font-semibold my-8 text-drop-grey">
+        Save your filter data, so you can directly see and access them in your
+        profile.
+      </p>
       <form className="form">
         <p className="mb-3">Title</p>
         <input
@@ -43,19 +40,17 @@ function ConfirmationModal() {
           type="text"
           placeholder="Enter title for save filter data"
           style={{
-            width: 'calc(100% - 2rem)',
+            width: "calc(100% - 2rem)",
           }}
           onChange={(e) => setInput(e.target.value)}
           value={input}
         />
 
         <div className="flex items-center justify-end mt-7">
-          <CommonRoundedButton>
-            No, Just Let me in
-          </CommonRoundedButton>
+          <CommonRoundedButton>No, Just Let me in</CommonRoundedButton>
           <span className="mx-2" />
           <CommonRoundedButton
-            styles={{ backgroundColor: '#D32424', marginRight: '1rem' }}
+            styles={{ backgroundColor: "#D32424", marginRight: "1rem" }}
           >
             Save
           </CommonRoundedButton>

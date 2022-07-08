@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { TEXT, NUMBER } from '../../Utils/constants';
+import React from "react";
+import { TEXT, NUMBER } from "../../Utils/constants";
 
 interface IFilterMenuInput {
-    type: TEXT | NUMBER;
-    placeholder: string;
-    // eslint-disable-next-line react/require-default-props
-    extratailwindcss?: string;
-    // eslint-disable-next-line react/require-default-props
-    onChangeHandler?: (e) => void;
-    // eslint-disable-next-line react/require-default-props
-    value?: string | number;
+  type: TEXT | NUMBER;
+  placeholder: string;
+  // eslint-disable-next-line react/require-default-props
+  extratailwindcss?: string;
+  // eslint-disable-next-line react/require-default-props
+  onChangeHandler?: (e) => void;
+  // eslint-disable-next-line react/require-default-props
+  value?: string | number;
 }
 
 function FilterMenuInput({
@@ -25,7 +25,7 @@ function FilterMenuInput({
       type={type}
       className={`border border-drop-grey rounded-lg p-4 ${extratailwindcss}`}
       style={{
-        width: 'calc(100% - 2rem)',
+        width: "calc(100% - 2rem)",
       }}
       placeholder={placeholder}
       onChange={(e) => onChangeHandler(e)}

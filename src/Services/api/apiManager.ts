@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { AxiosResponse } from 'axios';
-import { networkError } from '../../Utils/constants';
+import axios, { AxiosResponse } from "axios";
+import { networkError } from "../../Utils/constants";
 
 export interface ResponseObject {
-    data?: any;
-    status?: number;
-    token?:string;
-    refreshToken?: string;
-    errorCode?: number;
-    errorMessage?: string;
+  data?: any;
+  status?: number;
+  token?: string;
+  refreshToken?: string;
+  errorCode?: number;
+  errorMessage?: string;
 }
 
 const errorHandling = (error: any) => {
@@ -41,10 +41,9 @@ class APIService {
   http = axios.create({
     baseURL: process.env.baseUrl,
     headers: {
-      'Content-type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD, OPTIONS',
-
+      "Content-type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, HEAD, OPTIONS",
     },
   });
 

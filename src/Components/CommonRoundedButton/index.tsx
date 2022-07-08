@@ -1,19 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable react/require-default-props */
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
-import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
-import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
-import {
-  fetchSaveModalStateRequest,
-} from '../../Store/SaveFilterModal/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getModalState } from "../../Store/FilterMenuModal/selectors";
+import { getSaveModalState } from "../../Store/SaveFilterModal/selectors";
+import { fetchModalStateRequest } from "../../Store/FilterMenuModal/actions";
+import { fetchSaveModalStateRequest } from "../../Store/SaveFilterModal/actions";
 
 export enum CommonButtonActions {
-  OPEN_FILTER= 'OPEN_FILTER',
-  CLOSE_FILTER = ' CLOSE_FILTER',
-  OPEN_MODAL = 'OPEN_MODAL',
-  CLOSE_MODAL = 'CLOSE_MODAL'
+  OPEN_FILTER = "OPEN_FILTER",
+  CLOSE_FILTER = " CLOSE_FILTER",
+  OPEN_MODAL = "OPEN_MODAL",
+  CLOSE_MODAL = "CLOSE_MODAL",
 }
 
 export interface CommonRoundedButtonProps {
@@ -40,7 +38,8 @@ function CommonRoundedButton({
       case CommonButtonActions.OPEN_MODAL:
         dispatch(fetchSaveModalStateRequest(saveMenuOpened));
         break;
-      default: break;
+      default:
+        break;
     }
   };
 

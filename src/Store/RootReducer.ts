@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import ModalStateReducer from './FilterMenuModal/reducer';
-import SaveModalReducer from './SaveFilterModal/reducer';
+import { combineReducers } from "redux";
+import ModalStateReducer from "./FilterMenuModal/reducer";
+import SaveModalReducer from "./SaveFilterModal/reducer";
 
 const rootReducer = combineReducers({
   filterMenuState: ModalStateReducer,

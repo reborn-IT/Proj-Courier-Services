@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 enum SearchableDropDownEnums {
-  CREATE_NEW_TITLE = 'Create new title'
+  CREATE_NEW_TITLE = "Create new title",
 }
 
 interface SearchableDropDownInterface {
@@ -18,15 +18,16 @@ function SearchableDropDown({
   reset,
   createmode,
 }: SearchableDropDownInterface) {
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState<string>("");
   const [ListOpened, setListOpened] = useState<boolean>(true);
   const [List, setList] = useState<string[]>(data);
   const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
 
   const filterList = (needle: string) => {
     const query: string = needle.toLowerCase();
-    const sortedData = data
-      .filter((item: string) => item.toLowerCase().indexOf(query) >= 0);
+    const sortedData = data.filter(
+      (item: string) => item.toLowerCase().indexOf(query) >= 0,
+    );
     if (createmode) {
       if (sortedData.length === 0) {
         setCreateModeStatus(true);
@@ -37,7 +38,7 @@ function SearchableDropDown({
 
   const setNewList = (e) => {
     setInput(e.currentTarget.value);
-    if (e.currentTarget.value === '') {
+    if (e.currentTarget.value === "") {
       setList(data);
     } else {
       filterList(input);
@@ -52,9 +53,10 @@ function SearchableDropDown({
   const inputHandler = (e) => {
     setNewList(e);
     if (createModeStatus) {
-      setList(
-        (oldList) => [...oldList, SearchableDropDownEnums.CREATE_NEW_TITLE],
-      );
+      setList((oldList) => [
+        ...oldList,
+        SearchableDropDownEnums.CREATE_NEW_TITLE,
+      ]);
     }
   };
 
@@ -70,7 +72,7 @@ function SearchableDropDown({
     <div
       className="searchable-dropdown relative"
       style={{
-        width: 'calc(100% - 2rem)',
+        width: "calc(100% - 2rem)",
       }}
     >
       <svg
@@ -80,11 +82,7 @@ function SearchableDropDown({
         stroke="currentColor"
         strokeWidth="2"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19 9l-7 7-7-7"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
       </svg>
       <input
         type="text"
@@ -92,30 +90,30 @@ function SearchableDropDown({
         placeholder={placeholder}
         onFocus={() => setListOpened(false)}
         onChange={(e) => inputHandler(e)}
-        value={reset ? input : ''}
+        value={reset ? input : ""}
         style={{
-          width: 'width: calc(100% - 2rem)',
+          width: "width: calc(100% - 2rem)",
         }}
       />
 
       <ul
-        className={`price-list bg-drop-white text-drop-grey overflow-hidden flex-col rounded-lg ${ListOpened ? 'hidden' : 'flex'}`}
+        className={`price-list bg-drop-white text-drop-grey overflow-hidden flex-col rounded-lg ${
+          ListOpened ? "hidden" : "flex"
+        }`}
       >
-        {
-                  List.map((item) => (
-                    <button
-                      type="button"
-                      onClick={() => buttonClickHandler(item)}
-                      className={`capitalize px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
-                        item === SearchableDropDownEnums.CREATE_NEW_TITLE
-                          ? 'text-drop-white bg-drop-blue'
-                          : ''}`}
-                    >
-                      {item}
-
-                    </button>
-                  ))
-                }
+        {List.map((item) => (
+          <button
+            type="button"
+            onClick={() => buttonClickHandler(item)}
+            className={`capitalize px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
+              item === SearchableDropDownEnums.CREATE_NEW_TITLE
+                ? "text-drop-white bg-drop-blue"
+                : ""
+            }`}
+          >
+            {item}
+          </button>
+        ))}
       </ul>
     </div>
   );

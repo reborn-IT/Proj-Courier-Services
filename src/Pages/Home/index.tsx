@@ -1,43 +1,33 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect } from 'react';
-import './Home.scss';
-import { ToastContainer } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
-import {
-  Footer,
-  Filters,
-  Testimonial,
-  HomeFeatured,
-  FAQ,
-} from '../../Lib';
-import {
-  StateProvider,
-} from '../../Components/DropDownForm/DropDownStateProvider';
-import { NavBar } from '../../Components';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
+import React, { useEffect } from "react";
+import "./Home.scss";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import { Footer, Filters, Testimonial, HomeFeatured, FAQ } from "../../Lib";
+import { StateProvider } from "../../Components/DropDownForm/DropDownStateProvider";
+import { NavBar } from "../../Components";
+import { getModalState } from "../../Store/FilterMenuModal/selectors";
 
 function Home() {
   const modalState: boolean | null = useSelector(getModalState);
 
   useEffect(() => {
     if (modalState) {
-      document.body.style.overflowY = 'hidden';
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflowY = 'scroll';
+      document.body.style.overflowY = "scroll";
     }
   }, [modalState]);
 
   return (
-    <main
-      className="main-wrapper bg-drop-white w-full overflow-x-hidden box-border"
-    >
+    <main className="main-wrapper bg-drop-white w-full overflow-x-hidden box-border">
       <ToastContainer />
       <NavBar homeComponent />
       <div
         className="fixed top-0 left-0 right-0 bottom-0 h-full w-full shadow-xl transition-all duration-150 ease-in-out z-50"
-        style={{ display: `${modalState ? 'block' : 'none'}` }}
+        style={{ display: `${modalState ? "block" : "none"}` }}
       >
         <StateProvider>
           <Filters />

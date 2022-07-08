@@ -1,16 +1,14 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { TEXT, NUMBER } from '../../Utils/constants';
+import React from "react";
+import { TEXT, NUMBER } from "../../Utils/constants";
 
 interface IRoundedInput {
-    type: TEXT | NUMBER;
-    placeholder: string;
-    onChange: (e) => void;
+  type: TEXT | NUMBER;
+  placeholder: string;
+  onChange: (e) => void;
 }
 
-function RoundedInput({
-  type, placeholder, onChange,
-}: IRoundedInput) {
+function RoundedInput({ type, placeholder, onChange }: IRoundedInput) {
   return (
     <input
       type={type}

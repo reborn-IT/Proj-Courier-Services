@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { DateRangePicker } from 'react-date-range';
+import React, { useState } from "react";
+import { DateRangePicker } from "react-date-range";
 
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 function CustomizedDatePicker() {
   const [startDate, setStartDate] = useState(new Date());
@@ -16,7 +16,7 @@ function CustomizedDatePicker() {
   };
 
   const selectionRange = {
-    key: 'selection',
+    key: "selection",
     startDate,
     endDate,
   };
@@ -24,7 +24,7 @@ function CustomizedDatePicker() {
     <DateRangePicker
       ranges={[selectionRange]}
       minDate={new Date()}
-      rangeColors={['#525298']}
+      rangeColors={["#525298"]}
       onChange={handleSelect}
     />
   );

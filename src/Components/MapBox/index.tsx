@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Map, { Marker } from 'react-map-gl';
-import './mapbox.scss';
-import { DATA } from '../../Utils/MAPData';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Map, { Marker } from "react-map-gl";
+import "./mapbox.scss";
+import { DATA } from "../../Utils/MAPData";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 interface ViewportInterface {
-    longitude: number;
-    latitude: number;
-    zoom: number,
-    width: number,
-    height: number,
-    container: string
+  longitude: number;
+  latitude: number;
+  zoom: number;
+  width: number;
+  height: number;
+  container: string;
 }
 
 interface LocationInterface {
-    longitude: number;
-    latitude: number;
+  longitude: number;
+  latitude: number;
 }
 
 const mapboxAPI = process.env.mapbox;
@@ -42,7 +42,7 @@ function MapBox() {
     zoom: 14,
     width: window.innerWidth,
     height: window.innerHeight,
-    container: 'mapbox-gl-custom',
+    container: "mapbox-gl-custom",
   });
 
   const addMarker = (event) => {
@@ -64,11 +64,7 @@ function MapBox() {
         addMarker(event);
       }}
     >
-      <Marker
-        latitude={pin.latitude}
-        longitude={pin.longitude}
-        draggable
-      />
+      <Marker latitude={pin.latitude} longitude={pin.longitude} draggable />
     </Map>
   );
 }
