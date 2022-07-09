@@ -1,13 +1,10 @@
 /* eslint-disable max-len */
+import { all, fork, put, takeLatest } from "redux-saga/effects";
 import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
-import {
-  FetchDeletingFilterLogListRequest, FETCH_DELETING_FILTER_LOG_LIST_REQUEST,
-} from './actionTypes';
-import {
-  fetchDeletingFilterLogListSuccess,
-} from './actions';
+  FetchDeletingFilterLogListRequest,
+  FETCH_DELETING_FILTER_LOG_LIST_REQUEST,
+} from "./actionTypes";
+import { fetchDeletingFilterLogListSuccess } from "./actions";
 
 function* fetchDeltingFilterLogListSagaWorkrer(
   action: FetchDeletingFilterLogListRequest,
@@ -21,12 +18,13 @@ function* fetchDeltingFilterLogListSagaWorkrer(
 
 function* fetchDeletingFilterLogListSaga() {
   yield all([
-    takeLatest(FETCH_DELETING_FILTER_LOG_LIST_REQUEST, fetchDeltingFilterLogListSagaWorkrer),
+    takeLatest(
+      FETCH_DELETING_FILTER_LOG_LIST_REQUEST,
+      fetchDeltingFilterLogListSagaWorkrer,
+    ),
   ]);
 }
 
 export default function* DeletingFilterLogListSaga() {
-  yield all([
-    fork(fetchDeletingFilterLogListSaga),
-  ]);
+  yield all([fork(fetchDeletingFilterLogListSaga)]);
 }

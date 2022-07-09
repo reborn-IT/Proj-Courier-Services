@@ -1,24 +1,22 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-param-reassign */
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_NAVIGATION_BAR_STATE_FAILURE,
   FETCH_NAVIGATION_BAR_STATE_REQUEST,
   FETCH_NAVIGATION_BAR_STATE_SUCCESS,
   NavigationBarState,
   NavigationBarStatusActions,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState: NavigationBarState = {
   pending: false,
-  state: 'normal',
+  state: "normal",
   error: null,
 };
 
-export default (
-  state = initialState,
-  action: NavigationBarStatusActions,
-) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export default (state = initialState, action: NavigationBarStatusActions) => {
   switch (action.type) {
     case FETCH_NAVIGATION_BAR_STATE_REQUEST:
       return produce(state, (draft: NavigationBarState) => {
@@ -33,11 +31,12 @@ export default (
     case FETCH_NAVIGATION_BAR_STATE_FAILURE:
       return produce(state, (draft: NavigationBarState) => {
         draft.pending = false;
-        draft.state = 'normal';
+        draft.state = "normal";
         draft.error = action.payload.error;
       });
-    default: return {
-      ...state,
-    };
+    default:
+      return {
+        ...state,
+      };
   }
 };

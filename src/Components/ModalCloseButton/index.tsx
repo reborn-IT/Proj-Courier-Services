@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
-import React from 'react';
-import CloseButtonSvg from '../Icons/Svgs/CloseButton.svg';
+import React from "react";
+import CloseButtonSvg from "../Icons/Svgs/CloseButton.svg";
 
 interface IModalCloseButton {
-    ClickHandler: () => void;
+  ClickHandler: () => void;
 }
 
 function ModalCloseButton({ ClickHandler }: IModalCloseButton) {

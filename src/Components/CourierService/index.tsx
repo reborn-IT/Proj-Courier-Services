@@ -1,14 +1,18 @@
 /* eslint-disable max-len */
-import React from 'react';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import React from "react";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 interface ICourierService {
-    serviceName: string;
-    optionalTailwindCss?: string;
-    onClickHandler: () => void;
+  serviceName: string;
+  optionalTailwindCss?: string;
+  onClickHandler: () => void;
 }
 
-function CourierService({ serviceName, optionalTailwindCss, onClickHandler }: ICourierService) {
+function CourierService({
+  serviceName,
+  optionalTailwindCss,
+  onClickHandler,
+}: ICourierService) {
   return (
     <button
       type="button"
@@ -22,7 +26,7 @@ function CourierService({ serviceName, optionalTailwindCss, onClickHandler }: IC
 }
 
 CourierService.defaultProps = {
-  optionalTailwindCss: '',
+  optionalTailwindCss: "",
 };
 
 export default CourierService;

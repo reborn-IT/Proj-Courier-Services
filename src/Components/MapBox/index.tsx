@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Map, { Marker } from 'react-map-gl';
-import './mapbox.scss';
-import { DATA } from '../../Utils/MAPData';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Map, { Marker } from "react-map-gl";
+import "./mapbox.scss";
+import { DATA } from "../../Utils/MAPData";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 interface ViewportInterface {
-    longitude: number;
-    latitude: number;
-    zoom: number,
-    width: number,
-    height: number,
-    container: string
+  longitude: number;
+  latitude: number;
+  zoom: number;
+  width: number;
+  height: number;
+  container: string;
 }
 
 interface LocationInterface {
-    longitude: number;
-    latitude: number;
+  longitude: number;
+  latitude: number;
 }
 
 const mapboxAPI = process.env.mapbox;
@@ -36,16 +36,17 @@ function MapBox() {
     latitude: DATA[0].Latitude,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [viewport, setViewport] = useState<ViewportInterface>({
     longitude: geoLocation.latitude,
     latitude: geoLocation.longitude,
     zoom: 14,
     width: window.innerWidth,
     height: window.innerHeight,
-    container: 'mapbox-gl-custom',
+    container: "mapbox-gl-custom",
   });
 
-  const addMarker = (event) => {
+  const addMarker = (event: any) => {
     const coordinates = event.lngLat;
     setPin({
       latitude: coordinates.lat,
@@ -59,16 +60,12 @@ function MapBox() {
       {...viewport}
       mapStyle="mapbox://styles/sithumdev07/cl1np10b8000314qhz0wtpf9c"
       mapboxAccessToken={mapboxAPI}
-      onMove={(nextViewport) => setViewport(nextViewport.viewState)}
+      // onMove={(nextViewport) => setViewport(nextViewport.viewState)}
       onClick={(event) => {
         addMarker(event);
       }}
     >
-      <Marker
-        latitude={pin.latitude}
-        longitude={pin.longitude}
-        draggable
-      />
+      <Marker latitude={pin.latitude} longitude={pin.longitude} draggable />
     </Map>
   );
 }

@@ -1,19 +1,17 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
-import { getSaveModalState } from '../../Store/SaveFilterModal/selectors';
-import { fetchModalStateRequest } from '../../Store/FilterMenuModal/actions';
-import {
-  fetchSaveModalStateRequest,
-} from '../../Store/SaveFilterModal/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { getModalState } from "../../Store/FilterMenuModal/selectors";
+import { getSaveModalState } from "../../Store/SaveFilterModal/selectors";
+import { fetchModalStateRequest } from "../../Store/FilterMenuModal/actions";
+import { fetchSaveModalStateRequest } from "../../Store/SaveFilterModal/actions";
 
 export enum CommonButtonActions {
-  OPEN_FILTER= 'OPEN_FILTER',
-  CLOSE_FILTER = ' CLOSE_FILTER',
-  OPEN_MODAL = 'OPEN_MODAL',
-  CLOSE_MODAL = 'CLOSE_MODAL'
+  OPEN_FILTER = "OPEN_FILTER",
+  CLOSE_FILTER = " CLOSE_FILTER",
+  OPEN_MODAL = "OPEN_MODAL",
+  CLOSE_MODAL = "CLOSE_MODAL",
 }
 
 export interface CommonRoundedButtonProps {
@@ -43,17 +41,25 @@ function CommonRoundedButton({
         dispatch(fetchModalStateRequest(true));
         break;
       case CommonButtonActions.CLOSE_FILTER:
-        if (filterMenuOpened) { dispatch(fetchModalStateRequest(false)); }
+        if (filterMenuOpened) {
+          dispatch(fetchModalStateRequest(false));
+        }
         break;
       case CommonButtonActions.OPEN_MODAL:
         await dispatch(fetchModalStateRequest(false));
-        // eslint-disable-next-line no-console
-        console.warn('Save Menu State', saveMenuOpened, ' and Filter Menu Status', filterMenuOpened);
-        if (saveMenuOpened) { dispatch(fetchSaveModalStateRequest(true)); }
+        if (saveMenuOpened) {
+          dispatch(fetchSaveModalStateRequest(true));
+        }
         break;
-      default: break;
+      default:
+        break;
     }
-    if (ClickHandler) { ClickHandler(); }
+    if (ClickHandler) {
+      ClickHandler();
+    }
+    if (ClickHandler) {
+      ClickHandler();
+    }
   };
   if (motionDiv) {
     return (
@@ -83,8 +89,8 @@ function CommonRoundedButton({
 
 CommonRoundedButton.defaultProps = {
   styles: {},
-  action: '',
-  extraTailwindClasses: '',
+  action: "",
+  extraTailwindClasses: "",
   motionDiv: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ClickHandler: () => {},

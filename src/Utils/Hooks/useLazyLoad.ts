@@ -1,19 +1,19 @@
 /* eslint-disable no-underscore-dangle */
-import { useEffect, useReducer, useCallback } from 'react';
-import debounce from 'lodash.debounce';
+import { useEffect, useReducer, useCallback } from "react";
+import debounce from "lodash.debounce";
 
 const INTERSECTION_THRESHOLD = 5;
 const LOAD_DELAY_MS = 500;
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
-    case 'set': {
+    case "set": {
       return {
         ...state,
         ...action.payload,
       };
     }
-    case 'onGrabData': {
+    case "onGrabData": {
       return {
         ...state,
         loading: false,
@@ -26,31 +26,38 @@ const reducer = (state, action) => {
   }
 };
 
-const useLazyLoad = ({ triggerRef, onGrabData, options }) => {
+interface IUseLazyLoad {
+  triggerRef: any;
+  onGrabData: any;
+  options: any;
+}
+
+const useLazyLoad = ({ triggerRef, onGrabData, options }: IUseLazyLoad) => {
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
     currentPage: 1,
     data: [],
   });
 
-  const _handleEntry = async (entry) => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const _handleEntry = async (entry: any) => {
     const boundingRect = entry.boundingClientRect;
     const { intersectionRect } = entry;
 
     if (
-      !state.loading
-      && entry.isIntersecting
-      && intersectionRect.bottom - boundingRect.bottom <= INTERSECTION_THRESHOLD
+      !state.loading &&
+      entry.isIntersecting &&
+      intersectionRect.bottom - boundingRect.bottom <= INTERSECTION_THRESHOLD
     ) {
-      dispatch({ type: 'set', payload: { loading: true } });
+      dispatch({ type: "set", payload: { loading: true } });
       const data = await onGrabData(state.currentPage);
-      dispatch({ type: 'onGrabData', payload: { data } });
+      dispatch({ type: "onGrabData", payload: { data } });
     }
   };
   const handleEntry = debounce(_handleEntry, LOAD_DELAY_MS);
 
   const onIntersect = useCallback(
-    (entries) => {
+    (entries: any) => {
       handleEntry(entries[0]);
     },
     [handleEntry],

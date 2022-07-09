@@ -1,11 +1,9 @@
-import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
-import { fetchCourierServiceLabelStateSuccess } from './actions';
+import { all, fork, put, takeLatest } from "redux-saga/effects";
+import { fetchCourierServiceLabelStateSuccess } from "./actions";
 import {
   FetchCourierServiceLabelStateRequest,
   FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
-} from './actionTypes';
+} from "./actionTypes";
 
 function* fetchCourierServiceLabelStateSagaWorker(
   action: FetchCourierServiceLabelStateRequest,
@@ -27,7 +25,5 @@ function* fetchCourierServiceLabelStateSaga() {
 }
 
 export default function* ServiceLabelSaga() {
-  yield all([
-    fork(fetchCourierServiceLabelStateSaga),
-  ]);
+  yield all([fork(fetchCourierServiceLabelStateSaga)]);
 }

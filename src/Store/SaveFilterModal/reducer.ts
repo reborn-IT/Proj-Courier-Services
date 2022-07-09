@@ -1,13 +1,13 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-param-reassign */
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_SAVE_MODAL_STATE_REQUEST,
   FETCH_SAVE_MODAL_STATE_SUCCESS,
   FETCH_SAVE_MODAL_STATE_FAILURE,
   SaveMenuModalState,
   SaveModalStateActions,
-} from './actionsTypes';
+} from "./actionsTypes";
 
 const initialState: SaveMenuModalState = {
   pending: false,
@@ -15,10 +15,8 @@ const initialState: SaveMenuModalState = {
   error: null,
 };
 
-export default (
-  state = initialState,
-  action: SaveModalStateActions,
-) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export default (state = initialState, action: SaveModalStateActions) => {
   switch (action.type) {
     case FETCH_SAVE_MODAL_STATE_REQUEST:
       return produce(state, (draft: SaveMenuModalState) => {
@@ -36,8 +34,9 @@ export default (
         draft.state = null;
         draft.error = action.payload.error;
       });
-    default: return {
-      ...state,
-    };
+    default:
+      return {
+        ...state,
+      };
   }
 };
