@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from "react";
-import { v4 as UniqueId } from "uuid";
+import { useState } from "react";
 
 enum SearchableDropDownEnums {
   CREATE_NEW_TITLE = "Create new title",
@@ -25,8 +23,8 @@ function SearchableDropDown({
   reset,
   createMode,
 }: SearchableDropDownInterface) {
-  const [uniqueKey, setUniqueKey] = useState<string>();
   const [input, setInput] = useState<string>("");
+  const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const [List, setList] = useState<IDropDownData[]>(data);
   const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
 
@@ -77,17 +75,13 @@ function SearchableDropDown({
     }
   };
 
-  useEffect(() => {
-    setUniqueKey(UniqueId());
-  }, []);
-
   return (
-    <>
+    <div className="relative">
       <button
         type="button"
+        onMouseDown={() => setDropDownOpen(true)}
+        onBlur={() => setDropDownOpen(false)}
         className="w-full"
-        id={`dropdownDefault-${uniqueKey}`}
-        data-dropdown-toggle={`dropdown-${uniqueKey}`}
       >
         <input
           type="text"
@@ -98,21 +92,16 @@ function SearchableDropDown({
         />
       </button>
       <div
-        id={`dropdown-${uniqueKey}`}
-        style={{
-          width: "calc(100% - 2rem)",
-        }}
-        className="price-list z-10 hidden bg-drop-white shadow-xl text-drop-grey overflow-hidden rounded-lg"
+        className={`${
+          dropDownOpen ? "block" : "hidden"
+        } price-list z-10 absolute top-full left-0 right-0 bg-drop-white shadow-xl text-drop-grey overflow-hidden rounded-lg mt-1`}
       >
-        <ul
-          className="py-1 text-sm text-gray-700 overflow-hidden"
-          aria-labelledby={`dropdownDefault-${uniqueKey}`}
-        >
+        <ul className="py-1 text-sm text-gray-700 overflow-hidden">
           {List.map(({ id, title }) => (
             <button
               key={id}
               type="button"
-              onClick={() => buttonClickHandler(title)}
+              onMouseDown={() => buttonClickHandler(title)}
               className={`capitalize block w-full px-4 py-3 transition-all duration-100 ease-linear text-left hover:bg-drop-blue hover:text-white ${
                 title === SearchableDropDownEnums.CREATE_NEW_TITLE
                   ? "text-drop-white bg-drop-blue"
@@ -124,7 +113,7 @@ function SearchableDropDown({
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 
