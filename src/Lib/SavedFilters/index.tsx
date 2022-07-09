@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable max-len */
 import React, { useState } from "react";
 import { motion } from "framer-motion";

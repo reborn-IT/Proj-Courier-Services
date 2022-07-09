@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable max-len */
 /* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-nested-ternary */

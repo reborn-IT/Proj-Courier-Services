@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
 import React, { useEffect, useRef, useState } from "react";

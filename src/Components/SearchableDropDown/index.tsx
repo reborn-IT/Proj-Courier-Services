@@ -11,11 +11,6 @@ export interface IDropDownData {
   title: string;
 }
 
-export interface IDropDownData {
-  id: number;
-  title: string;
-}
-
 interface SearchableDropDownInterface {
   data: IDropDownData[];
   placeholder: string;
@@ -80,10 +75,6 @@ function SearchableDropDown({
       setChecked(item);
     }
   };
-
-  useEffect(() => {
-    setUniqueKey(UniqueId());
-  }, []);
 
   return (
     <div className="relative">
