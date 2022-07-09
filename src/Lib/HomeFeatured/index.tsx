@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import React from 'react';
-import './HomeFeatured.scss';
+import React from "react";
+import "./HomeFeatured.scss";
 
 function HomeFeatured() {
   return (

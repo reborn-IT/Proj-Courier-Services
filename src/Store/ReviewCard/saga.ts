@@ -1,13 +1,9 @@
-import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
+import { all, fork, put, takeLatest } from "redux-saga/effects";
 import {
   FetchReviewCardStateRequest,
   FETCH_REVIEW_CARD_STATE_REQUEST,
-} from './actionTypes';
-import {
-  fetchReviewCardStateSuccess,
-} from './actions';
+} from "./actionTypes";
+import { fetchReviewCardStateSuccess } from "./actions";
 
 function* fetchReviewStateSagaWorker(action: FetchReviewCardStateRequest) {
   yield put(
@@ -24,7 +20,5 @@ function* fetchReviewStateSaga() {
 }
 
 export default function* ReviewSaga() {
-  yield all([
-    fork(fetchReviewStateSaga),
-  ]);
+  yield all([fork(fetchReviewStateSaga)]);
 }

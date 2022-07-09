@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_REVIEW_CARD_STATE_FAILURE,
   FETCH_REVIEW_CARD_STATE_REQUEST,
   FETCH_REVIEW_CARD_STATE_SUCCESS,
   ReviewCardState,
   ReviewCardStateActions,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState: ReviewCardState = {
   pending: false,
@@ -15,10 +15,8 @@ const initialState: ReviewCardState = {
   error: null,
 };
 
-export default (
-  state = initialState,
-  action: ReviewCardStateActions,
-) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export default (state = initialState, action: ReviewCardStateActions) => {
   switch (action.type) {
     case FETCH_REVIEW_CARD_STATE_REQUEST:
       return produce(state, (draft: ReviewCardState) => {
@@ -36,8 +34,9 @@ export default (
         draft.state = null;
         draft.error = action.payload.error;
       });
-    default: return {
-      ...state,
-    };
+    default:
+      return {
+        ...state,
+      };
   }
 };

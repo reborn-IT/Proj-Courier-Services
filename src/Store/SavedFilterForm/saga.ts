@@ -1,13 +1,9 @@
-import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
-import {
-  fetchSavedFilterFormSuccess,
-} from './actions';
+import { all, fork, put, takeLatest } from "redux-saga/effects";
+import { fetchSavedFilterFormSuccess } from "./actions";
 import {
   FetchSavedFilterFormRequest,
   FETCH_SAVED_FILTER_FORM_REQUEST,
-} from './actionTypes';
+} from "./actionTypes";
 
 function* fetchSavedFilterFormSagaWorker(action: FetchSavedFilterFormRequest) {
   yield put(
@@ -24,7 +20,5 @@ function* fetchSavedFilterFormSaga() {
 }
 
 export default function* SavedFilterFormSaga() {
-  yield all([
-    fork(fetchSavedFilterFormSaga),
-  ]);
+  yield all([fork(fetchSavedFilterFormSaga)]);
 }

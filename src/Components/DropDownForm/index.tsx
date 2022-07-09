@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
-import DownArrowIcon from '../../Assets/Icons/downArrow.svg';
-import { ExpandActionTypes } from './DropDownReducer';
-import { useExpandedContext } from './DropDownStateProvider';
+import { useState } from "react";
+import DownArrowIcon from "../../Assets/Icons/downArrow.svg";
+import { ExpandActionTypes } from "./DropDownReducer";
+import { useExpandedContext } from "./DropDownStateProvider";
 
-interface DropDownForm {
-    title: string;
-    trigger?: ExpandActionTypes,
-    payload?: boolean,
+interface IDropDownForm {
+  title: string;
+  trigger: ExpandActionTypes;
+  payload: boolean;
 }
 
-function DropDownForm({ title, trigger, payload }: DropDownForm) {
+function DropDownForm({ title, trigger, payload }: IDropDownForm) {
   const [revealed, setRevealed] = useState<boolean>(false);
   const { action } = useExpandedContext();
 
@@ -31,7 +31,9 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
       <img
         src={DownArrowIcon}
         alt="Down Arrow Icon"
-        className={`transition-all duration-300 ease-in-out w-5 transform ${revealed ? 'rotate-180' : 'rotate-0'}`}
+        className={`transition-all duration-300 ease-in-out w-5 transform ${
+          revealed ? "rotate-180" : "rotate-0"
+        }`}
       />
       <p className="ml-4 font-semibold text-drop-grey text-xl">{title}</p>
     </button>
@@ -39,8 +41,8 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
 }
 
 DropDownForm.defaultProps = {
-  trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
-  payload: false,
+  // trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
+  // payload: false,
 };
 
 export default DropDownForm;

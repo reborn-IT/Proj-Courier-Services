@@ -7,7 +7,7 @@ import {
   FETCH_REVIEW_CARD_STATE_FAILURE,
   FETCH_REVIEW_CARD_STATE_REQUEST,
   FETCH_REVIEW_CARD_STATE_SUCCESS,
-} from './actionTypes';
+} from "./actionTypes";
 
 export const fetchReviewCardStateRequest = (
   state: boolean,

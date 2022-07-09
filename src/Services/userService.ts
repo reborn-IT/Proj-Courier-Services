@@ -1,10 +1,10 @@
 /* eslint-disable comma-dangle */
-import apiService from './api/apiManager';
+import apiService from "./api/apiManager";
 
-type ROLE_PUBLIC_USER = 'ROLE_PUBLIC_USER';
+type RolePublicUser = "ROLE_PUBLIC_USER";
 
 type FormDataType = {
-  role: ROLE_PUBLIC_USER;
+  role: RolePublicUser;
   firstName?: string;
   lastName?: string;
   mobileNumber?: string;
@@ -21,19 +21,16 @@ class UserService {
   async registerUser(formData: FormDataType) {
     return this.apiService.apiPOST(
       `${backendAPIPath}/user/registration`,
-      formData
+      formData,
     );
   }
 
   async loginUser(formData: FormDataType) {
-    return this.apiService.apiPOST(
-      `${backendAPIPath}/user/login`,
-      formData
-    );
+    return this.apiService.apiPOST(`${backendAPIPath}/user/login`, formData);
   }
 
-  async getUser(userid: string) {
-    return this.apiService.apiGET(`${backendAPIPath}/user/${userid}`);
+  async getUser(userID: string) {
+    return this.apiService.apiGET(`${backendAPIPath}/user/${userID}`);
   }
 }
 

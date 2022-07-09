@@ -1,14 +1,14 @@
 /* eslint-disable no-param-reassign,comma-dangle */
 /* eslint-disable default-param-last */
 
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_USER_REGISTER_FAILURE,
   FETCH_USER_REGISTER_REQUEST,
   FETCH_USER_REGISTER_SUCCESS,
   UserRegisterActions,
   UserState,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState: UserState = {
   pending: false,
@@ -17,8 +17,9 @@ const initialState: UserState = {
 };
 
 export default (
+  // eslint-disable-next-line @typescript-eslint/default-param-last
   state: UserState = initialState,
-  action: UserRegisterActions
+  action: UserRegisterActions,
 ) => {
   switch (action.type) {
     case FETCH_USER_REGISTER_REQUEST:

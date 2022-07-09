@@ -1,4 +1,4 @@
-import { NORMAL, SCROLLING } from '../../Utils/constants';
+import { NORMAL, SCROLLING } from "../../Utils/constants";
 import {
   FetchNavigationBarStatusFailure,
   FetchNavigationBarStatusFailurePayload,
@@ -8,7 +8,7 @@ import {
   FETCH_NAVIGATION_BAR_STATE_FAILURE,
   FETCH_NAVIGATION_BAR_STATE_REQUEST,
   FETCH_NAVIGATION_BAR_STATE_SUCCESS,
-} from './actionTypes';
+} from "./actionTypes";
 
 export const fetchNavigationBarStatusRequest = (
   state: NORMAL | SCROLLING,

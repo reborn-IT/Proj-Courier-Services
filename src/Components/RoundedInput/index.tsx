@@ -1,17 +1,21 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { TEXT, NUMBER } from '../../Utils/constants';
+import React from "react";
+import { TEXT, NUMBER } from "../../Utils/constants";
 
 interface IRoundedInput {
-    type: TEXT | NUMBER;
-    placeholder: string;
-    onChange: (e) => void;
-    extraTailwindClasses?: string;
-    value: string;
+  type: TEXT | NUMBER;
+  placeholder: string;
+  onChange: (e: any) => void;
+  extraTailwindClasses?: string;
+  value: string;
 }
 
 function RoundedInput({
-  type, placeholder, onChange, value, extraTailwindClasses,
+  type,
+  placeholder,
+  onChange,
+  value,
+  extraTailwindClasses,
 }: IRoundedInput) {
   return (
     <input
@@ -25,7 +29,7 @@ function RoundedInput({
 }
 
 RoundedInput.defaultProps = {
-  extraTailwindClasses: '',
+  extraTailwindClasses: "",
 };
 
 export default RoundedInput;

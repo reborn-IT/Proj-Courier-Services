@@ -1,13 +1,13 @@
 /* eslint-disable default-param-last */
 /* eslint-disable no-param-reassign */
-import produce from 'immer';
+import produce from "immer";
 import {
   FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
   FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS,
   FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE,
   CourierServiceLabelState,
   CourierServiceLabelStateActions,
-} from './actionTypes';
+} from "./actionTypes";
 
 const initialState: CourierServiceLabelState = {
   pending: false,
@@ -16,6 +16,7 @@ const initialState: CourierServiceLabelState = {
 };
 
 export default (
+  // eslint-disable-next-line @typescript-eslint/default-param-last
   state = initialState,
   action: CourierServiceLabelStateActions,
 ) => {
@@ -36,8 +37,9 @@ export default (
         draft.state = false;
         draft.error = action.payload.error;
       });
-    default: return {
-      ...state,
-    };
+    default:
+      return {
+        ...state,
+      };
   }
 };

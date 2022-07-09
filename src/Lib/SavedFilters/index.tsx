@@ -1,36 +1,34 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
-import Switch from 'react-switch';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import Switch from "react-switch";
 import {
-  CommonRoundedButton, CustomizedDatePicker, DropDownForm, FilterMenuInput,
-} from '../../Components';
-import { ExpandActionTypes } from '../../Components/DropDownForm/DropDownReducer';
-import { useExpandedContext } from '../../Components/DropDownForm/DropDownStateProvider';
-import SearchableDropDown, { IDropDownData } from '../../Components/SearchableDropDown';
-import {
-  fetchSavedFilterFormRequest,
-} from '../../Store/SavedFilterForm/actions';
-import {
-  getSavedFilterFormState,
-}
-  from '../../Store/SavedFilterForm/selectors';
+  CommonRoundedButton,
+  CustomizedDatePicker,
+  DropDownForm,
+  FilterMenuInput,
+} from "../../Components";
+import { ExpandActionTypes } from "../../Components/DropDownForm/DropDownReducer";
+import { useExpandedContext } from "../../Components/DropDownForm/DropDownStateProvider";
+import SearchableDropDown, {
+  IDropDownData,
+} from "../../Components/SearchableDropDown";
+import { fetchSavedFilterFormRequest } from "../../Store/SavedFilterForm/actions";
+import { getSavedFilterFormState } from "../../Store/SavedFilterForm/selectors";
 
 enum ExpandButtonState {
-    VIEW_ALL = 'View all...',
-    SHOW_LESS = 'Show less...',
-  }
+  VIEW_ALL = "View all...",
+  SHOW_LESS = "Show less...",
+}
 
 function SavedFilters() {
   const { state } = useExpandedContext();
   const [scheduled, setScheduled] = useState<boolean>(false);
   const [isImmediateCourier, setIsImmediateCourier] = useState<boolean>(false);
-  const [
-    viewAllButtonState,
-    setViewAllButtonState,
-  ] = useState<ExpandButtonState>(ExpandButtonState.VIEW_ALL);
-  const [serviceInput, setServiceInput] = useState<string>('');
+  const [viewAllButtonState, setViewAllButtonState] =
+    useState<ExpandButtonState>(ExpandButtonState.VIEW_ALL);
+  const [serviceInput, setServiceInput] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [natureArray, setNatureArray] = useState<string[]>([]);
   const savedFilterFormState = useSelector(getSavedFilterFormState);
@@ -38,83 +36,79 @@ function SavedFilters() {
   const servicesAPI: IDropDownData[] = [
     {
       id: 1,
-      title: 'Fragile',
+      title: "Fragile",
     },
     {
       id: 2,
-      title: 'Confidential',
+      title: "Confidential",
     },
     {
       id: 3,
-      title: 'Documents',
+      title: "Documents",
     },
     {
       id: 4,
-      title: 'Tender',
+      title: "Tender",
     },
     {
       id: 5,
-      title: 'Bulk',
+      title: "Bulk",
     },
     {
       id: 6,
-      title: 'Stationary',
+      title: "Stationary",
     },
   ];
   const priceListAPI: IDropDownData[] = [
     {
       id: 1,
-      title: 'Price High to Low',
+      title: "Price High to Low",
     },
     {
       id: 2,
-      title: 'Average Price',
+      title: "Average Price",
     },
     {
       id: 3,
-      title: 'Price Low to High',
+      title: "Price Low to High",
     },
   ];
   const PrimaryLocationDataAPI: IDropDownData[] = [
     {
       id: 1,
-      title: 'Home',
+      title: "Home",
     },
     {
       id: 2,
-      title: 'Office',
+      title: "Office",
     },
     {
       id: 3,
-      title: 'Work',
+      title: "Work",
     },
   ];
   //   const SaveFilterModalOpened = useSelector(getSaveModalState);
   const [services, setServices] = useState<IDropDownData[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
-  const
-    [
-      arrivingpointAddressChecked,
-      setArrivepointAddressChecked,
-    ] = useState<boolean>(false);
+  const [arrivingpointAddressChecked, setArrivepointAddressChecked] =
+    useState<boolean>(false);
 
-  const
-    [
-      DestinationpointAddressChecked,
-      setDestinationpointAddressChecked,
-    ] = useState<boolean>(false);
+  const [DestinationpointAddressChecked, setDestinationpointAddressChecked] =
+    useState<boolean>(false);
 
   const filterServices = (needle: string) => {
     const query: string = needle.toLowerCase();
-    setServices(servicesAPI.filter(
-      ({ title }) => title.toLowerCase().indexOf(query) >= 0,
-    ));
+    setServices(
+      servicesAPI.filter(
+        ({ title }) => title.toLowerCase().indexOf(query) >= 0,
+      ),
+    );
   };
 
-  const setNewServicesList = (e) => {
+  const setNewServicesList = (e: any) => {
     // eslint-disable-next-line no-sequences, no-unused-expressions
     setServiceInput(e.currentTarget.value);
-    if (e.currentTarget.value === '') {
+    if (e.currentTarget.value === "") {
       setServices(servicesAPI);
       setExpandServices(true);
     } else {
@@ -133,13 +127,17 @@ function SavedFilters() {
   const handleNatureArray = (item: string) => {
     if (natureArray.includes(item)) {
       setNatureArray(natureArray.filter((element: string) => element !== item));
-      setServices(services
-        .filter(({ title }) => title !== item)
-        .concat(services.filter(({ title }) => title === item)));
+      setServices(
+        services
+          .filter(({ title }) => title !== item)
+          .concat(services.filter(({ title }) => title === item)),
+      );
     } else {
-      setServices(services
-        // eslint-disable-next-line no-nested-ternary
-        .sort((a, b) => (a.title === item ? -1 : b.title === item ? 1 : 0)));
+      setServices(
+        services
+          // eslint-disable-next-line no-nested-ternary
+          .sort((a, b) => (a.title === item ? -1 : b.title === item ? 1 : 0)),
+      );
       setNatureArray((oldArray: string[]) => [...oldArray, item]);
     }
   };
@@ -154,16 +152,18 @@ function SavedFilters() {
   };
 
   function closeSavedFilterForm() {
-    dispatch(
-      fetchSavedFilterFormRequest(false),
-    );
+    dispatch(fetchSavedFilterFormRequest(false));
   }
 
   return (
     <div
-      className={`${savedFilterFormState ? 'block' : 'hidden'} filters shadow-2xl rounded-3xl py-4 bg-drop-white overflow-y-auto absolute w-full md:w-4/5 h-full md:h-3/4 z-50 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-200 ease-in-out`}
+      className={`${
+        savedFilterFormState ? "block" : "hidden"
+      } filters shadow-2xl rounded-3xl py-4 bg-drop-white overflow-y-auto absolute w-full md:w-4/5 h-full md:h-3/4 z-50 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-200 ease-in-out`}
     >
-      <h1 className="text-drop-primary text-5xl font-semibold max-w-[95%] mx-auto">Filters</h1>
+      <h1 className="text-drop-primary text-5xl font-semibold max-w-[95%] mx-auto">
+        Filters
+      </h1>
       <div className="nature-parcel">
         <DropDownForm
           title="Nature of the parcel"
@@ -172,11 +172,9 @@ function SavedFilters() {
         />
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
-          style={{ display: `${state.natureExpanded ? 'none' : 'block'}` }}
+          style={{ display: `${state.natureExpanded ? "none" : "block"}` }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <FilterMenuInput
               type="text"
               placeholder="search for nature of the parcel"
@@ -186,10 +184,13 @@ function SavedFilters() {
           </form>
 
           <div className="checkboxes flex flex-col mt-4   px-6">
-            {
-              expandServices
-                ? services.slice(0, 4).map(({ id, title }) => (
-                  <motion.div layout key={id} className="checkbox flex items-center mb-2 self-start">
+            {expandServices
+              ? services.slice(0, 4).map(({ id, title }) => (
+                  <motion.div
+                    layout
+                    key={id}
+                    className="checkbox flex items-center mb-2 self-start"
+                  >
                     <input
                       id="one"
                       type="checkbox"
@@ -197,25 +198,24 @@ function SavedFilters() {
                       onChange={() => handleNatureArray(title)}
                       className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                     />
-                    <span>
-                      {title}
-                    </span>
+                    <span>{title}</span>
                   </motion.div>
                 ))
-                : services.map(({ id, title }) => (
-                  <motion.div layout key={id} className="checkbox flex items-center mb-2 self-start">
+              : services.map(({ id, title }) => (
+                  <motion.div
+                    layout
+                    key={id}
+                    className="checkbox flex items-center mb-2 self-start"
+                  >
                     <input
                       id="one"
                       type="checkbox"
                       checked={natureArray.includes(title)}
                       onChange={() => handleNatureArray(title)}
                     />
-                    <span>
-                      {title}
-                    </span>
+                    <span>{title}</span>
                   </motion.div>
-                ))
-              }
+                ))}
 
             <button
               type="button"
@@ -236,14 +236,14 @@ function SavedFilters() {
         />
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
-          style={{ display: `${state.weightExpanded ? 'none' : 'block'}` }}
+          style={{ display: `${state.weightExpanded ? "none" : "block"}` }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <FilterMenuInput
               type="number"
               placeholder="Weight in kilograms"
+              value={0}
+              onChangeHandler={() => null}
             />
           </form>
         </div>
@@ -258,17 +258,15 @@ function SavedFilters() {
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
           style={{
-            display: `${state.parcelCountExpanded
-              ? 'none'
-              : 'block'}`,
+            display: `${state.parcelCountExpanded ? "none" : "block"}`,
           }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <FilterMenuInput
               type="number"
               placeholder="Quantity"
+              value={0}
+              onChangeHandler={() => null}
             />
           </form>
         </div>
@@ -282,17 +280,13 @@ function SavedFilters() {
         />
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
-          style={{ display: `${state.pickupExpanded ? 'none' : 'block'}` }}
+          style={{ display: `${state.pickupExpanded ? "none" : "block"}` }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <SearchableDropDown
               data={PrimaryLocationDataAPI}
               placeholder="- Select Starting Location -"
-              reset={
-                  !(arrivingpointAddressChecked)
-                }
+              reset={!arrivingpointAddressChecked}
               createMode={false}
             />
           </form>
@@ -301,41 +295,44 @@ function SavedFilters() {
               <input
                 id="one"
                 type="checkbox"
-                onChange={
-                    () => handleArriveSwitchAddress()
-                  }
+                onChange={() => handleArriveSwitchAddress()}
                 className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
               />
-              <span>
-                Address
-              </span>
+              <span>Address</span>
             </div>
           </div>
           <form
             className="content-form   px-6"
             style={{
-              display:
-                `${arrivingpointAddressChecked ? 'block' : 'none'}`,
+              display: `${arrivingpointAddressChecked ? "block" : "none"}`,
             }}
           >
             <FilterMenuInput
               type="text"
               placeholder="Address Line 1"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="text"
               placeholder="Address Line 2"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="text"
               placeholder="City"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="number"
               placeholder="Postal Code"
+              value={0}
+              onChangeHandler={() => null}
             />
           </form>
         </div>
@@ -350,20 +347,14 @@ function SavedFilters() {
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
           style={{
-            display: `${state.destinationExpanded
-              ? 'none'
-              : 'block'}`,
+            display: `${state.destinationExpanded ? "none" : "block"}`,
           }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <SearchableDropDown
               data={PrimaryLocationDataAPI}
               placeholder="- Select Destination Location -"
-              reset={
-                  !(DestinationpointAddressChecked)
-}
+              reset={!DestinationpointAddressChecked}
               createMode={false}
             />
           </form>
@@ -375,36 +366,41 @@ function SavedFilters() {
                 className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                 onChange={() => handleDestinationSwitchAddress()}
               />
-              <span>
-                Address
-              </span>
+              <span>Address</span>
             </div>
           </div>
           <form
             className="content-form   px-6"
             style={{
-              display:
-                `${DestinationpointAddressChecked ? 'block' : 'none'}`,
+              display: `${DestinationpointAddressChecked ? "block" : "none"}`,
             }}
           >
             <FilterMenuInput
               type="text"
               placeholder="Address Line 1"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="text"
               placeholder="Address Line 2"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="text"
               placeholder="City"
               extraTailwindCSS="mb-3"
+              value={0}
+              onChangeHandler={() => null}
             />
             <FilterMenuInput
               type="number"
               placeholder="Postal Code"
+              value={0}
+              onChangeHandler={() => null}
             />
           </form>
         </div>
@@ -414,8 +410,10 @@ function SavedFilters() {
         <div className="dropdown-flex max-w-[96.5%] mx-auto">
           <DropDownForm
             title="Scheduled"
+            payload
+            trigger={ExpandActionTypes.SET_EXPANDED_NATURE}
           />
-          <div className="toggle-switch" style={{ marginTop: '1.5rem' }}>
+          <div className="toggle-switch" style={{ marginTop: "1.5rem" }}>
             <Switch
               checked={scheduled}
               onColor="#525298"
@@ -430,8 +428,8 @@ function SavedFilters() {
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4   px-6"
           style={{
-            padding: '2rem',
-            display: `${scheduled ? 'block' : 'none'}`,
+            padding: "2rem",
+            display: `${scheduled ? "block" : "none"}`,
           }}
         >
           <CustomizedDatePicker />
@@ -442,8 +440,10 @@ function SavedFilters() {
         <div className="dropdown-flex max-w-[96.5%] mx-auto">
           <DropDownForm
             title="Immediate Courier?"
+            payload
+            trigger={ExpandActionTypes.SET_EXPANDED_NATURE}
           />
-          <div className="toggle-switch" style={{ marginTop: '1.5rem' }}>
+          <div className="toggle-switch" style={{ marginTop: "1.5rem" }}>
             <Switch
               checked={isImmediateCourier}
               onColor="#525298"
@@ -458,11 +458,13 @@ function SavedFilters() {
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4   px-6"
           style={{
-            padding: '2rem',
-            display: `${isImmediateCourier ? 'block' : 'none'}`,
+            padding: "2rem",
+            display: `${isImmediateCourier ? "block" : "none"}`,
           }}
         >
-          <p className="font-semibold text-drop-grey text-sm">Extra charges may apply.</p>
+          <p className="font-semibold text-drop-grey text-sm">
+            Extra charges may apply.
+          </p>
         </div>
       </div>
 
@@ -474,11 +476,9 @@ function SavedFilters() {
         />
         <div
           className="content-forms mt-4 bg-drop-lightest-grey py-4"
-          style={{ display: `${state.costExpanded ? 'none' : 'block'}` }}
+          style={{ display: `${state.costExpanded ? "none" : "block"}` }}
         >
-          <form
-            className="content-form   px-6"
-          >
+          <form className="content-form   px-6">
             <SearchableDropDown
               data={priceListAPI}
               placeholder={priceListAPI[0].title}
@@ -491,16 +491,13 @@ function SavedFilters() {
 
       <div className="buttons">
         <CommonRoundedButton
-          styles={{ backgroundColor: '#D32424', marginRight: '1rem' }}
+          styles={{ backgroundColor: "#D32424", marginRight: "1rem" }}
           ClickHandler={() => closeSavedFilterForm()}
         >
           Cancel
         </CommonRoundedButton>
-        <CommonRoundedButton>
-          Save
-        </CommonRoundedButton>
+        <CommonRoundedButton>Save</CommonRoundedButton>
       </div>
-
     </div>
   );
 }

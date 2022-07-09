@@ -7,7 +7,7 @@ import {
   FETCH_COURIER_SERVICE_LABEL_STATE_REQUEST,
   FETCH_COURIER_SERVICE_LABEL_STATE_SUCCESS,
   FETCH_COURIER_SERVICE_LABEL_STATE_FAILURE,
-} from './actionTypes';
+} from "./actionTypes";
 
 export const fetchCourierServiceLabelStateRequest = (
   state: boolean,
