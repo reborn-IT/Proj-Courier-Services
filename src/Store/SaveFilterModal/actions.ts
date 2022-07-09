@@ -1,9 +1,9 @@
 import {
-  FetchSaveModalStateFailure,
   FetchSaveModalStateFailurePayload,
+  FetchSaveModalStateSuccessPayload,
   FetchSaveModalStateRequest,
   FetchSaveModalStateSuccess,
-  FetchSaveModalStateSuccessPayload,
+  FetchSaveModalStateFailure,
   FETCH_SAVE_MODAL_STATE_FAILURE,
   FETCH_SAVE_MODAL_STATE_REQUEST,
   FETCH_SAVE_MODAL_STATE_SUCCESS,

@@ -15,7 +15,7 @@ function Testimonial() {
       <div
         className={`
       ${
-        size.width <= 768
+        size.width && size.width <= 768
           ? "right-aligned-text flex items-center justify-center w-full sm:w-auto sm:justify-end h-full sm:pr-8"
           : "flex flex-col items-center justify-center h-full w-full"
       }`}
@@ -41,20 +41,20 @@ function Testimonial() {
         author="TLS Courier"
         starCount={5}
         topPos={
-          size.width > 1024
+          size.width && size.width > 1024
             ? -10
-            : size.width <= 1024 && size.width > 960
+            : size.width && size.width <= 1024 && size.width && size.width > 960
             ? -10
-            : size.width <= 960 && size.width > 767
+            : size.width && size.width <= 960 && size.width && size.width > 767
             ? -9
             : 0
         }
         rightPos={
-          size.width > 1024
+          size.width && size.width > 1024
             ? 5
-            : size.width <= 1024 && size.width > 960
+            : size.width && size.width <= 1024 && size.width && size.width > 960
             ? 2
-            : size.width <= 960 && size.width > 767
+            : size.width && size.width <= 960 && size.width && size.width > 767
             ? 1
             : 0
         }
@@ -65,25 +65,25 @@ function Testimonial() {
         author="grasshopers"
         starCount={5}
         topPos={
-          size.width > 1024
+          size.width && size.width > 1024
             ? 4
-            : size.width <= 1024 && size.width > 960
-            ? 20
-            : size.width <= 960 && size.width > 767
+            : size.width && size.width <= 1024 && size.width && size.width > 960
+            ? 16
+            : size.width && size.width <= 960 && size.width && size.width > 767
             ? 16
             : 0
         }
         rightPos={
-          size.width > 1024
+          size.width && size.width > 1024
             ? 5
-            : size.width <= 1024 && size.width > 960
+            : size.width && size.width <= 1024 && size.width && size.width > 960
             ? 2
-            : size.width <= 960 && size.width > 767
+            : size.width && size.width <= 960 && size.width && size.width > 767
             ? 1
             : 0
         }
         // rightBiased={false}
-        rightBiased={size.width > 768 ? false : true}
+        rightBiased={size.width && size.width > 768 ? false : true}
       />
       <div className="transform scale-0 lg:scale-125 xl:scale-100 absolute bg-no-repeat bg-cover bg-center testimonial-card-m transition-all duration-500 ease-in-out left-4/5 lg:left-1/2 xl:left-1/3 2xl:left-1/2 -top-28 rounded-2xl w-36 2xl:w-56 h-52 2xl:h-72" />
       <div className="transform scale-0 lg:scale-125 xl:scale-100 absolute bg-no-repeat bg-cover bg-center testimonial-card-m transition-all duration-500 ease-in-out left-4/5 lg:left-1/2 xl:left-1/3 -top-28 rounded-2xl w-36 2xl:w-56 h-52 2xl:h-72" />

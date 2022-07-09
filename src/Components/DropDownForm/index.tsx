@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
-import React, { useState } from "react";
+import { useState } from "react";
 import DownArrowIcon from "../../Assets/Icons/downArrow.svg";
 import { ExpandActionTypes } from "./DropDownReducer";
 import { useExpandedContext } from "./DropDownStateProvider";
 
-interface DropDownForm {
+interface IDropDownForm {
   title: string;
-  // eslint-disable-next-line react/require-default-props
-  trigger?: ExpandActionTypes;
-  // eslint-disable-next-line react/require-default-props
-  payload?: boolean;
+  trigger: ExpandActionTypes;
+  payload: boolean;
 }
 
-function DropDownForm({ title, trigger, payload }: DropDownForm) {
+function DropDownForm({ title, trigger, payload }: IDropDownForm) {
   const [revealed, setRevealed] = useState<boolean>(false);
   const { action } = useExpandedContext();
 
@@ -27,13 +25,13 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
   return (
     <button
       type="button"
-      className="flex items-start mt-6 w-full max-w-[95%] mx-auto"
+      className="flex items-center mt-6 w-full max-w-[95%] mx-auto"
       onClick={() => ExpandForm()}
     >
       <img
         src={DownArrowIcon}
         alt="Down Arrow Icon"
-        className={`transition-all duration-300 ease-in-out w-7 transform ${
+        className={`transition-all duration-300 ease-in-out w-5 transform ${
           revealed ? "rotate-180" : "rotate-0"
         }`}
       />
@@ -41,5 +39,10 @@ function DropDownForm({ title, trigger, payload }: DropDownForm) {
     </button>
   );
 }
+
+DropDownForm.defaultProps = {
+  // trigger: ExpandActionTypes.SET_EXPANDED_NATURE,
+  // payload: false,
+};
 
 export default DropDownForm;

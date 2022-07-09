@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import image from "../../Assets/Images/featuredOne.svg";
 
 interface IResultCard {
+  id: number;
   title: string;
   address: string;
   rating: number;
   website: string;
 }
 
-function ResultCard({ title, address, rating, website }: IResultCard) {
+function ResultCard({ id, title, address, rating, website }: IResultCard) {
   const [fav, setFav] = useState<boolean>(false);
   return (
     <div className="card-flex relative">
@@ -48,7 +49,7 @@ function ResultCard({ title, address, rating, website }: IResultCard) {
         )}
       </button>
       <Link
-        to="button"
+        to={`${id}`}
         className="flex items-center text-drop-grey shadow-xl mb-4 bg-drop-white overflow-hidden max-h-[8rem] md:max-h-[12rem] 2xl:max-h-[15rem] rounded-2xl"
       >
         <div
@@ -83,7 +84,8 @@ function ResultCard({ title, address, rating, website }: IResultCard) {
             <li>Special Parcel Delivery</li>
           </ul>
           <div className="text-xs md:text-sm mt-1 md:mt-0 contact flex items-center justify-between">
-            <a href="domex.lk">{website}</a>
+            {/* <a href="domex.lk">{website}</a> */}
+            <p>{website}</p>
             <p>
               Hotline <span>031 22 45 456</span>
             </p>

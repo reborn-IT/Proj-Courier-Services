@@ -19,6 +19,6 @@ function* fetchSaveModalStateSaga() {
   ]);
 }
 
-export default function* SaveModalsSaga() {
+export default function* SaveModalSaga() {
   yield all([fork(fetchSaveModalStateSaga)]);
 }

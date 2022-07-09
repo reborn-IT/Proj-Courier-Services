@@ -15,6 +15,7 @@ const initialState: FilterMenuModalState = {
   error: null,
 };
 
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export default (state = initialState, action: ModalStateActions) => {
   switch (action.type) {
     case FETCH_MODAL_STATE_REQUEST:
@@ -24,7 +25,7 @@ export default (state = initialState, action: ModalStateActions) => {
     case FETCH_MODAL_STATE_SUCCESS:
       return produce(state, (draft: FilterMenuModalState) => {
         draft.pending = false;
-        draft.state = !action.payload.state;
+        draft.state = action.payload.state;
         draft.error = null;
       });
     case FETCH_MODAL_STATE_FAILURE:

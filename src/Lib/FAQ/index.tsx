@@ -10,7 +10,7 @@ function FAQ() {
         Frequently Asked Questions
       </h2>
 
-      <div className="questions-wrapper mx-auto mt-6  w-[90%] md:w-3/4 xl:w-4/5 2xl:w-[98%]">
+      <div className="questions-wrapper mx-auto mt-6 w-[90%] md:w-3/4 xl:w-4/5 2xl:w-[98%]">
         {DATA.map((item) => (
           <FAQComponent
             key={item.id}

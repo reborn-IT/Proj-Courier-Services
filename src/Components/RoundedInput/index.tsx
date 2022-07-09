@@ -5,18 +5,31 @@ import { TEXT, NUMBER } from "../../Utils/constants";
 interface IRoundedInput {
   type: TEXT | NUMBER;
   placeholder: string;
-  onChange: (e) => void;
+  onChange: (e: any) => void;
+  extraTailwindClasses?: string;
+  value: string;
 }
 
-function RoundedInput({ type, placeholder, onChange }: IRoundedInput) {
+function RoundedInput({
+  type,
+  placeholder,
+  onChange,
+  value,
+  extraTailwindClasses,
+}: IRoundedInput) {
   return (
     <input
       type={type}
       placeholder={placeholder}
       onChange={(e) => onChange(e)}
-      className="rounded-input ml-2 md:ml-0 flex-1 border border-drop-primary rounded-full p-3 md:p-4 text-sm md:text-base"
+      value={value}
+      className={`rounded-input ml-2 md:ml-0 flex-1 border border-drop-primary rounded-full p-3 md:p-4 text-sm md:text-base ${extraTailwindClasses}`}
     />
   );
 }
+
+RoundedInput.defaultProps = {
+  extraTailwindClasses: "",
+};
 
 export default RoundedInput;

@@ -9,7 +9,9 @@ function CustomizedDatePicker() {
   const [endDate, setEndDate] = useState(new Date());
   const [clicked, setClicked] = useState(false);
 
-  const handleSelect = (ranges) => {
+  const handleSelect = (ranges: any) => {
+    // eslint-disable-next-line no-console
+    console.warn("ttttpp ", typeof ranges);
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
     setClicked(!clicked);

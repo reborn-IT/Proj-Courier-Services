@@ -36,6 +36,7 @@ function MapBox() {
     latitude: DATA[0].Latitude,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [viewport, setViewport] = useState<ViewportInterface>({
     longitude: geoLocation.latitude,
     latitude: geoLocation.longitude,
@@ -45,7 +46,7 @@ function MapBox() {
     container: "mapbox-gl-custom",
   });
 
-  const addMarker = (event) => {
+  const addMarker = (event: any) => {
     const coordinates = event.lngLat;
     setPin({
       latitude: coordinates.lat,
@@ -59,7 +60,7 @@ function MapBox() {
       {...viewport}
       mapStyle="mapbox://styles/sithumdev07/cl1np10b8000314qhz0wtpf9c"
       mapboxAccessToken={mapboxAPI}
-      onMove={(nextViewport) => setViewport(nextViewport.viewState)}
+      // onMove={(nextViewport) => setViewport(nextViewport.viewState)}
       onClick={(event) => {
         addMarker(event);
       }}

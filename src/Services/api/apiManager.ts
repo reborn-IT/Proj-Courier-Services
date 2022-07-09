@@ -50,7 +50,7 @@ class APIService {
   async apiGET(path: string) {
     const response = await this.http
       .get(path)
-      .then((response) => responseHandling(response))
+      .then((res) => responseHandling(res))
       .catch((error) => errorHandling(error));
     return response;
   }
@@ -59,7 +59,7 @@ class APIService {
     const json = JSON.stringify(body);
     const response = await this.http
       .post(path, json)
-      .then((response) => responseHandling(response))
+      .then((res) => responseHandling(res))
       .catch((error) => errorHandling(error));
     return response;
   }
@@ -68,7 +68,7 @@ class APIService {
     const json = JSON.stringify(body);
     const response = await this.http
       .put(`${path}/${id}`, json)
-      .then((response) => responseHandling(response))
+      .then((res) => responseHandling(res))
       .catch((error) => errorHandling(error));
     return response;
   }
@@ -77,7 +77,7 @@ class APIService {
     const json = JSON.stringify(body);
     const response = await this.http
       .put(path, json)
-      .then((response) => responseHandling(response))
+      .then((res) => responseHandling(res))
       .catch((error) => errorHandling(error));
     return response;
   }
@@ -85,7 +85,7 @@ class APIService {
   async apiDelete(path: string, id: number) {
     const response = await this.http
       .delete(`${path}/${id}`)
-      .then((response) => responseHandling(response))
+      .then((res) => responseHandling(res))
       .catch((error) => errorHandling(error));
     return response;
   }

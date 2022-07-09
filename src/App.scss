@@ -20,6 +20,17 @@
   padding: 0;
 }
 
+body {
+  overflow: unset !important;
+}
+
+.glass-bg {
+  background-image: unset;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
+    background-color: rgba(0, 0, 0, 0);  
+}
+
 .container {
   width: 100%;
   margin: 0 auto;

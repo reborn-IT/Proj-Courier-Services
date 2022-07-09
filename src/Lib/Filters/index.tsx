@@ -2,20 +2,22 @@
 import React, { useState } from "react";
 import "./filters.scss";
 import Switch from "react-switch";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import DropDownForm from "../../Components/DropDownForm";
 import CustomizedDatePicker from "../../Components/CustomizedDatePicker";
 import CommonRoundedButton, {
   CommonButtonActions,
 } from "../../Components/CommonRoundedButton";
-import SearchableDropDown from "../../Components/SearchableDropDown";
+import SearchableDropDown, {
+  IDropDownData,
+} from "../../Components/SearchableDropDown";
 import ConfirmationModal from "../ConfirmationModal";
-import MapBox from "../../Components/MapBox";
 import { useExpandedContext } from "../../Components/DropDownForm/DropDownStateProvider";
 import { ExpandActionTypes } from "../../Components/DropDownForm/DropDownReducer";
 import { getSaveModalState } from "../../Store/SaveFilterModal/selectors";
 import FilterMenuInput from "../../Components/FilterMenuInput";
+import { fetchSaveModalStateRequest } from "../../Store/SaveFilterModal/actions";
 
 enum ExpandButtonState {
   VIEW_ALL = "View all...",
@@ -26,49 +28,118 @@ function Filters() {
   const { state } = useExpandedContext();
   const [scheduled, setScheduled] = useState<boolean>(false);
   const [isImmediateCourier, setIsImmediateCourier] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const [viewAllButtonState, setViewAllButtonState] =
     useState<ExpandButtonState>(ExpandButtonState.VIEW_ALL);
   const [serviceInput, setServiceInput] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [natureArray, setNatureArray] = useState<string[]>([]);
-  const servicesAPI = [
-    "Fragile",
-    "Confidential",
-    "Documents",
-    "Tender",
-    "Bulk",
-    "Stationary",
+  const servicesAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: "Fragile",
+    },
+    {
+      id: 2,
+      title: "Confidential",
+    },
+    {
+      id: 3,
+      title: "Documents",
+    },
+    {
+      id: 4,
+      title: "Tender",
+    },
+    {
+      id: 5,
+      title: "Bulk",
+    },
+    {
+      id: 6,
+      title: "Stationary",
+    },
   ];
-  const priceListAPI = [
-    "Price High to Low",
-    "Average Price",
-    "Price Low to High",
+  const priceListAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: "Price High to Low",
+    },
+    {
+      id: 2,
+      title: "Average Price",
+    },
+    {
+      id: 3,
+      title: "Price Low to High",
+    },
   ];
-  const PrimaryLocationDataAPI = ["Home", "Office", "Work"];
+  const PickupPointLocationAPI: IDropDownData[] = [
+    {
+      id: 1,
+      title: "Home",
+    },
+    {
+      id: 2,
+      title: "Office",
+    },
+    {
+      id: 3,
+      title: "Work",
+    },
+  ];
+  const DestinationPointLocationAPI: IDropDownData[] = [
+    {
+      id: 4,
+      title: "Home",
+    },
+    {
+      id: 5,
+      title: "Office",
+    },
+    {
+      id: 6,
+      title: "Work",
+    },
+  ];
   const SaveFilterModalOpened = useSelector(getSaveModalState);
-  const [services, setServices] = useState<string[]>(servicesAPI);
+  const [services, setServices] = useState<IDropDownData[]>(servicesAPI);
   const [expandServices, setExpandServices] = useState<boolean>(true);
-  const [arrivingpointAddressChecked, setArrivepointAddressChecked] =
+  const [arrivingPointAddressChecked, setArrivePointAddressChecked] =
     useState<boolean>(false);
 
-  const [arriveMarkOnMap, setArriveMarkOnMap] = useState<boolean>(false);
-
-  const [DestinationpointAddressChecked, setDestinationpointAddressChecked] =
-    useState<boolean>(false);
-
-  const [DestinationMarkOnMap, setDestinationMarkOnMap] =
+  const [DestinationPointAddressChecked, setDestinationPointAddressChecked] =
     useState<boolean>(false);
 
   const filterServices = (needle: string) => {
     const query: string = needle.toLowerCase();
     setServices(
       servicesAPI.filter(
-        (item: string) => item.toLowerCase().indexOf(query) >= 0,
+        ({ title }) => title.toLowerCase().indexOf(query) >= 0,
       ),
     );
   };
 
-  const setNewServicesList = (e) => {
+  const [weight, setWeight] = useState<number>(0);
+  const [parcelCount, setParcelCount] = useState<number>(0);
+
+  function numberInputHandler(value: any) {
+    let checkedValue;
+
+    const regExp = /^[0-9\b]+$/;
+    if (value === "" || regExp.test(value)) {
+      checkedValue = value;
+    }
+
+    return checkedValue;
+  }
+
+  function simpleFunc() {
+    // eslint-disable-next-line no-console
+    // console.log('hello');
+  }
+
+  const setNewServicesList = (e: any) => {
     // eslint-disable-next-line no-sequences, no-unused-expressions
     setServiceInput(e.currentTarget.value);
     if (e.currentTarget.value === "") {
@@ -79,20 +150,16 @@ function Filters() {
     }
   };
 
-  const handleArriveMarkOnMap = () => {
-    setArriveMarkOnMap(!arriveMarkOnMap);
-  };
-
   const handleArriveSwitchAddress = () => {
-    setArrivepointAddressChecked(!arrivingpointAddressChecked);
+    setArrivePointAddressChecked(!arrivingPointAddressChecked);
   };
 
-  const handleDestinationMarkOnMap = () => {
-    setDestinationMarkOnMap(!DestinationMarkOnMap);
-  };
+  function saveModalHandler() {
+    dispatch(fetchSaveModalStateRequest(true));
+  }
 
   const handleDestinationSwitchAddress = () => {
-    setDestinationpointAddressChecked(!DestinationpointAddressChecked);
+    setDestinationPointAddressChecked(!DestinationPointAddressChecked);
   };
 
   const handleNatureArray = (item: string) => {
@@ -100,14 +167,14 @@ function Filters() {
       setNatureArray(natureArray.filter((element: string) => element !== item));
       setServices(
         services
-          .filter((element) => element !== item)
-          .concat(services.filter((element) => element === item)),
+          .filter(({ title }) => title !== item)
+          .concat(services.filter(({ title }) => title === item)),
       );
     } else {
       setServices(
         services
           // eslint-disable-next-line no-nested-ternary
-          .sort((a, b) => (a === item ? -1 : b === item ? 1 : 0)),
+          .sort((a, b) => (a.title === item ? -1 : b.title === item ? 1 : 0)),
       );
       setNatureArray((oldArray: string[]) => [...oldArray, item]);
     }
@@ -158,35 +225,35 @@ function Filters() {
 
             <div className="checkboxes flex flex-col mt-4   px-6">
               {expandServices
-                ? services.slice(0, 4).map((item) => (
+                ? services.slice(0, 4).map(({ id, title }) => (
                     <motion.div
                       layout
-                      key={item}
+                      key={id}
                       className="checkbox flex items-center mb-2 self-start"
                     >
                       <input
                         id="one"
                         type="checkbox"
-                        checked={natureArray.includes(item)}
-                        onChange={() => handleNatureArray(item)}
+                        checked={natureArray.includes(title)}
+                        onChange={() => handleNatureArray(title)}
                         className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
                       />
-                      <span>{item}</span>
+                      <span>{title}</span>
                     </motion.div>
                   ))
-                : services.map((item) => (
+                : services.map(({ id, title }) => (
                     <motion.div
                       layout
-                      key={item}
+                      key={id}
                       className="checkbox flex items-center mb-2 self-start"
                     >
                       <input
                         id="one"
                         type="checkbox"
-                        checked={natureArray.includes(item)}
-                        onChange={() => handleNatureArray(item)}
+                        checked={natureArray.includes(title)}
+                        onChange={() => handleNatureArray(title)}
                       />
-                      <span>{item}</span>
+                      <span>{title}</span>
                     </motion.div>
                   ))}
 
@@ -211,10 +278,14 @@ function Filters() {
             className="content-forms mt-4 bg-drop-lightest-grey py-4"
             style={{ display: `${state.weightExpanded ? "none" : "block"}` }}
           >
-            <form className="content-form   px-6">
+            <form className="content-form px-6">
               <FilterMenuInput
                 type="number"
+                onChangeHandler={(e) =>
+                  setWeight(numberInputHandler(e.target.value))
+                }
                 placeholder="Weight in kilograms"
+                value={weight}
               />
             </form>
           </div>
@@ -233,7 +304,14 @@ function Filters() {
             }}
           >
             <form className="content-form   px-6">
-              <FilterMenuInput type="number" placeholder="Quantity" />
+              <FilterMenuInput
+                type="number"
+                placeholder="Quantity"
+                onChangeHandler={(e) =>
+                  setParcelCount(numberInputHandler(e.target.value))
+                }
+                value={parcelCount}
+              />
             </form>
           </div>
         </div>
@@ -250,10 +328,10 @@ function Filters() {
           >
             <form className="content-form   px-6">
               <SearchableDropDown
-                data={PrimaryLocationDataAPI}
+                data={PickupPointLocationAPI}
                 placeholder="- Select Starting Location -"
-                reset={!(arriveMarkOnMap || arrivingpointAddressChecked)}
-                createmode={false}
+                reset={!arrivingPointAddressChecked}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -270,47 +348,37 @@ function Filters() {
             <form
               className="content-form   px-6"
               style={{
-                display: `${arrivingpointAddressChecked ? "block" : "none"}`,
+                display: `${arrivingPointAddressChecked ? "block" : "none"}`,
               }}
             >
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
-              <FilterMenuInput type="number" placeholder="Postal Code" />
+              <FilterMenuInput
+                type="number"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                placeholder="Postal Code"
+              />
             </form>
-
-            <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleArriveMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>Mark on map</span>
-              </div>
-            </div>
-
-            <div
-              className="map h-[40vh]  px-6"
-              style={{
-                display: `${arriveMarkOnMap ? "block" : "none"}`,
-              }}
-            >
-              <MapBox />
-            </div>
           </div>
         </div>
 
@@ -328,12 +396,10 @@ function Filters() {
           >
             <form className="content-form   px-6">
               <SearchableDropDown
-                data={PrimaryLocationDataAPI}
+                data={DestinationPointLocationAPI}
                 placeholder="- Select Destination Location -"
-                reset={
-                  !(DestinationMarkOnMap || DestinationpointAddressChecked)
-                }
-                createmode={false}
+                reset={!DestinationPointAddressChecked}
+                createMode={false}
               />
             </form>
             <div className="checkboxes flex flex-col mt-4   px-6">
@@ -350,53 +416,47 @@ function Filters() {
             <form
               className="content-form   px-6"
               style={{
-                display: `${DestinationpointAddressChecked ? "block" : "none"}`,
+                display: `${DestinationPointAddressChecked ? "block" : "none"}`,
               }}
             >
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 1"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="Address Line 2"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
               <FilterMenuInput
                 type="text"
                 placeholder="City"
-                extratailwindcss="mb-3"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                extraTailwindCSS="mb-3"
               />
-              <FilterMenuInput type="number" placeholder="Postal Code" />
+              <FilterMenuInput
+                type="number"
+                onChangeHandler={() => simpleFunc()}
+                value={weight}
+                placeholder="Postal Code"
+              />
             </form>
-
-            <div className="checkboxes flex flex-col mt-4   px-6">
-              <div className="checkbox flex items-center mb-2 self-start">
-                <input
-                  id="one"
-                  type="checkbox"
-                  onChange={() => handleDestinationMarkOnMap()}
-                  className="m-0 mr-2 bg-drop-white w-4 h-4 rounded grid place-items-center transition-all duration-300 ease-in-out cursor-pointer"
-                />
-                <span>Mark on map</span>
-              </div>
-            </div>
-
-            <div
-              className="  px-6 map h-[40vh]"
-              style={{
-                display: `${DestinationMarkOnMap ? "block" : "none"}`,
-              }}
-            >
-              <MapBox />
-            </div>
           </div>
         </div>
 
         <div className="scheduled">
           <div className="dropdown-flex max-w-[96.5%] mx-auto">
-            <DropDownForm title="Scheduled" />
+            <DropDownForm
+              title="Scheduled"
+              payload
+              trigger={ExpandActionTypes.SET_EXPANDED_NATURE}
+            />
             <div className="toggle-switch" style={{ marginTop: "1.5rem" }}>
               <Switch
                 checked={scheduled}
@@ -422,7 +482,11 @@ function Filters() {
 
         <div className="immediate-courier">
           <div className="dropdown-flex max-w-[96.5%] mx-auto">
-            <DropDownForm title="Immediate Courier?" />
+            <DropDownForm
+              title="Immediate Courier?"
+              payload
+              trigger={ExpandActionTypes.SET_EXPANDED_NATURE}
+            />
             <div className="toggle-switch" style={{ marginTop: "1.5rem" }}>
               <Switch
                 checked={isImmediateCourier}
@@ -461,9 +525,9 @@ function Filters() {
             <form className="content-form   px-6">
               <SearchableDropDown
                 data={priceListAPI}
-                placeholder={priceListAPI[0]}
+                placeholder={priceListAPI[0].title}
                 reset
-                createmode={false}
+                createMode={false}
               />
             </form>
           </div>
@@ -476,7 +540,7 @@ function Filters() {
           >
             Cancel
           </CommonRoundedButton>
-          <CommonRoundedButton action={CommonButtonActions.OPEN_MODAL}>
+          <CommonRoundedButton ClickHandler={() => saveModalHandler()}>
             Done
           </CommonRoundedButton>
         </div>

@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
-import React, { useRef } from "react";
+import * as React from "react";
+import { useRef } from "react";
 import { toast } from "react-toastify";
 import SendIcon from "../../Assets/Icons/send.svg";
 
 const notify = () =>
   toast.success(
     `
-You have successfully subscriubed to our newsletter`,
+You have successfully subscribed to our newsletter`,
     {
       position: "top-right",
       autoClose: 5000,
@@ -30,7 +31,7 @@ const notifyError = () =>
   });
 
 function NewsletterInput() {
-  const newsletter = useRef(null);
+  const newsletter: any = useRef(null);
   const handleSubscribe = () => {
     if (newsletter.current?.value === "") {
       notifyError();
@@ -41,7 +42,12 @@ function NewsletterInput() {
 
   return (
     <div className="newsletter-wrapper bg-drop-white overflow-hidden flex items-center justify-between sm:justify-start rounded-full py-3 px-4 w-[80vw] sm:w-auto">
-      <input type="text" placeholder="Your Email" ref={newsletter} />
+      <input
+        type="text"
+        className="border-0"
+        placeholder="Your Email"
+        ref={newsletter}
+      />
       <button
         type="button"
         className="transform rotate-[30deg]"
