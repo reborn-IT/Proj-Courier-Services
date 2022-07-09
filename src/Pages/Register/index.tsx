@@ -1,48 +1,53 @@
 /* eslint-disable max-len,no-console,implicit-arrow-linebreak */
-import * as React from 'react';
-import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { motion } from 'framer-motion';
-import GoogleLogin from 'react-google-login';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import * as React from "react";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+import GoogleLogin from "react-google-login";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   CommonRoundedButton,
   FormInput,
   LoadingSpinner,
-} from '../../Components';
-import { isEmailValid, IsPasswordValid } from '../../Utils/Validations';
+} from "../../Components";
+import { isEmailValid, IsPasswordValid } from "../../Utils/Validations";
 
 // API service
-import UserService from '../../Services/userService';
+import UserService from "../../Services/userService";
 
-const notifyError = (error: string) => toast.error(error, {
-  position: 'top-right',
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: false,
-  progress: undefined,
-});
+const notifyError = (error: string) =>
+  toast.error(error, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+  });
 
-type inputTypes = {
+type InputTypes = {
   emailAddress: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 export default function Register() {
   const {
-    register, handleSubmit, setError, clearErrors, formState: { errors },
-  } = useForm<inputTypes>();
-  const formRef = useRef<HTMLFormElement>(document.createElement('form'));
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<InputTypes>();
+  const formRef = useRef<HTMLFormElement>(document.createElement("form"));
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [googleAuthID, setGoogleAuthID] = useState<string|null>('');
+  const [googleAuthID, setGoogleAuthID] = useState<string | null>("");
 
   const HandleSuccess = () => {
     // eslint-disable-next-line no-alert
@@ -61,55 +66,57 @@ export default function Register() {
     } else setGoogleAuthID(null);
   }, []);
 
-  async function registerUser(data: inputTypes) {
+  async function registerUser(data: InputTypes) {
     setLoading(true);
     const response = await UserService.registerUser({
-      role: 'ROLE_PUBLIC_USER',
+      role: "ROLE_PUBLIC_USER",
       email: data.emailAddress,
       password: data.password,
     });
     if (response && response.status === 201) {
       setLoading(false);
-      navigate('/profile');
+      navigate("/profile");
     } else if (response && response.errorCode === 409) {
-      notifyError('An account is already associated with this email address. Please log in');
+      notifyError(
+        "An account is already associated with this email address. Please log in",
+      );
       setLoading(false);
     } else {
-      notifyError('Something went wrong');
+      notifyError("Something went wrong");
       setLoading(false);
     }
   }
 
-  const onSubmit = (data: inputTypes) => {
+  const onSubmit = (data: InputTypes) => {
     if (!isEmailValid(data.emailAddress)) {
-      setError('emailAddress', {
-        type: 'manual',
-        message: 'Invalid Email address',
+      setError("emailAddress", {
+        type: "manual",
+        message: "Invalid Email address",
       });
-      notifyError('Invalid Email address');
+      notifyError("Invalid Email address");
       return;
     }
-    clearErrors('emailAddress');
+    clearErrors("emailAddress");
 
     if (!IsPasswordValid(data.password)) {
-      setError('password', {
-        type: 'manual',
-        message: 'Password should have at least 6 characters',
+      setError("password", {
+        type: "manual",
+        message: "Password should have at least 6 characters",
       });
-      notifyError('Password should have at least 6 characters');
+      notifyError("Password should have at least 6 characters");
       return;
     }
-    clearErrors('password');
+    clearErrors("password");
 
     if (data.password !== data.confirmPassword) {
-      setError('confirmPassword', {
-        type: 'manual',
-        message: 'Passwords does not match',
+      setError("confirmPassword", {
+        type: "manual",
+        message: "Passwords does not match",
       });
-      notifyError('Passwords does not match');
+      notifyError("Passwords does not match");
       return;
     }
-    clearErrors('confirmPassword');
+    clearErrors("confirmPassword");
 
     registerUser(data);
   };
@@ -119,7 +126,7 @@ export default function Register() {
       <ToastContainer
         toastClassName="border border-2 border-red-500"
         style={{
-          borderStyle: 'solid',
+          borderStyle: "solid",
         }}
       />
       <motion.div
@@ -139,46 +146,61 @@ export default function Register() {
               <LoadingSpinner />
             </div>
           ) : (
-            <form ref={formRef} className="mt-5 2xl:mt-8" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              ref={formRef}
+              className="mt-5 2xl:mt-8"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <FormInput
                 icon={<i className="bi bi-at" />}
                 label="Your Email"
                 input={{
-                  type: 'text',
-                  placeholder: 'Enter your email address',
+                  type: "text",
+                  placeholder: "Enter your email address",
                 }}
-                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${errors.emailAddress && 'ring-2 ring-red-500 border-0 placeholder:text-red-500'}`}
-                extra={register('emailAddress', { required: 'Email cannot be empty' })}
-                errorStylesTailwind={errors.emailAddress && 'text-red-500'}
+                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${
+                  errors.emailAddress &&
+                  "ring-2 ring-red-500 border-0 placeholder:text-red-500"
+                }`}
+                extra={register("emailAddress", {
+                  required: "Email cannot be empty",
+                })}
+                errorStylesTailwind={errors.emailAddress && "text-red-500"}
               />
               <FormInput
                 icon={<i className="bi bi-fingerprint" />}
                 label="Your Password"
                 input={{
-                  type: 'password',
-                  placeholder: 'Enter your password',
+                  type: "password",
+                  placeholder: "Enter your password",
                 }}
-                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${errors.password && 'ring-2 ring-red-500 border-0 placeholder:text-red-500'}`}
-                extra={register('password', {
-                  required: 'Password cannot be empty',
+                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${
+                  errors.password &&
+                  "ring-2 ring-red-500 border-0 placeholder:text-red-500"
+                }`}
+                extra={register("password", {
+                  required: "Password cannot be empty",
                 })}
-                errorStylesTailwind={errors.password && 'text-red-500'}
+                errorStylesTailwind={errors.password && "text-red-500"}
               />
               <FormInput
                 icon={<i className="bi bi-fingerprint" />}
                 label="Confirm Your Password"
                 input={{
-                  type: 'password',
-                  placeholder: 'Re-enter your password',
+                  type: "password",
+                  placeholder: "Re-enter your password",
                 }}
-                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${errors.confirmPassword && 'ring-2 ring-red-500 border-0 placeholder:text-red-500'}`}
-                extra={register('confirmPassword')}
-                errorStylesTailwind={errors.confirmPassword && 'text-red-500'}
+                extraTailwindCss={`mb-3 2xl:mb-5 bg-transparent xl:bg-drop-white ${
+                  errors.confirmPassword &&
+                  "ring-2 ring-red-500 border-0 placeholder:text-red-500"
+                }`}
+                extra={register("confirmPassword")}
+                errorStylesTailwind={errors.confirmPassword && "text-red-500"}
               />
               <CommonRoundedButton
                 ClickHandler={() => {
                   formRef.current.dispatchEvent(
-                    new Event('submit', { bubbles: true, cancelable: true }),
+                    new Event("submit", { bubbles: true, cancelable: true }),
                   );
                 }}
                 extraTailwindClasses="mt-3 w-full active:scale-95 transform transition-all duration-200"
@@ -195,28 +217,26 @@ export default function Register() {
                 Or
               </p>
               <div className="flex justify-center">
-                {
-                  googleAuthID && (
-                    <GoogleLogin
-                      clientId={googleAuthID}
-                      buttonText="Login with Google"
-                      onSuccess={HandleSuccess}
-                      onFailure={HandleFailure}
-                      cookiePolicy="single_host_origin"
-                      render={(renderProps) => (
-                        <button
-                          type="button"
-                          onClick={renderProps.onClick}
-                          disabled={renderProps.disabled}
-                          className="px-5 py-3 md:py-4 rounded-full border text-blue-600 w-auto whitespace-nowrap flex items-center cursor-pointer"
-                        >
-                          <i className="bi bi-google" />
-                          <p className="ml-2">Signup with Google</p>
-                        </button>
-                      )}
-                    />
-                  )
-                }
+                {googleAuthID && (
+                  <GoogleLogin
+                    clientId={googleAuthID}
+                    buttonText="Login with Google"
+                    onSuccess={HandleSuccess}
+                    onFailure={HandleFailure}
+                    cookiePolicy="single_host_origin"
+                    render={(renderProps) => (
+                      <button
+                        type="button"
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                        className="px-5 py-3 md:py-4 rounded-full border text-blue-600 w-auto whitespace-nowrap flex items-center cursor-pointer"
+                      >
+                        <i className="bi bi-google" />
+                        <p className="ml-2">Signup with Google</p>
+                      </button>
+                    )}
+                  />
+                )}
               </div>
             </form>
           )}

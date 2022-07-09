@@ -1,20 +1,26 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getDeletingFilterLogList } from '../../Store/DeletingFilterCards/selectors';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getDeletingFilterLogList } from "../../Store/DeletingFilterCards/selectors";
 
 interface CustomCheckBoxI {
-    id: number;
-    onChangeHandler: (id: number) => void;
-    extraTailwindCss?: string;
+  id: number;
+  onChangeHandler: (id: number) => void;
+  extraTailwindCss?: string;
 }
 
-function CustomCheckBox({ id, onChangeHandler, extraTailwindCss }: CustomCheckBoxI) {
+function CustomCheckBox({
+  id,
+  onChangeHandler,
+  extraTailwindCss,
+}: CustomCheckBoxI) {
   const currentDeletingList = useSelector(getDeletingFilterLogList);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
   useEffect(() => {
-    const contains = currentDeletingList?.some((item) => JSON.stringify({ id }) === JSON.stringify(item));
+    const contains = currentDeletingList?.some(
+      (item) => JSON.stringify({ id }) === JSON.stringify(item),
+    );
     if (contains) setIsSelected(true);
     else setIsSelected(false);
   }, [currentDeletingList, id]);
@@ -30,7 +36,7 @@ function CustomCheckBox({ id, onChangeHandler, extraTailwindCss }: CustomCheckBo
 }
 
 CustomCheckBox.defaultProps = {
-  extraTailwindCss: '',
+  extraTailwindCss: "",
 };
 
 export default CustomCheckBox;

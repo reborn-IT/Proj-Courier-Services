@@ -1,4 +1,4 @@
-import { AppState } from '../RootReducer';
+import { AppState } from "../RootReducer";
 
 // eslint-disable-next-line max-len
 export const getPending = (state: AppState) => state.saveModalState.pending;

@@ -1,25 +1,23 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable max-len */
-import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { NavBar } from '../../Components';
-import { StateProvider } from '../../Components/DropDownForm/DropDownStateProvider';
-import {
-  FAQ, Filters, Footer, HomeFeatured, Testimonial,
-} from '../../Lib';
-import { getModalState } from '../../Store/FilterMenuModal/selectors';
-import { fetchNavigationBarStatusRequest } from '../../Store/NavigationBar/actions';
-import { SCROLLING_DOWN, SCROLLING_UP } from '../../Utils/constants';
-import './Home.scss';
+import * as React from "react";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { NavBar } from "../../Components";
+import { StateProvider } from "../../Components/DropDownForm/DropDownStateProvider";
+import { FAQ, Filters, Footer, HomeFeatured, Testimonial } from "../../Lib";
+import { getModalState } from "../../Store/FilterMenuModal/selectors";
+import { fetchNavigationBarStatusRequest } from "../../Store/NavigationBar/actions";
+import { SCROLLINGDOWN, SCROLLINGUP } from "../../Utils/constants";
+import "./Home.scss";
 
 function Home() {
   const modalState: boolean | null = useSelector(getModalState);
   const dispatch = useDispatch();
-  const testimonialRef = useRef(null);
+  const testimonialRef: any = useRef(null);
 
   const { ref, inView } = useInView();
   const [topTriggerRef1, inViewTopTrigger1] = useInView();
@@ -27,9 +25,9 @@ function Home() {
 
   useEffect(() => {
     if (modalState) {
-      document.body.style.overflowY = 'hidden';
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflowY = 'scroll';
+      document.body.style.overflowY = "scroll";
     }
   }, [modalState]);
 
@@ -37,8 +35,8 @@ function Home() {
     window.scrollTo(0, 0);
   }, []);
 
-  const [scrollDir, setScrollDir] = useState<SCROLLING_DOWN | SCROLLING_UP>(
-    'scrolling_down',
+  const [scrollDir, setScrollDir] = useState<SCROLLINGDOWN | SCROLLINGUP>(
+    "scrolling_down",
   );
 
   useEffect(() => {
@@ -53,7 +51,7 @@ function Home() {
         ticking = false;
         return;
       }
-      setScrollDir(scrollY > lastScrollY ? 'scrolling_down' : 'scrolling_up');
+      setScrollDir(scrollY > lastScrollY ? "scrolling_down" : "scrolling_up");
       lastScrollY = scrollY > 0 ? scrollY : 0;
       ticking = false;
     };
@@ -65,27 +63,27 @@ function Home() {
       }
     };
 
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [scrollDir]);
 
   useEffect(() => {
-    if (scrollDir === 'scrolling_down') {
+    if (scrollDir === "scrolling_down") {
       if (inView && inViewTopTrigger1) {
         window.scrollTo(
           0,
-          testimonialRef.current?.offsetTop
-            + testimonialRef.current?.clientHeight,
+          testimonialRef.current?.offsetTop +
+            testimonialRef.current?.clientHeight,
         );
-        dispatch(fetchNavigationBarStatusRequest('scrolling'));
+        dispatch(fetchNavigationBarStatusRequest("scrolling"));
       } else {
-        dispatch(fetchNavigationBarStatusRequest('normal'));
+        dispatch(fetchNavigationBarStatusRequest("normal"));
       }
     } else if (inViewTopTrigger2) {
-      dispatch(fetchNavigationBarStatusRequest('normal'));
+      dispatch(fetchNavigationBarStatusRequest("normal"));
     } else {
-      dispatch(fetchNavigationBarStatusRequest('scrolling'));
+      dispatch(fetchNavigationBarStatusRequest("scrolling"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, inViewTopTrigger2]);
@@ -96,7 +94,7 @@ function Home() {
       <NavBar homeComponent />
       <div
         className="fixed top-0 left-0 right-0 bottom-0 h-full w-full shadow-xl transition-all duration-150 ease-in-out z-50"
-        style={{ display: `${modalState ? 'block' : 'none'}` }}
+        style={{ display: `${modalState ? "block" : "none"}` }}
       >
         <StateProvider>
           <Filters />
@@ -105,7 +103,7 @@ function Home() {
 
       <div
         className={`glass-bg fixed top-0 right-0 left-0 bottom-0 w-full h-full z-40 ${
-          modalState ? 'block' : 'hidden'
+          modalState ? "block" : "hidden"
         }`}
       />
 

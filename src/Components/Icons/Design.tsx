@@ -1,23 +1,26 @@
 /* eslint-disable max-len */
-import * as React from 'react';
-import './Style.scss';
-import { motion, Transition, Variants } from 'framer-motion';
+import * as React from "react";
+import "./Style.scss";
+import { motion, Transition, Variants } from "framer-motion";
 
-const transition = {
+const transitionLocal = {
   duration: 1,
   ease: [0.43, 0.13, 0.23, 0.96],
 };
 
 const draw = {
   hidden: { pathLength: 0, opacity: 0 },
-  visible: (i) => {
+  visible: (i: number) => {
     const delay = 1 + i * 0.5;
     return {
       pathLength: 1,
       opacity: 1,
       transition: {
         pathLength: {
-          delay, type: 'spring', duration: 1.5, bounce: 0,
+          delay,
+          type: "spring",
+          duration: 1.5,
+          bounce: 0,
         },
         opacity: { delay, duration: 0.0025 },
       },
@@ -117,11 +120,11 @@ function SvgDesign({ transition, variants }: SvgDesignInterface) {
 SvgDesign.defaultProps = {
   transition: { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] },
   variants: {
-    exit: { y: '50%', opacity: 0, transition },
+    exit: { y: "50%", opacity: 0, transitionLocal },
     enter: {
-      y: '0%',
+      y: "0%",
       opacity: 1,
-      transition,
+      transitionLocal,
     },
   },
 };

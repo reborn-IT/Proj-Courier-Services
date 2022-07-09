@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
-import React from 'react';
-import { TEXT, NUMBER, TEL } from '../../Utils/constants';
+import React from "react";
+import { TEXT, NUMBER, TEL } from "../../Utils/constants";
 
 interface IFilterMenuInput {
-    type: TEXT | NUMBER | TEL;
-    placeholder: string;
-    extraTailwindCSS?: string;
-    onChangeHandler: (e) => void;
-    value: string | number;
-    styles?: object;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    extraAttributes?: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    innerRef?: React.Ref<any>;
+  type: TEXT | NUMBER | TEL;
+  placeholder: string;
+  extraTailwindCSS?: string;
+  onChangeHandler: (e: any) => void;
+  value: string | number;
+  styles?: object;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extraAttributes?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  innerRef?: React.Ref<any>;
 }
 function FilterMenuInput({
   type,
@@ -25,10 +25,10 @@ function FilterMenuInput({
   extraAttributes,
   innerRef,
 }: IFilterMenuInput) {
-  function takeValue(e) {
+  function takeValue(e: any) {
     onChangeHandler(e);
     // eslint-disable-next-line no-console
-    console.log('value: ', e.target.value);
+    console.log("value: ", e.target.value);
   }
 
   return (
@@ -37,7 +37,7 @@ function FilterMenuInput({
       type={type}
       className={`border border-drop-grey rounded-lg p-4 ${extraTailwindCSS}`}
       style={{
-        width: 'calc(100% - 2rem)',
+        width: "calc(100% - 2rem)",
         ...styles,
       }}
       placeholder={placeholder}
@@ -49,9 +49,9 @@ function FilterMenuInput({
 }
 
 FilterMenuInput.defaultProps = {
-  extraTailwindCSS: '',
+  extraTailwindCSS: "",
   styles: {},
-  extraAttributes: '',
+  extraAttributes: "",
   innerRef: null,
 };
 

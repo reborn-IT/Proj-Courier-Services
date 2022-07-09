@@ -1,17 +1,20 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface HighlightI {
-    type?: string;
-    highlight: string;
-    picked?: boolean; // Optional
-    extraTailwindCss?: string;
-    ClickHandler?: () => void;
+  type?: string;
+  highlight: string;
+  picked?: boolean; // Optional
+  extraTailwindCss?: string;
+  ClickHandler?: () => void;
 }
 
 function Highlight({
-  highlight, picked, extraTailwindCss, ClickHandler,
+  highlight,
+  picked,
+  extraTailwindCss,
+  ClickHandler,
   type,
 }: HighlightI) {
   // Check for existence
@@ -39,20 +42,23 @@ function Highlight({
       whileTap={{ scale: 0.9 }}
       onClick={() => HandleClick()}
       type="button"
-      className={`px-4 py-3 text-sm rounded-full ${!selected ? 'bg-highlight-no-selected text-drop-grey' : 'bg-highligh-selected text-drop-white'} ${extraTailwindCss}`}
+      className={`px-4 py-3 text-sm rounded-full ${
+        !selected
+          ? "bg-highlight-no-selected text-drop-grey"
+          : "bg-highligh-selected text-drop-white"
+      } ${extraTailwindCss}`}
     >
       {highlight}
-
     </motion.button>
   );
 }
 
 Highlight.defaultProps = {
-  extraTailwindCss: '',
+  extraTailwindCss: "",
   picked: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ClickHandler: () => {},
-  type: '',
+  type: "",
 };
 
 export default Highlight;

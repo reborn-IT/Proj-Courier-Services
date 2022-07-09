@@ -1,14 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
-import produce from 'immer';
+import produce from "immer";
 import {
   SavedFilterFormState,
   SavedFilterFormActions,
   FETCH_SAVED_FILTER_FORM_REQUEST,
   FETCH_SAVED_FILTER_FORM_SUCCESS,
   FETCH_SAVED_FILTER_FORM_FAILURE,
-}
-  from './actionTypes';
+} from "./actionTypes";
 
 const initialState: SavedFilterFormState = {
   pending: false,
@@ -16,10 +15,8 @@ const initialState: SavedFilterFormState = {
   error: null,
 };
 
-export default (
-  state = initialState,
-  action: SavedFilterFormActions,
-) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export default (state = initialState, action: SavedFilterFormActions) => {
   switch (action.type) {
     case FETCH_SAVED_FILTER_FORM_REQUEST:
       return produce(state, (draft: SavedFilterFormState) => {

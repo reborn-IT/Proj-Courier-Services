@@ -1,11 +1,9 @@
-import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
-import { fetchSaveModalStateSuccess } from './actions';
+import { all, fork, put, takeLatest } from "redux-saga/effects";
+import { fetchSaveModalStateSuccess } from "./actions";
 import {
   FetchSaveModalStateRequest,
   FETCH_SAVE_MODAL_STATE_REQUEST,
-} from './actionsTypes';
+} from "./actionsTypes";
 
 function* fetchSaveModalStateSagaWorker(action: FetchSaveModalStateRequest) {
   yield put(
@@ -22,7 +20,5 @@ function* fetchSaveModalStateSaga() {
 }
 
 export default function* SaveModalSaga() {
-  yield all([
-    fork(fetchSaveModalStateSaga),
-  ]);
+  yield all([fork(fetchSaveModalStateSaga)]);
 }

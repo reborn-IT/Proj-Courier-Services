@@ -1,45 +1,45 @@
-import apiService from './api/apiManager';
+import apiService from "./api/apiManager";
 
 type FormDataType = {
-    natures: string[];
-    weight: number;
-    parcelCount: number;
-    existingPickupId?: number;
-    pickupAddress?: string;
-    pickupCoordinates?: { latitude: number, longitude: number };
-    existingDestinationId?: number;
-    destinationAddress?: string;
-    destinationCoordinates?: {latitude: number, longitude: number};
-    scheduled: boolean;
-    immediateCourier: boolean;
-    costType: string;
-}
+  natures: string[];
+  weight: number;
+  parcelCount: number;
+  existingPickupId?: number;
+  pickupAddress?: string;
+  pickupCoordinates?: { latitude: number; longitude: number };
+  existingDestinationId?: number;
+  destinationAddress?: string;
+  destinationCoordinates?: { latitude: number; longitude: number };
+  scheduled: boolean;
+  immediateCourier: boolean;
+  costType: string;
+};
 
 class FilterDataService {
   apiService = apiService;
 
   async getNatures() {
-    return this.apiService.apiGET('/filter/nature');
+    return this.apiService.apiGET("/filter/nature");
   }
 
   async getPickupPoints() {
-    return this.apiService.apiGET('/filter/pickuppoints');
+    return this.apiService.apiGET("/filter/pickuppoints");
   }
 
   async getDestinationPoints() {
-    return this.apiService.apiGET('/filter/destinationpoints');
+    return this.apiService.apiGET("/filter/destinationpoints");
   }
 
   async getExistingTitles() {
-    return this.apiService.apiGET('/filter/existingtitles');
+    return this.apiService.apiGET("/filter/existingtitles");
   }
 
   async postTitle(title: { title: string }) {
-    return this.apiService.apiPOST('/filter/createtitle', title);
+    return this.apiService.apiPOST("/filter/createtitle", title);
   }
 
   async postData(formData: FormDataType) {
-    return this.apiService.apiPOST('/filer/search', formData);
+    return this.apiService.apiPOST("/filer/search", formData);
   }
 }
 

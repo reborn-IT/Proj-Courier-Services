@@ -7,7 +7,7 @@ import {
   FETCH_MODAL_STATE_FAILURE,
   FETCH_MODAL_STATE_REQUEST,
   FETCH_MODAL_STATE_SUCCESS,
-} from './actionsTypes';
+} from "./actionsTypes";
 
 export const fetchModalStateRequest = (
   state: boolean,

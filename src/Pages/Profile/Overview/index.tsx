@@ -1,18 +1,18 @@
 /* eslint-disable max-len */
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { CommonRoundedButton } from '../../../Components';
-import UserImage from '../../../Assets/Images/user.png';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { CommonRoundedButton } from "../../../Components";
+import UserImage from "../../../Assets/Images/user.png";
 
 function Overview() {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookie, setCookie, removeCookie] = useCookies(['user']);
+  const [cookie, setCookie, removeCookie] = useCookies(["user"]);
 
   function logOut() {
-    removeCookie('user');
-    navigate('/');
+    removeCookie("user");
+    navigate("/");
   }
 
   return (
@@ -22,7 +22,9 @@ function Overview() {
       </div>
 
       <div className="information mt-8">
-        <h2 className="text-drop-primary font-semibold text-2xl md:text-4xl lg:text-5xl text-center">Tharindu Kumesh</h2>
+        <h2 className="text-drop-primary font-semibold text-2xl md:text-4xl lg:text-5xl text-center">
+          Tharindu Kumesh
+        </h2>
         <div className="flex text-sm md:text-base items-center justify-between text-drop-grey mt-2">
           <p>created at 2nd May, 2022</p>
           <p className="ml-3 md:ml-5">
@@ -35,7 +37,7 @@ function Overview() {
       <div className="flex items-center space-x-10">
         <CommonRoundedButton
           extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10"
-          styles={{ backgroundColor: '#D32424', marginRight: '1rem' }}
+          styles={{ backgroundColor: "#D32424", marginRight: "1rem" }}
           ClickHandler={() => logOut()}
         >
           <div className="flex items-center">
@@ -43,16 +45,13 @@ function Overview() {
             <p>Log out</p>
           </div>
         </CommonRoundedButton>
-        <CommonRoundedButton
-          extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10"
-        >
+        <CommonRoundedButton extraTailwindClasses="transition-all transform scale-100 active:scale-90 duration-100 mt-10">
           <Link to="/profile/edit" className="flex items-center">
             <p>Edit Profile</p>
             <i className="bi bi-arrow-right-short ml-2 text-xl" />
           </Link>
         </CommonRoundedButton>
       </div>
-
     </div>
   );
 }

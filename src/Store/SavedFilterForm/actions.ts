@@ -7,7 +7,7 @@ import {
   FETCH_SAVED_FILTER_FORM_FAILURE,
   FETCH_SAVED_FILTER_FORM_REQUEST,
   FETCH_SAVED_FILTER_FORM_SUCCESS,
-} from './actionTypes';
+} from "./actionTypes";
 
 export const fetchSavedFilterFormRequest = (
   state: boolean,

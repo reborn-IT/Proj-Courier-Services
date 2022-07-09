@@ -1,42 +1,45 @@
 /* eslint-disable max-len */
-export const FETCH_DELETING_FILTER_LOG_LIST_REQUEST = 'FETCH_DELETING_FILTER_LOG_LIST_REQUEST';
-export const FETCH_DELETING_FILTER_LOG_LIST_SUCCESS = 'FETCH_DELETING_FILTER_LOG_LIST_SUCCESS';
-export const FETCH_DELETING_FILTER_LOG_LIST_FAILURE = 'FETCH_DELETING_FILTER_LOG_LIST_FAILURE';
+export const FETCH_DELETING_FILTER_LOG_LIST_REQUEST =
+  "FETCH_DELETING_FILTER_LOG_LIST_REQUEST";
+export const FETCH_DELETING_FILTER_LOG_LIST_SUCCESS =
+  "FETCH_DELETING_FILTER_LOG_LIST_SUCCESS";
+export const FETCH_DELETING_FILTER_LOG_LIST_FAILURE =
+  "FETCH_DELETING_FILTER_LOG_LIST_FAILURE";
 
 export interface FilterLogListItemI {
-    id: number;
+  id: number;
 }
 
 export interface DeletingFilterLogListState {
-    pending: boolean;
-    state: FilterLogListItemI[];
-    error: string | null;
+  pending: boolean;
+  state: FilterLogListItemI[];
+  error: string | null;
 }
 
 export interface FetchDeletingFilterLogListSuccessPayload {
-    state: FilterLogListItemI[];
+  state: FilterLogListItemI[];
 }
 
 export interface FetchDeletingFilterLogListFailurePayload {
-    error: string;
+  error: string;
 }
 
 export interface FetchDeletingFilterLogListRequest {
-    type: typeof FETCH_DELETING_FILTER_LOG_LIST_REQUEST;
-    payload: FilterLogListItemI[];
+  type: typeof FETCH_DELETING_FILTER_LOG_LIST_REQUEST;
+  payload: FilterLogListItemI[];
 }
 
 export interface FetchDeletingFilterLogListSuccess {
-    type: typeof FETCH_DELETING_FILTER_LOG_LIST_SUCCESS;
-    payload: FetchDeletingFilterLogListSuccessPayload;
+  type: typeof FETCH_DELETING_FILTER_LOG_LIST_SUCCESS;
+  payload: FetchDeletingFilterLogListSuccessPayload;
 }
 
 export interface FetchDeletingFilterLogListFailure {
-    type: typeof FETCH_DELETING_FILTER_LOG_LIST_FAILURE;
-    payload: FetchDeletingFilterLogListFailurePayload;
+  type: typeof FETCH_DELETING_FILTER_LOG_LIST_FAILURE;
+  payload: FetchDeletingFilterLogListFailurePayload;
 }
 
 export type DeletingFilterLogListActions =
-| FetchDeletingFilterLogListRequest
-| FetchDeletingFilterLogListSuccess
-| FetchDeletingFilterLogListFailure;
+  | FetchDeletingFilterLogListRequest
+  | FetchDeletingFilterLogListSuccess
+  | FetchDeletingFilterLogListFailure;

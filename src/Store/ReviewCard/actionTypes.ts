@@ -1,38 +1,41 @@
 /* eslint-disable max-len */
-export const FETCH_REVIEW_CARD_STATE_REQUEST = 'FETCH_REVIEW_CARD_STATE_REQUEST';
-export const FETCH_REVIEW_CARD_STATE_SUCCESS = 'FETCH_REVIEW_CARD_STATE_SUCCESS';
-export const FETCH_REVIEW_CARD_STATE_FAILURE = 'FETCH_REVIEW_CARD_STATE_FAILURE';
+export const FETCH_REVIEW_CARD_STATE_REQUEST =
+  "FETCH_REVIEW_CARD_STATE_REQUEST";
+export const FETCH_REVIEW_CARD_STATE_SUCCESS =
+  "FETCH_REVIEW_CARD_STATE_SUCCESS";
+export const FETCH_REVIEW_CARD_STATE_FAILURE =
+  "FETCH_REVIEW_CARD_STATE_FAILURE";
 
 export interface ReviewCardState {
-    pending: boolean;
-    state: boolean | null;
-    error: string | null;
+  pending: boolean;
+  state: boolean | null;
+  error: string | null;
 }
 
 export interface FetchReviewCardSuccessPayload {
-    state: boolean;
+  state: boolean;
 }
 
 export interface FetchReviewCardFailurePayload {
-    error: string;
+  error: string;
 }
 
 export interface FetchReviewCardStateRequest {
-    type: typeof FETCH_REVIEW_CARD_STATE_REQUEST;
-    payload: boolean;
+  type: typeof FETCH_REVIEW_CARD_STATE_REQUEST;
+  payload: boolean;
 }
 
 export interface FetchReviewCardStateSuccess {
-    type: typeof FETCH_REVIEW_CARD_STATE_SUCCESS;
-    payload: FetchReviewCardSuccessPayload;
+  type: typeof FETCH_REVIEW_CARD_STATE_SUCCESS;
+  payload: FetchReviewCardSuccessPayload;
 }
 
 export interface FetchReviewCardStateFailure {
-    type: typeof FETCH_REVIEW_CARD_STATE_FAILURE;
-    payload: FetchReviewCardFailurePayload;
+  type: typeof FETCH_REVIEW_CARD_STATE_FAILURE;
+  payload: FetchReviewCardFailurePayload;
 }
 
 export type ReviewCardStateActions =
-| FetchReviewCardStateRequest
-| FetchReviewCardStateSuccess
-| FetchReviewCardStateFailure;
+  | FetchReviewCardStateRequest
+  | FetchReviewCardStateSuccess
+  | FetchReviewCardStateFailure;

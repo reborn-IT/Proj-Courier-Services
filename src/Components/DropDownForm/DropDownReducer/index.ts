@@ -1,10 +1,10 @@
 export enum ExpandActionTypes {
-  SET_EXPANDED_NATURE = 'SET_EXPANDED_NATURE',
-  SET_EXPANDED_WEIGHT = 'SET_EXPANDED_WEIGHT',
-  SET_EXPANDED_PARCEL = 'SET_EXPANDED_PARCEL',
-  SET_EXPANDED_PICKUP = 'SET_EXPANDED_PICKUP',
-  SET_EXPANDED_DESTINATION = 'SET_EXPANDED_DESTINATION',
-  SET_EXPANDED_COST = 'SET_EXPANDED_COST',
+  SET_EXPANDED_NATURE = "SET_EXPANDED_NATURE",
+  SET_EXPANDED_WEIGHT = "SET_EXPANDED_WEIGHT",
+  SET_EXPANDED_PARCEL = "SET_EXPANDED_PARCEL",
+  SET_EXPANDED_PICKUP = "SET_EXPANDED_PICKUP",
+  SET_EXPANDED_DESTINATION = "SET_EXPANDED_DESTINATION",
+  SET_EXPANDED_COST = "SET_EXPANDED_COST",
 }
 
 export interface ExpandAction {
@@ -63,7 +63,8 @@ const reducer = (state: ExpandState, action: ExpandAction) => {
         ...state,
         costExpanded: payload,
       };
-    default: throw new Error(`Unhandled Action Type ${type}`);
+    default:
+      throw new Error(`Unhandled Action Type ${type}`);
   }
 };
 

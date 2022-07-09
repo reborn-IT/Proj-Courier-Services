@@ -7,7 +7,7 @@ import {
   FETCH_SAVE_MODAL_STATE_FAILURE,
   FETCH_SAVE_MODAL_STATE_REQUEST,
   FETCH_SAVE_MODAL_STATE_SUCCESS,
-} from './actionsTypes';
+} from "./actionsTypes";
 
 export const fetchSaveModalStateRequest = (
   state: boolean,

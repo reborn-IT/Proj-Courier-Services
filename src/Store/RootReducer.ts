@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
-import ModalStateReducer from './FilterMenuModal/reducer';
-import SaveModalReducer from './SaveFilterModal/reducer';
-import CourierServiceLabelService from './CourierServiceModal/reducer';
-import NavigationBarStatusReducer from './NavigationBar/reducer';
-import ReviewCardStatusReducer from './ReviewCard/reducer';
-import DeletingFilterLogListReducer from './DeletingFilterCards/reducer';
-import SavedFilterFormReducer from './SavedFilterForm/reducer';
+import { combineReducers } from "redux";
+import ModalStateReducer from "./FilterMenuModal/reducer";
+import SaveModalReducer from "./SaveFilterModal/reducer";
+import CourierServiceLabelService from "./CourierServiceModal/reducer";
+import NavigationBarStatusReducer from "./NavigationBar/reducer";
+import ReviewCardStatusReducer from "./ReviewCard/reducer";
+import DeletingFilterLogListReducer from "./DeletingFilterCards/reducer";
+import SavedFilterFormReducer from "./SavedFilterForm/reducer";
 
 const rootReducer = combineReducers({
   filterMenuState: ModalStateReducer,

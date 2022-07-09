@@ -1,17 +1,15 @@
-import React, {
-  createContext, Dispatch, useContext, useReducer,
-} from 'react';
-import reducer,
-{
+import React, { createContext, Dispatch, useContext, useReducer } from "react";
+import reducer, {
   ExpandAction,
   ExpandState,
   initialState,
-} from '../DropDownReducer';
+} from "../DropDownReducer";
 
-type StateProviderProps = { children: React.ReactNode}
+type StateProviderProps = { children: React.ReactNode };
 
 export const StateContext = createContext<
-{state: ExpandState, action: Dispatch<ExpandAction>} | undefined >(undefined);
+  { state: ExpandState; action: Dispatch<ExpandAction> } | undefined
+>(undefined);
 
 // eslint-disable-next-line react/function-component-definition
 export const StateProvider = ({ children }: StateProviderProps) => {
@@ -28,7 +26,7 @@ export const StateProvider = ({ children }: StateProviderProps) => {
 export function useExpandedContext() {
   const context = useContext(StateContext);
   if (context === undefined) {
-    throw new Error('useCount must be used within a StateProvider');
+    throw new Error("useCount must be used within a StateProvider");
   }
   return context;
 }

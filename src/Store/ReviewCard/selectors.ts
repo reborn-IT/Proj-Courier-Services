@@ -1,4 +1,4 @@
-import { AppState } from '../RootReducer';
+import { AppState } from "../RootReducer";
 
 export const getPending = (state: AppState) => state.reviewCardStats.pending;
 

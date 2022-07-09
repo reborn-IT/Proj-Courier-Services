@@ -1,46 +1,46 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
-import { useSelector } from 'react-redux';
-import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
-import CommonRoundedButton from '../CommonRoundedButton';
-import MainFilterComponent from '../HomeFIlterComponent';
-import logo from '../../Assets/Images/logo.svg';
-import language from '../../Assets/Icons/language.svg';
-import userprofile from '../../Assets/Icons/userprofile.svg';
-import { getNavigationBarStatus } from '../../Store/NavigationBar/selectors';
-import ModalCloseButton from '../ModalCloseButton';
+import { motion, useAnimation, Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import language from "../../Assets/Icons/language.svg";
+import userprofile from "../../Assets/Icons/userprofile.svg";
+import logo from "../../Assets/Images/logo.svg";
+import { getNavigationBarStatus } from "../../Store/NavigationBar/selectors";
+import { Size, useWindowSize } from "../../Utils/Hooks/useWindowSize";
+import CommonRoundedButton from "../CommonRoundedButton";
+import MainFilterComponent from "../HomeFIlterComponent";
+import ModalCloseButton from "../ModalCloseButton";
 
 interface NavBarProps {
-    homeComponent: boolean;
-    // eslint-disable-next-line react/require-default-props
-    navBarPhoto?: string;
+  homeComponent: boolean;
+  // eslint-disable-next-line react/require-default-props
+  navBarPhoto?: string;
 }
 
-function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
+function NavBar({ homeComponent, navBarPhoto }: NavBarProps) {
   const size: Size = useWindowSize();
   const control = useAnimation();
   const navigationBarStatus = useSelector(getNavigationBarStatus);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-  const navVariants = {
+  const navVariants: Variants = {
     normal: {
-      height: `${size.width && size.width < 1025 ? '45vh' : '65vh'}`,
-      position: 'relative',
+      height: `${size.width && size.width < 1025 ? "45vh" : "65vh"}`,
+      position: "relative",
     },
     scrolling: {
-      height: 'auto',
-      position: 'fixed',
+      height: "auto",
+      position: "fixed",
       top: 0,
       left: 0,
       right: 0,
       zIndex: 50,
     },
     courierPage: {
-      height: '65vh',
-      position: 'relative',
+      height: "65vh",
+      position: "relative",
       backgroundImage: `url(${navBarPhoto})`,
     },
   };
@@ -53,7 +53,9 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
 
   return (
     <motion.nav
-      initial={`${homeComponent ? 'normal' : navBarPhoto ? 'courierPage' : 'scrolling'}`}
+      initial={`${
+        homeComponent ? "normal" : navBarPhoto ? "courierPage" : "scrolling"
+      }`}
       variants={navVariants}
       animate={control}
       className={`
@@ -69,7 +71,9 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
           type="button"
           className="menu-icon ml-2 text-white"
           onClick={() => setOpenMenu(!openMenu)}
-          style={{ display: `${size.width && size.width < 480 ? 'block' : 'none'}` }}
+          style={{
+            display: `${size.width && size.width < 480 ? "block" : "none"}`,
+          }}
         >
           <svg
             height={48}
@@ -86,44 +90,60 @@ function NavBar({ homeComponent, navBarPhoto } : NavBarProps) {
             />
           </svg>
         </button>
-        <div className={`fixed-menu ${openMenu ? '' : 'hidden overflow-hidden transform scale-0'} fixed top-0 left-0 right-0 bottom-0 z-40 h-full w-full shadow-xl transition-all duration-300 ease-in-out`}>
+        <div
+          className={`fixed-menu ${
+            openMenu ? "" : "hidden overflow-hidden transform scale-0"
+          } fixed top-0 left-0 right-0 bottom-0 z-40 h-full w-full shadow-xl transition-all duration-300 ease-in-out`}
+        >
           <div className="relative h-full w-full backdrop-blur-md">
             <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-4/5 z-50 flex items-end flex-col transition-all duration-300">
-              <ModalCloseButton
-                ClickHandler={() => setOpenMenu(!openMenu)}
-              />
+              <ModalCloseButton ClickHandler={() => setOpenMenu(!openMenu)} />
               <ul className="px-6 rounded-md py-6 bg-drop-white flex flex-col mt-2 space-y-3 w-full h-full">
                 <li className="text-drop-primary font-semibold">
-                  <Link to="/">
-                    Home
-                  </Link>
+                  <Link to="/">Home</Link>
                 </li>
-                <li className="text-drop-primary font-semibold">Become a Provider</li>
-                <li className="text-drop-primary font-semibold">Switch Language</li>
                 <li className="text-drop-primary font-semibold">
-                  <Link to="/profile">
-                    My Account
-                  </Link>
+                  Become a Provider
+                </li>
+                <li className="text-drop-primary font-semibold">
+                  Switch Language
+                </li>
+                <li className="text-drop-primary font-semibold">
+                  <Link to="/profile">My Account</Link>
                 </li>
               </ul>
             </div>
           </div>
         </div>
         <div
-          className={`items-center mr-2 ${homeComponent ? 'flex' : 'none'}`}
-          style={{ display: `${size.width && size.width < 767 ? 'none' : 'flex'}` }}
+          className={`items-center mr-2 ${homeComponent ? "flex" : "none"}`}
+          style={{
+            display: `${size.width && size.width < 767 ? "none" : "flex"}`,
+          }}
         >
-          <CommonRoundedButton>
-            Become a Provider
-          </CommonRoundedButton>
-          <img className="icon w-12 h-12 ml-2" src={language} alt="Language Icon" />
+          <CommonRoundedButton>Become a Provider</CommonRoundedButton>
+          <img
+            className="icon w-12 h-12 ml-2"
+            src={language}
+            alt="Language Icon"
+          />
           <Link to="/profile">
-            <img className="icon w-12 h-12 ml-2" src={userprofile} alt="User Profile Icon" />
+            <img
+              className="icon w-12 h-12 ml-2"
+              src={userprofile}
+              alt="User Profile Icon"
+            />
           </Link>
         </div>
       </div>
 
-      <div style={{ display: `${homeComponent && navigationBarStatus === 'normal' ? 'block' : 'none'}` }}>
+      <div
+        style={{
+          display: `${
+            homeComponent && navigationBarStatus === "normal" ? "block" : "none"
+          }`,
+        }}
+      >
         <MainFilterComponent />
       </div>
     </motion.nav>

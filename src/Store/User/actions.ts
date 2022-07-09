@@ -8,24 +8,24 @@ import {
   FetchUserRegisterSuccessPayload,
   FetchUserRegisterFailurePayload,
   User,
-} from './actionTypes';
+} from "./actionTypes";
 
 export const fetchUserRegisterRequest = (
-  state: User
+  state: User,
 ): FetchUserRegisterRequest => ({
   type: FETCH_USER_REGISTER_REQUEST,
   payload: state,
 });
 
 export const fetchUserRegisterSuccess = (
-  payload: FetchUserRegisterSuccessPayload
+  payload: FetchUserRegisterSuccessPayload,
 ): FetchUserRegisterSuccess => ({
   type: FETCH_USER_REGISTER_SUCCESS,
   payload,
 });
 
 export const fetchUserRegisterFailure = (
-  payload: FetchUserRegisterFailurePayload
+  payload: FetchUserRegisterFailurePayload,
 ) => ({
   type: FETCH_USER_REGISTER_FAILURE,
   payload,

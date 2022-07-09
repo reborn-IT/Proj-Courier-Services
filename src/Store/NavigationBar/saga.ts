@@ -1,11 +1,9 @@
-import {
-  all, fork, put, takeLatest,
-} from 'redux-saga/effects';
-import { fetchNavigationBarStatusSuccess } from './actions';
+import { all, fork, put, takeLatest } from "redux-saga/effects";
+import { fetchNavigationBarStatusSuccess } from "./actions";
 import {
   FetchNavigationBarStatusRequest,
   FETCH_NAVIGATION_BAR_STATE_REQUEST,
-} from './actionTypes';
+} from "./actionTypes";
 
 function* fetchNavigationBarStatusSagaWorker(
   action: FetchNavigationBarStatusRequest,
@@ -27,7 +25,5 @@ function* fetchNavigationBarStatusSaga() {
 }
 
 export default function* NavigationBarSaga() {
-  yield all([
-    fork(fetchNavigationBarStatusSaga),
-  ]);
+  yield all([fork(fetchNavigationBarStatusSaga)]);
 }

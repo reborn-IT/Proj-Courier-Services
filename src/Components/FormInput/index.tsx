@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
-import * as React from 'react';
-import { InputTypes } from '../../Utils/constants';
+import * as React from "react";
+import { InputTypes } from "../../Utils/constants";
 
 interface InputInterface {
   placeholder: string;
@@ -32,7 +32,9 @@ function FormInput({
     <>
       <p className="block mb-2 font-medium text-drop-grey">{label}</p>
       <div className="relative text-drop-primary">
-        <div className={`absolute text-xl inset-y-0 left-0 flex items-center pl-3 pointer-events-none ${errorStylesTailwind}`}>
+        <div
+          className={`absolute text-xl inset-y-0 left-0 flex items-center pl-3 pointer-events-none ${errorStylesTailwind}`}
+        >
           {icon}
         </div>
         <input
@@ -49,9 +51,9 @@ function FormInput({
 }
 
 FormInput.defaultProps = {
-  extraTailwindCss: '',
+  extraTailwindCss: "",
   extra: {},
-  errorStylesTailwind: '',
+  errorStylesTailwind: "",
 };
 
 export default FormInput;

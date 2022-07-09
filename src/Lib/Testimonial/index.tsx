@@ -2,35 +2,37 @@
 /* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-nested-ternary */
 
-import React from 'react';
-import CommonRoundedButton from '../../Components/CommonRoundedButton';
-import TestimonialXL from '../../Components/TestimonialXL';
-import { Size, useWindowSize } from '../../Utils/Hooks/useWindowSize';
-import './Testimonial.scss';
+import React from "react";
+import CommonRoundedButton from "../../Components/CommonRoundedButton";
+import TestimonialXL from "../../Components/TestimonialXL";
+import { Size, useWindowSize } from "../../Utils/Hooks/useWindowSize";
+import "./Testimonial.scss";
 
 function Testimonial() {
   const size: Size = useWindowSize();
   return (
     <>
-      <div className={`
+      <div
+        className={`
       ${
-        (size.width && size.width <= 768)
-          ? 'right-aligned-text flex items-center justify-center w-full sm:w-auto sm:justify-end h-full sm:pr-8'
-          : 'flex flex-col items-center justify-center h-full w-full'}`}
+        size.width && size.width <= 768
+          ? "right-aligned-text flex items-center justify-center w-full sm:w-auto sm:justify-end h-full sm:pr-8"
+          : "flex flex-col items-center justify-center h-full w-full"
+      }`}
       >
         <div
-          style={{ width: 'auto' }}
+          style={{ width: "auto" }}
           className={`
           flex flex-col items-center justify-center h-full w-full`}
         >
-          <h3 className="max-w-[80vw] sm:max-w-full text-2xl sm:text-xl md:text-3xl mb-5 font-semibold text-drop-grey">Become a Service Provider</h3>
+          <h3 className="max-w-[80vw] sm:max-w-full text-2xl sm:text-xl md:text-3xl mb-5 font-semibold text-drop-grey">
+            Become a Service Provider
+          </h3>
           <p className="max-w-[80vw] md:max-w-[40vw] text-base md:text-xl text-center mb-5">
-            Give extra publicity and increase sales by becoming a
-            service provider.
+            Give extra publicity and increase sales by becoming a service
+            provider.
           </p>
-          <CommonRoundedButton>
-            Get Started
-          </CommonRoundedButton>
+          <CommonRoundedButton>Get Started</CommonRoundedButton>
         </div>
       </div>
 
@@ -41,34 +43,44 @@ function Testimonial() {
         topPos={
           size.width && size.width > 1024
             ? -10
-            : size.width && size.width <= 1024 && size.width && size.width > 960 ? -10
-              : size.width && size.width <= 960 && size.width && size.width > 767 ? -9
-                : 0
+            : size.width && size.width <= 1024 && size.width && size.width > 960
+            ? -10
+            : size.width && size.width <= 960 && size.width && size.width > 767
+            ? -9
+            : 0
         }
         rightPos={
           size.width && size.width > 1024
             ? 5
-            : size.width && size.width <= 1024 && size.width && size.width > 960 ? 2
-              : size.width && size.width <= 960 && size.width && size.width > 767 ? 1
-                : 0
-}
+            : size.width && size.width <= 1024 && size.width && size.width > 960
+            ? 2
+            : size.width && size.width <= 960 && size.width && size.width > 767
+            ? 1
+            : 0
+        }
         rightBiased
       />
       <TestimonialXL
         review="I gained more web traffic beacase of DROP."
         author="grasshopers"
         starCount={5}
-        topPos={size.width && size.width > 1024
-          ? 4
-          : size.width && size.width <= 1024 && size.width && size.width > 960 ? 16
-            : size.width && size.width <= 960 && size.width && size.width > 767 ? 16
-              : 0}
+        topPos={
+          size.width && size.width > 1024
+            ? 4
+            : size.width && size.width <= 1024 && size.width && size.width > 960
+            ? 16
+            : size.width && size.width <= 960 && size.width && size.width > 767
+            ? 16
+            : 0
+        }
         rightPos={
           size.width && size.width > 1024
             ? 5
-            : size.width && size.width <= 1024 && size.width && size.width > 960 ? 2
-              : size.width && size.width <= 960 && size.width && size.width > 767 ? 1
-                : 0
+            : size.width && size.width <= 1024 && size.width && size.width > 960
+            ? 2
+            : size.width && size.width <= 960 && size.width && size.width > 767
+            ? 1
+            : 0
         }
         // rightBiased={false}
         rightBiased={size.width && size.width > 768 ? false : true}
