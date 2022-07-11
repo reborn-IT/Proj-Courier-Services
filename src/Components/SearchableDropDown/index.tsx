@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 enum SearchableDropDownEnums {
   CREATE_NEW_TITLE = "Create new title",
@@ -28,6 +28,7 @@ function SearchableDropDown({
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const [List, setList] = useState<IDropDownData[]>(data);
   const [createModeStatus, setCreateModeStatus] = useState<boolean>(false);
+  const ref = useRef<HTMLUListElement>(null);
 
   const filterList = (needle: string) => {
     const query: string = needle.toLowerCase();
@@ -76,11 +77,22 @@ function SearchableDropDown({
     }
   };
 
+  function dropDownButtonHandler() {
+    setTimeout(() => {
+      ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 0);
+    setDropDownOpen(true);
+  }
+
   return (
     <div className="relative">
       <button
         type="button"
-        onMouseDown={() => setDropDownOpen(true)}
+        onMouseDown={() => dropDownButtonHandler()}
         onBlur={() => setDropDownOpen(false)}
         className="w-full"
       >
@@ -97,7 +109,7 @@ function SearchableDropDown({
           dropDownOpen ? "block" : "hidden"
         } price-list z-10 absolute top-full left-0 right-0 bg-drop-white shadow-xl text-drop-grey overflow-hidden rounded-lg mt-1`}
       >
-        <ul className="py-1 text-sm text-gray-700 overflow-hidden">
+        <ul ref={ref} className="py-1 text-sm text-gray-700 overflow-hidden">
           {List.map(({ id, title }) => (
             <button
               key={id}

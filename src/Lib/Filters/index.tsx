@@ -1,23 +1,23 @@
 /* eslint-disable max-len */
-import React, { useState } from "react";
-import "./filters.scss";
-import Switch from "react-switch";
-import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import DropDownForm from "../../Components/DropDownForm";
-import CustomizedDatePicker from "../../Components/CustomizedDatePicker";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Switch from "react-switch";
 import CommonRoundedButton, {
   CommonButtonActions,
 } from "../../Components/CommonRoundedButton";
+import CustomizedDatePicker from "../../Components/CustomizedDatePicker";
+import DropDownForm from "../../Components/DropDownForm";
+import { ExpandActionTypes } from "../../Components/DropDownForm/DropDownReducer";
+import { useExpandedContext } from "../../Components/DropDownForm/DropDownStateProvider";
+import FilterMenuInput from "../../Components/FilterMenuInput";
 import SearchableDropDown, {
   IDropDownData,
 } from "../../Components/SearchableDropDown";
-import ConfirmationModal from "../ConfirmationModal";
-import { useExpandedContext } from "../../Components/DropDownForm/DropDownStateProvider";
-import { ExpandActionTypes } from "../../Components/DropDownForm/DropDownReducer";
-import { getSaveModalState } from "../../Store/SaveFilterModal/selectors";
-import FilterMenuInput from "../../Components/FilterMenuInput";
 import { fetchSaveModalStateRequest } from "../../Store/SaveFilterModal/actions";
+import { getSaveModalState } from "../../Store/SaveFilterModal/selectors";
+import ConfirmationModal from "../ConfirmationModal";
+import "./filters.scss";
 
 enum ExpandButtonState {
   VIEW_ALL = "View all...",
@@ -120,8 +120,8 @@ function Filters() {
     );
   };
 
-  const [weight, setWeight] = useState<number>(0);
-  const [parcelCount, setParcelCount] = useState<number>(0);
+  const [weight, setWeight] = useState<number | null>(null);
+  const [parcelCount, setParcelCount] = useState<number | null>(null);
 
   function numberInputHandler(value: any) {
     let checkedValue;

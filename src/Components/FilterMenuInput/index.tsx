@@ -1,18 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable max-len */
-import React from "react";
-import { TEXT, NUMBER, TEL } from "../../Utils/constants";
+import React, { ChangeEvent } from "react";
+import { NUMBER, TEL, TEXT } from "../../Utils/constants";
 
 interface IFilterMenuInput {
   type: TEXT | NUMBER | TEL;
   placeholder: string;
   extraTailwindCSS?: string;
   onChangeHandler: (e: any) => void;
-  value: string | number;
+  value: string | number | null;
   styles?: object;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraAttributes?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   innerRef?: React.Ref<any>;
 }
 function FilterMenuInput({
@@ -25,10 +24,8 @@ function FilterMenuInput({
   extraAttributes,
   innerRef,
 }: IFilterMenuInput) {
-  function takeValue(e: any) {
+  function takeValue(e: ChangeEvent<HTMLInputElement>) {
     onChangeHandler(e);
-    // eslint-disable-next-line no-console
-    console.log("value: ", e.target.value);
   }
 
   return (
@@ -42,7 +39,8 @@ function FilterMenuInput({
       }}
       placeholder={placeholder}
       value={value}
-      onChange={(e) => takeValue(e)}
+      onWheel={(e) => e.currentTarget.blur()}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => takeValue(e)}
       {...extraAttributes}
     />
   );
