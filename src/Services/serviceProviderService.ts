@@ -16,6 +16,8 @@ class ServiceProviderService {
   apiService = apiService;
 
   async getAllServiceProviders() {
+    // eslint-disable-next-line no-console
+    console.log(server);
     return this.apiService.apiGET(`${server}/user/view/serviceProvider`);
   }
 }
