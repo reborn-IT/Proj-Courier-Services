@@ -10,15 +10,13 @@ import apiService from "./api/apiManager";
 //   nearestBranch: string;
 // };
 
-const { backendAPIPath } = process.env;
+const server = process.env.SERVER_URL;
 
 class ServiceProviderService {
   apiService = apiService;
 
   async getAllServiceProviders() {
-    return this.apiService.apiGET(
-      `${backendAPIPath}/api/v1/user/view/serviceProvider`,
-    );
+    return this.apiService.apiGET(`${server}/user/view/serviceProvider`);
   }
 }
 
