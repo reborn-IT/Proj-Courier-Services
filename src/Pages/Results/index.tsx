@@ -1,16 +1,28 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CommonRoundedButton, NavBar } from "../../Components";
 import { StateProvider } from "../../Components/DropDownForm/DropDownStateProvider";
 import RoundedInput from "../../Components/RoundedInput";
 import { Filters, Footer, PaginatedItems } from "../../Lib";
+import { ResponseObject } from "../../Services/api/apiManager";
+import ServiceProviderService from "../../Services/serviceProviderService";
 import { fetchModalStateRequest } from "../../Store/FilterMenuModal/actions";
 import { getModalState } from "../../Store/FilterMenuModal/selectors";
 import { fetchSaveModalStateRequest } from "../../Store/SaveFilterModal/actions";
 import { Size, useWindowSize } from "../../Utils/Hooks/useWindowSize";
 import "./Results.scss";
+
+// interface ServiceProviderDataType {
+//   id: number;
+//   name: string;
+//   address: string;
+//   website: string;
+//   hotline: string;
+//   description: string;
+//   nearestBranch: string;
+// }
 
 function Results() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,6 +32,8 @@ function Results() {
   const size: Size = useWindowSize();
   const dispatch = useDispatch();
   const modalState: boolean | null = useSelector(getModalState);
+  const [serviceProviderData, setServiceProviderData] =
+    useState<ResponseObject | void | null>(null);
   useEffect(() => {
     if (modalState) {
       document.body.style.overflowY = "hidden";
@@ -33,8 +47,19 @@ function Results() {
   useEffect(() => {
     dispatch(fetchModalStateRequest(false));
     dispatch(fetchSaveModalStateRequest(false));
+    async function getServiceProviderData() {
+      setServiceProviderData(
+        await ServiceProviderService.getAllServiceProviders(),
+      );
+    }
+    getServiceProviderData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function showData() {
+    // eslint-disable-next-line no-console
+    console.warn(serviceProviderData);
+  }
 
   useEffect(() => {
     if (size.width && size.width < 480) {
@@ -60,6 +85,9 @@ function Results() {
         }`}
       />
       <div className="container mx-auto">
+        <button type="button" onClick={() => showData()}>
+          Show Data
+        </button>
         <div className="flex items-center justify-between mb-8 w-[95%] md:w-[90%] lg:w-[80%] xl:w-[60%] md:mx-auto mt-24 md:mt-[7.5rem] 2xl:mt-32">
           <RoundedInput
             type="text"
@@ -69,6 +97,7 @@ function Results() {
           />
           <div className="mr-1 md:mr-2" />
           <CommonRoundedButton
+            ClickHandler={() => showData()}
             styles={{
               padding: "1rem",
               paddingLeft: "1.2rem",
