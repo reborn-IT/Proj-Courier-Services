@@ -10,7 +10,7 @@ import apiService from "./api/apiManager";
 //   nearestBranch: string;
 // };
 
-const server = process.env.SERVER_URL;
+const server: string = process.env.REACT_APP_SERVER_URL as string;
 
 class ServiceProviderService {
   apiService = apiService;

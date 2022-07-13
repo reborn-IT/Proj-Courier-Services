@@ -39,7 +39,7 @@ const responseHandling = (response: AxiosResponse) => {
 
 class APIService {
   http = axios.create({
-    baseURL: process.env.baseUrl,
+    baseURL: process.env.REACT_APP_SERVER_URL as string,
     headers: {
       "Content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
