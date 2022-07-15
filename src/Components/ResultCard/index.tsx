@@ -1,17 +1,28 @@
 /* eslint-disable max-len */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../../Assets/Images/featuredOne.svg";
 
 interface IResultCard {
-  id: number;
+  resultID: number;
   title: string;
   address: string;
   rating: number;
   website: string;
+  services: {
+    id: number;
+    service: string;
+  }[];
 }
 
-function ResultCard({ id, title, address, rating, website }: IResultCard) {
+function ResultCard({
+  resultID,
+  title,
+  address,
+  rating,
+  website,
+  services,
+}: IResultCard) {
   const [fav, setFav] = useState<boolean>(false);
   return (
     <div className="card-flex relative">
@@ -49,7 +60,7 @@ function ResultCard({ id, title, address, rating, website }: IResultCard) {
         )}
       </button>
       <Link
-        to={`${id}`}
+        to={`${resultID}`}
         className="flex items-center text-drop-grey shadow-xl mb-4 bg-drop-white overflow-hidden max-h-[8rem] md:max-h-[12rem] 2xl:max-h-[15rem] rounded-2xl"
       >
         <div
@@ -77,14 +88,16 @@ function ResultCard({ id, title, address, rating, website }: IResultCard) {
             {address}
           </p>
           <ul className="services text-xs md:text-base hidden md:flex flex-wrap">
-            <li>One Day Service</li>
-            <span className="mx-2">|</span>
-            <li>24x7 Customer Service</li>
-            <span className="mx-2">|</span>
-            <li>Special Parcel Delivery</li>
+            {services.slice(0, 3).map(({ id, service }, index, arr) => (
+              <>
+                <li key={id}>{service}</li>
+                {arr.length - 1 !== index ? (
+                  <span className="mx-2">|</span>
+                ) : null}
+              </>
+            ))}
           </ul>
           <div className="text-xs md:text-sm mt-1 md:mt-0 contact flex items-center justify-between">
-            {/* <a href="domex.lk">{website}</a> */}
             <p>{website}</p>
             <p>
               Hotline <span>031 22 45 456</span>

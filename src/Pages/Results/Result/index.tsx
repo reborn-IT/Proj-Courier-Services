@@ -1,10 +1,11 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import classNames from "classnames";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams } from "react-router-dom";
 import {
   CommonRoundedButton,
@@ -12,18 +13,19 @@ import {
   ReviewCard,
   StaticDropDownRounded,
 } from "../../../Components";
-import "./Result.scss";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import CourierService from "../../../Components/CourierService";
-import { Footer, CourierServiceModal } from "../../../Lib";
-import RoundedInput from "../../../Components/RoundedInput";
-import { ICourierServiceModal } from "../../../Lib/CourierServiceModal";
-import { fetchCourierServiceLabelStateRequest } from "../../../Store/CourierServiceModal/actions";
 import { IReviewCard } from "../../../Components/ReviewCard";
-import useLazyLoad from "../../../Utils/Hooks/useLazyLoad";
-import { RESULTSCARD_DATA } from "../../../Lib/PaginatedItems";
+import RoundedInput from "../../../Components/RoundedInput";
+import { CourierServiceModal, Footer } from "../../../Lib";
+import { ICourierServiceModal } from "../../../Lib/CourierServiceModal";
+import { IResultCardData } from "../../../Lib/PaginatedItems";
 import ReviewForm from "../../../Lib/ReviewForm";
+import { ResponseObject } from "../../../Services/api/apiManager";
+import serviceProviderService from "../../../Services/serviceProviderService";
+import { fetchCourierServiceLabelStateRequest } from "../../../Store/CourierServiceModal/actions";
 import { fetchReviewCardStateRequest } from "../../../Store/ReviewCard/actions";
+import useLazyLoad from "../../../Utils/Hooks/useLazyLoad";
+import "./Result.scss";
 
 const REVIEW_CATEGORIES = [
   {
@@ -385,26 +387,43 @@ function Result() {
     setFav(state);
   }
 
+  const [serviceProviderData, setServiceProviderData] =
+    useState<ResponseObject | void | null>(null);
+  const [providerData, setProviderData] = useState<IResultCardData | null>(
+    null,
+  );
+
+  useEffect(() => {
+    async function getServiceProviderData() {
+      setServiceProviderData(
+        await serviceProviderService.getAllServiceProviders(),
+      );
+    }
+    getServiceProviderData();
+    setProviderData(
+      serviceProviderData?.data?.body[
+        parseInt(params.resultId ? params.resultId : "", 10) - 1
+      ],
+    );
+    // eslint-disable-next-line no-console
+    console.warn(
+      parseInt(params.resultId ? params.resultId : "", 10) - 1,
+      " and ",
+      params.resultId,
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.resultId, providerData, serviceProviderData]);
+
   return (
     <main>
       <NavBar
         homeComponent={false}
-        navBarPhoto={
-          RESULTSCARD_DATA[
-            parseInt(params.resultId ? params.resultId : "", 10) - 1
-          ].bannerURL
-        }
+        navBarPhoto="https://images.unsplash.com/photo-1657788913477-268657a2ea29?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1055&q=80"
       />
       <section className="container px-5 xl:px-0 mx-auto mt-6">
         <div className="content-para">
           <div className="title flex items-center text-4xl lg:text-6xl justify-between font-semibold text-drop-grey mb-3">
-            <h1>
-              {
-                RESULTSCARD_DATA[
-                  parseInt(params.resultId ? params.resultId : "", 10) - 1
-                ].title
-              }
-            </h1>
+            <h1>{providerData?.name}</h1>
             {!fav ? (
               <button
                 type="button"
@@ -423,13 +442,7 @@ function Result() {
               </button>
             )}
           </div>
-          <p>
-            {
-              RESULTSCARD_DATA[
-                parseInt(params.resultId ? params.resultId : "", 10) - 1
-              ].description
-            }
-          </p>
+          <p>{providerData?.description}</p>
         </div>
 
         {/* Services */}
@@ -542,14 +555,7 @@ function Result() {
           <div className="w-full flex flex-col items-center my-12">
             <p className="text-5xl font-semibold text-drop-grey">
               How is your experience with{" "}
-              <span className="text-drop-primary">
-                {
-                  RESULTSCARD_DATA[
-                    parseInt(params.resultId ? params.resultId : "", 10) - 1
-                  ].title
-                }
-                ?
-              </span>
+              <span className="text-drop-primary">{providerData?.name}?</span>
             </p>
             <p className="mt-4 mb-5 text-xl font-semibold text-drop-grey">
               Great feedbacks, towards more clarity. Add yours.

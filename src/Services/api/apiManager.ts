@@ -47,7 +47,7 @@ class APIService {
     },
   });
 
-  async apiGET(path: string) {
+  async apiGET(path: string): Promise<any> {
     const response = await this.http
       .get(path)
       .then((res) => responseHandling(res))
